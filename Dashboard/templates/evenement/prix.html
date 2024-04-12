@@ -1,0 +1,99 @@
+{% extends 'edition/base.html' %}
+{% load static %}
+{% block content%}
+
+<div class="container-fluid mb-1">
+    <img class="img-fluid" src="{% static 'immobilier/assete/img/prix.jpeg'%}" style="height: 600px; width: 100%;" alt="">
+</div>
+  
+
+
+
+
+<!-- Blog Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <div class="text-center pb-2">
+             {% comment %} <p class="section-title px-5"><span class="px-2">Notre Librairie</span></p>  {% endcomment %}
+            <h1 class="mb-4">Nos Prix</h1>
+            {% comment %} <p>Visitez notre librairie et achetez nos livres. Commandez juste et vous êtes servi(e) !
+            </p> {% endcomment %}
+        </div>
+        <div class="row pb-3">
+            {% for listePrix in listePrixs %}
+            <div class="col-lg-4 mb-4" >
+                <div class="card border-0 shadow-sm mb-2"style="overflow: hidden;" >
+                   <div style="height: 246px;" >
+                    <img class="card-img-top img-fluid mb-2" src="{{listePrix.images.url}}" alt="{{listePrix.images}} " ></div> 
+                    <div class="card-body bg-light text-center p-4">
+                        <h4 class="">{{listePrix.titre}}</h4>
+                        <h6 class="">{{listePrix.evenement.evenement}}</h6>
+                        <p> {{listePrix.date_evenement.date}}</p>
+                        {% comment %} <p> {{listePrix.description|safe }}</p> {% endcomment %}
+                        <a href="{% url 'detail_evenement' listePrix.id %}" class="btn btn-primary px-4 mx-auto my-2">Plus de Detail</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+ {% comment %} <div class="container-fluid pt-5">
+    <div class="container">
+        <div class="text-center pb-2">
+            <p class="section-title px-5"><span class="px-2">Latest Blog</span></p>
+            <h1 class="mb-4">Latest Articles From Blog</h1>
+        </div>
+        <div class="row pb-3">
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm mb-2">
+                    <img class="card-img-top mb-2" src="{% static 'asset/img/edition/blog-1.jpg'%}"  alt="">
+                    <div class="card-body bg-light text-center p-4">
+                        <h4 class="">Diam amet eos at no eos</h4>
+                        <div class="d-flex justify-content-center mb-3">
+                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                        </div>
+                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
+                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm mb-2">
+                    <img class="card-img-top mb-2" src="{% static 'asset/img/edition/blog-2.jpg'%}"  alt="">
+                    <div class="card-body bg-light text-center p-4">
+                        <h4 class="">Diam amet eos at no eos</h4>
+                        <div class="d-flex justify-content-center mb-3">
+                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                        </div>
+                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
+                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm mb-2">
+                    <img class="card-img-top mb-2" src="{% static 'asset/img/edition/blog-3.jpg'%}"  alt="">
+                    <div class="card-body bg-light text-center p-4">
+                        <h4 class="">Diam amet eos at no eos</h4>
+                        <div class="d-flex justify-content-center mb-3">
+                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                        </div>
+                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
+                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  {% endcomment %}
+<!-- Blog End -->
+
+
+{% endblock%}

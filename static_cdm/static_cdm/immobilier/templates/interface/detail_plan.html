@@ -1,0 +1,30 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="owl-carousel header-carousel">
+                    {% for image in plan.imagesplan_set.all %}
+                        <div class="owl-carousel-item">
+                            <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                                <img class="img-fluid chambre-image" src="{{ image.images.url }}" alt="Chambre Image" style="width: 500px; height: 300px">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1>BeninLand</h1>
+                <h4>C'est un : {{ plan.name }}</h4>
+                <p>{{ plan.description }}</p>
+                <h5 class="text-danger">  {{ plan.prix }} CFA</h5> 
+                <button><a href="{% url 'contact_immobilier' %}" class="text-white"> Commander</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+ {% endblock %}

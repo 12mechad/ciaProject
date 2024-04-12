@@ -1,0 +1,117 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- Team End -->
+ <!-- Contact Start -->
+ 
+ <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">Contactez-nous</h1>
+            <p class="text-justify">Contactez-nous pour toute question, demande d'information ou assistance. Notre équipe dévouée est à votre disposition pour vous fournir des réponses rapides et un soutien exceptionnel. Nous sommes là pour vous aider à chaque étape de votre parcours.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="row gy-4">
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <span>Porto-Novo,Bénin</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-envelope-open text-primary"></i>
+                                </div>
+                                <span>agenda@ciagroupafrica.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fab fa-whatsapp text-primary"></i>
+                                </div>
+                                <span>+229 40470007</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <div class="wow fadeInUp" data-wow-delay="0.5s">
+                  
+                    <form action="{% url 'rejoindre' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                       
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <div class="">
+                                    
+                                    {{ form.name }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="">
+                                   
+                                    {{ form.telephone }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="">
+                                    
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="">
+                                    
+                                    {{ form.qualite }}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="">
+                                    {{ form.Photo.label_tag }}
+                                    {{ form.Photo }}
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="">
+                                    {{ form.piece.label_tag }}
+                                    {{ form.piece }}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    
+                                    {{ form.message }}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Envoyer</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+ {% endblock %} 

@@ -1,0 +1,127 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- About Start -->
+ <div class="container-xxl py-5">
+    <div class="container ">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="{% static 'immobilier/assete/img/departement/Bonou.jpg'%}" style="width: 400px; height: 500px;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn " data-wow-delay="0.5s">
+                <h1 class="mb-4">Bonou</h1>
+                <p class="text-justify">Bonou est une commune du sud-est du Bénin, est composée des arrondissements d’Affamè,
+                    Atchonsa, Bonou, Damè-Wogon et Hounviguè. Terre de culture nantie d'un immense potentiel
+                    touristique ainsi que de nombreux autres atouts, la commune de Bonou tire aussi une grande
+                    partie des ressources nécessaires à son développement de l'agriculture, de la pêche, de l'élevage
+                    et de l'exploitation de ses carrières de sable. À côté de la forêt classée de Bonou et de ses
+                    nombreuses forêts sacrées qui se dressent dans les localités de Sologbozoun, de
+                    Gnahouizoumè et de Gbèvor, le « Minta kɔn» encore appelée site du commandant Faurax, la
+                    plaine inondable de Houêdagbo, la source thermale d'Atchabita, le cours d'eau mystique du
+                    Sota, le jardin botanique de Titikpa, les constructions sur pilotis appelées « wojihɔs » et le site
+                    de combat de Dogba en font un centre d'intérêt majeur dans la mise en œuvre du volet tourisme
+                    du pays. A cet important patrimoine s’ajoutent les fétiches « Oro » et « zangbéto » qui font
+                    partie intégrante de la culture de la commune de Bonou.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="">
+                                <h1 class="mb-5 text-center">Les Immeubles et chambres disponibres dans la commune de Bonou</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for bonouImmeuble in bonouImmeubles %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in bonouImmeuble.imagesimmeuble_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{bonouImmeuble.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{bonouImmeuble.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{bonouImmeuble.departement}}, {{bonouImmeuble.commune}}, {{bonouImmeuble.arrondissement}}, {{bonouImmeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'liste_chambres_immeubles' bonouImmeuble.id %}" class="text-white">Consulter</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5"> 
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for bonouQuartier in bonouQuartiers %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in bonouQuartier.images_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{bonouQuartier.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{bonouQuartier.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{bonouQuartier.immeuble.departement}}, {{bonouQuartier.immeuble.commune}}, {{bonouQuartier.immeuble.arrondissement}}, {{bonouQuartier.immeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'details_chambre' bonouQuartier.id %}" class="text-white">Voir Detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}

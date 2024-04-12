@@ -1,0 +1,233 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid header bg-white p-0">
+    <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+        <div class="col-md-12 animated fadeIn">
+            <div class="owl-carousel header-carousel">
+                <div class="owl-carousel-item">
+                    <img class="img-fluid" src="{% static 'immobilier/assete/img/louer.jpeg'%}" style="height: 600px; margin-top: 110px;" alt="">
+                </div>
+                {% comment %} <div class="owl-carousel-item">
+                    <img class="img-fluid" src="{% static 'immobilier/assete/img/carousel-2.jpg'%}" style=" height: 700px;" alt="">
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-xxl py-5">
+    
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="d-flex">
+                                <h1 class="mb-3 ">Nos chambres en location </h1>
+                            </div>
+                            <p>Explorez le confort et l'élégance dans nos chambres en location, conçues pour offrir une expérience unique et mémorable à chaque séjour.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container p-5">
+                <div class="">
+                    <div class="col-md-6 mx-auto">
+                        <form id="searchForm center" >
+                            <div class="d-flex justify-content-center">
+                                <div class="form-group">
+                                    <input type="search" id="search1" name="quartier" placeholder="Recherche ..." required>
+                                </div>
+    
+                                <div class="form-group">
+                                    <button type="submit" id="searchButton2">Rechercher </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for chambre in chambres %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="owl-carousel header-carousel">
+                                    {% for image in chambre.images_set.all %}
+                                    <div class="owl-carousel-item">
+                                        <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"  style="width: 500px; height: 200px;" ></div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{chambre.immeuble.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{chambre.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{chambre.immeuble.departement}}, {{chambre.immeuble.commune}}, {{chambre.immeuble.arrondissement}}, {{chambre.immeuble.quartier}}</p>
+                            </div>
+                            <div class="d-flex border-top">
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>{{chambre.salon}} </small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>{{chambre.chambre}} </small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fas fa-utensils text-primary me-2"></i>{{chambre.cuisine}} </small>
+                                <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>{{chambre.douche}} </small>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'details_chambre' chambre.id %}" class="text-white">Voir Detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="d-flex">
+                                <h1 class="mb-3 ">Nos Immeubles location</h1>
+                            </div>
+                            <p>Explorez le confort et l'élégance dans nos immeubles en location, conçues pour offrir une expérience unique et mémorable à chaque séjour.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container p-5">
+                <div class="">
+                    <div class="col-md-6 mx-auto">
+                        <form id="searchForm center" >
+                            <div class="d-flex justify-content-center">
+                                <div class="form-group">
+                                    <input type="search" id="search1" name="quartier" placeholder="Recherche ..." required>
+                                </div>
+                                {% comment %} <div class="form-group">
+                                    <button type="submit" id="searchButton2">Rechercher </button>
+                                </div> {% endcomment %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for immeuble in immeubles %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in immeuble.imagesimmeuble_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{immeuble.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{immeuble.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{immeuble.departement}}, {{immeuble.commune}}, {{immeuble.arrondissement}}, {{immeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'details_immeuble' immeuble.id %}" class="text-white">Voir Detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="d-flex">
+                                <h1 class="mb-3 ">Nos Terrains location</h1>
+                            </div>
+                            <p>Explorez le confort et l'élégance dans nos terrains en location, conçues pour offrir une expérience unique et mémorable à chaque séjour.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container p-5">
+                <div class="">
+                    <div class="col-md-6 mx-auto">
+                        <form id="searchForm center" >
+                            <div class="d-flex justify-content-center">
+                                <div class="form-group">
+                                    <input type="search" id="search1" name="quartier" placeholder="Recherche ..." required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" id="searchButton2">Rechercher </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for terrain in terrains %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="owl-carousel header-carousel">
+                                    <div class="owl-carousel-item">
+                                        <div style="height: 246px;"> <img class="img-fluid"  src="{{ terrain.images.url }}"  style="width: 500px; height: 200px;" ></div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{terrain.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{terrain.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{terrain.departement}}, {{terrain.commune}}, {{terrain.arrondissement}}, {{terrain.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'detail' terrain.id %}" class="text-white">Voir Detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}

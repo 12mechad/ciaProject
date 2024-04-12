@@ -1,0 +1,383 @@
+{% extends 'edition/base.html' %}
+{% load static %}
+{% block content%}
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+        <h3 class="display-3 font-weight-bold text-white">A propos</h3>
+        <div class="d-inline-flex text-white">
+            <p class="m-0"><a class="text-white" href="">Accueil</a></p>
+            <p class="m-0 px-2">/</p>
+            <p class="m-0">A propos</p>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<!-- About Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5">
+                <img class="img-fluid rounded mb-5 mb-lg-0" src="{% static 'immobilier/assete/img/propos.jpeg'%}" alt="" >            </div>
+            <div class="col-lg-7">
+          
+                <h1 class="mb-4">Les Editions Racine d'Afrique</h1>
+                <p>Racines d’Afrique est une renaissance de Kama Gold. En effet, Kama Gold est une maison d’édition née en 2019 au Bénin avec la vocation de promouvoir les jeunes écrivains à travers toute l’Afrique. En 2023, elle change de nom et devient Racines d’Afrique grâce à la redéfinition de sa vision et sa mission. 
+                    Racines d’Afrique se donne alors pour tâche de reconstituer l’histoire originelle et authentique de tous les peuples africains afin d’écrire une histoire unique d’Afrique. En outre, Racines d’Afrique se met au service des Organisations de la Société Civile, des gouvernants, des jeunes et des femmes pour mener avec eux les combats utiles de justice, d’égalité et de développement..
+                </p>
+                <p>Nous sommes convaincus que chacun de nous (Président de la République, Député, Président d’Institution, Politicien, Responsable d’OSC, Entrepreneur, Juriste, fonctionnaire, Enseignant, Chercheur, Etudiant, Elève, etc.) a quelque chose à partager avec le reste du monde ; ce n’est pas à négliger. Vous n’avez pas besoin d’être très lettré(e). C’est nous qui perfectionnons votre livre. C’est notre rôle. Faites-nous confiance !
+                    Contactez-nous !</p>
+                <div class="row pt-2 pb-4">
+                    <div class="col-6 col-md-4">
+                        <img class="img-fluid rounded" src="{% static 'dashboard/asset/img/edition/about-2.jpg'%}" alt="">
+                    </div>
+                    <div class="col-6 col-md-8">
+                        <ul class="list-inline m-0">
+                           <P><li class="py-2 border-top border-bottom"><i class="fa fa-check text-primary mr-3"></i>NOTRE VISION </li>Ecrire une Afrique nouvelle et authentique grâce à ses racines.</P> 
+                           <P><li class="py-2 border-bottom"><i class="fa fa-check text-primary mr-3"></i>NOTRE MISSION </li>Produire et promouvoir plume juvénile et féminine en Afrique.</P>
+
+                        </ul>
+                    </div>
+                </div>
+                {% comment %} <a href="" class="btn btn-primary mt-2 py-2 px-4">Learn More</a> {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+
+
+
+
+<!-- Registration Start -->
+{% comment %} <div class="container-fluid py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <p class="section-title pr-5"><span class="pr-2">Book A Seat</span></p>
+                <h1 class="mb-4">Book A Seat For Your Kid</h1>
+                <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos,
+                    ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est
+                    dolor</p>
+                <ul class="list-inline m-0">
+                    <li class="py-2"><i class="fa fa-check text-success mr-3"></i>Labore eos amet dolor amet diam</li>
+                    <li class="py-2"><i class="fa fa-check text-success mr-3"></i>Etsea et sit dolor amet ipsum</li>
+                    <li class="py-2"><i class="fa fa-check text-success mr-3"></i>Diam dolor diam elitripsum vero.</li>
+                </ul>
+                <a href="" class="btn btn-primary mt-4 py-2 px-4">Book Now</a>
+            </div>
+            <div class="col-lg-5">
+                <div class="card border-0">
+                    <div class="card-header bg-secondary text-center p-4">
+                        <h1 class="text-white m-0">Book A Seat</h1>
+                    </div>
+                    <div class="card-body rounded-bottom bg-primary p-5">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0 p-4" placeholder="Your Name" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0 p-4" placeholder="Your Email" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <select class="custom-select border-0 px-4" style="height: 47px;">
+                                    <option selected>Select A Class</option>
+                                    <option value="1">Class 1</option>
+                                    <option value="2">Class 1</option>
+                                    <option value="3">Class 1</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="btn btn-secondary btn-block border-0 py-3" type="submit">Book Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  {% endcomment %}
+<!-- Registration End -->
+
+
+
+<!-- <div class="container-fluid pt-5">
+    <div class="container">
+        <div class="text-center pb-2">
+            
+            <h1 class="mb-4">Notre Equipes</h1>
+            <P>Une équipe de professionnels très dynamiques et engagés.</P>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-3 text-center team mb-5">
+                <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
+                    <img class="img-fluid w-100" src="{% static 'dashboard/asset/img/edition/team-1.jpg'%}" alt="" >
+                    <div
+                        class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                        <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <h4>Julia Smith</h4>
+                <i>Music Teacher</i>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center team mb-5">
+                <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
+                    <img class="img-fluid w-100" src="{% static 'dashboard/asset/img/edition/team-2.jpg'%}" alt="" >
+                    <div
+                        class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                        <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <h4>Jhon Doe</h4>
+                <i>Language Teacher</i>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center team mb-5">
+                <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
+                    <img class="img-fluid w-100" src="{% static 'dashboard/asset/img/edition/team-3.jpg'%}" alt="" >
+                    <div
+                        class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                        <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <h4>Mollie Ross</h4>
+                <i>Dance Teacher</i>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center team mb-5">
+                <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
+                    <img class="img-fluid w-100" src="{% static 'dashboard/asset/img/edition/team-4.jpg'%}" alt="" >
+                    <div
+                        class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                        <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
+                            href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <h4>Donald John</h4>
+                <i>Art Teacher</i>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- Testimonial Start -->
+<!-- <div class="container-fluid py-5">
+    <div class="container p-0">
+        <div class="text-center pb-2">
+            <p class="section-title px-5"><span class="px-2">Avis Des Clients</span></p>
+            <h1 class="mb-4">Avis Des Clients </h1>
+        </div>
+        <div class="owl-carousel testimonial-carousel">
+            <div class="testimonial-item px-3">
+                <div class="bg-light shadow-sm rounded mb-4 p-4">
+                    <h3 class="fas fa-quote-left text-primary mr-3"></h3>
+                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum clita
+                </div>
+                <div class="d-flex align-items-center">
+                    <img class="rounded-circle" src="{% static 'dashboard/asset/img/edition/testimonial-1.jpg'%}" style="width: 70px; height: 70px;" alt="Image">
+                    <div class="pl-3">
+                        <h5>Parent Name</h5>
+                        <i>Profession</i>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item px-3">
+                <div class="bg-light shadow-sm rounded mb-4 p-4">
+                    <h3 class="fas fa-quote-left text-primary mr-3"></h3>
+                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum clita
+                </div>
+                <div class="d-flex align-items-center">
+                    <img class="rounded-circle" src="{% static 'dashboard/asset/img/edition/testimonial-2.jpg'%}" style="width: 70px; height: 70px;" alt="Image">
+                    <div class="pl-3">
+                        <h5>Parent Name</h5>
+                        <i>Profession</i>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item px-3">
+                <div class="bg-light shadow-sm rounded mb-4 p-4">
+                    <h3 class="fas fa-quote-left text-primary mr-3"></h3>
+                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum clita
+                </div>
+                <div class="d-flex align-items-center">
+                    <img class="rounded-circle" src="{% static 'dashboard/asset/img/edition/testimonial-3.jpg'%}" style="width: 70px; height: 70px;" alt="Image">
+                    <div class="pl-3">
+                        <h5>Parent Name</h5>
+                        <i>Profession</i>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item px-3">
+                <div class="bg-light shadow-sm rounded mb-4 p-4">
+                    <h3 class="fas fa-quote-left text-primary mr-3"></h3>
+                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum clita
+                </div>
+                <div class="d-flex align-items-center">
+                    <img class="rounded-circle" src="{% static 'dashboard/asset/img/edition/testimonial-4.jpg'%}" style="width: 70px; height: 70px;" alt="Image">
+                    <div class="pl-3">
+                        <h5>Parent Name</h5>
+                        <i>Profession</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- Testimonial End -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">Contactez-nous</h1>
+            <p class="text-justify">Contactez-nous pour toute question, demande d'information ou assistance. Notre équipe dévouée est à votre disposition pour vous fournir des réponses rapides et un soutien exceptionnel. Nous sommes là pour vous aider à chaque étape de votre parcours.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="row gy-4">
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <span>Porto-Novo, BENIN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-envelope-open text-primary"></i>
+                                </div>
+                                <span>beninlan@ciagroup.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fab fa-whatsapp text-primary"></i>
+                                </div>
+                                <span>+229 40470007</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7928.807790659692!2d2.614461!3d6.4704132!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b57a114bc797b%3A0x71ce14c8e04d4b9a!2sAdjinan%20Sud!5e0!3m2!1sfr!2sbj!4v1698511800112!5m2!1sfr!2sbj"
+                    width="100%"
+                    height="400" 
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"> 
+                </iframe>
+            </div>
+            <div class="col-md-6">
+                <div class="wow fadeInUp" data-wow-delay="0.5s">
+                    <form action="{% url 'propos' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                           
+                            {{ form.name }}
+                        </div>
+                        <div class="form-group">
+                            
+                            {{ form.email }}
+                        </div>
+                        <div class="form-group">
+                            
+                            {{ form.message }}
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3" type="submit">Envoyer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Start -->
+ {% comment %} <div class="container-fluid pt-5">
+    <div class="container">
+        <div class="text-center pb-2">
+            <p class="section-title px-5"><span class="px-2">Latest Blog</span></p>
+            <h1 class="mb-4">Latest Articles From Blog</h1>
+        </div>
+        <div class="row pb-3">
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm mb-2">
+                    <img class="card-img-top mb-2" src="{% static 'asset/img/edition/blog-1.jpg'%}" alt="">
+                    <div class="card-body bg-light text-center p-4">
+                        <h4 class="">Diam amet eos at no eos</h4>
+                        <div class="d-flex justify-content-center mb-3">
+                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                        </div>
+                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
+                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm mb-2">
+                    <img class="card-img-top mb-2" src="{% static 'asset/img/edition/blog-2.jpg'%}" alt="">
+                    <div class="card-body bg-light text-center p-4">
+                        <h4 class="">Diam amet eos at no eos</h4>
+                        <div class="d-flex justify-content-center mb-3">
+                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                        </div>
+                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
+                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm mb-2">
+                    <img class="card-img-top mb-2" src="{% static 'asset/img/edition/blog-3.jpg'%}" alt="">
+                    <div class="card-body bg-light text-center p-4">
+                        <h4 class="">Diam amet eos at no eos</h4>
+                        <div class="d-flex justify-content-center mb-3">
+                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                        </div>
+                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
+                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  {% endcomment %}
+<!-- Blog End -->
+
+{% endblock%}

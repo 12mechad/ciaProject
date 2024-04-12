@@ -1,0 +1,487 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid header bg-white p-0">
+    <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+        <div class="col-md-12 animated fadeIn">
+            <div class="owl-carousel header-carousel">
+                <div class="owl-carousel-item">
+                    <img class="img-fluid" src="{% static 'immobilier/assete/img/beninland.jpeg'%}" style=" height: 600px; margin-top: 110px;" alt="">
+                </div>
+                {% comment %} <div class="owl-carousel-item">
+                    <img class="img-fluid" src="{% static 'immobilier/assete/img/carousel-2.jpg'%}" style=" height: 700px;" alt="">
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-xxl py-5">
+    <div class="container text-center">
+        <div class="container">
+            <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                        <div class="d-flex">
+                            <h1 class="mb-3 ">Nos Actualités sur nos Immeubles</h1>
+                        </div>
+                        <p class="text-justify">Explorez nos actualités sur nos Immeubles pour rester à jour sur les derniers développements, les événements à venir et les informations clés concernant nos propriétés immobilières exceptionnelles. Découvrez tout ce que vous devez savoir sur nos immeubles et notre engagement envers l'excellence immobilière.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container p-5">
+                <div class="">
+                    <div class="col-md-6 mx-auto">
+                        <form id="searchForm center" >
+                            <div class="d-flex justify-content-center">
+                                <div class="form-group">
+                                    <input type="search" id="search1" name="quartier" placeholder="Recherche ..." required>
+                                </div>
+        
+                                <div class="form-group">
+                                    <button type="submit" id="searchButton2">Rechercher </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div class="row g-4">
+                        {% for immeuble in chambres %}
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="position-relative overflow-hidden">
+                                        <div class="col-md-12 animated fadeIn">
+                                            <div class="owl-carousel header-carousel">
+                                            {% for image in immeuble.imagesimmeuble_set.all %}
+                                        <div class="owl-carousel-item">
+                                            <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                        </div>
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{immeuble.type}}</div>
+                                </div>
+                            <div class="p-4 pb-0">
+                                                    
+                                                    {% comment %} <h5 class="text-primary mb-3">{{immeuble.quartier.nom}} </h5>  {% endcomment %}
+                            <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{immeuble.departement}}, {{immeuble.commune}}, {{immeuble.arrondissement}}, {{immeuble.quartier}}</p>
+                            <button class="btn btn-primary m-3 mx-2"><a href="{% url 'liste_chambres_immeubles' immeuble.id %}" class="text-white">Consulter</a></button>
+                            </div>
+                            {% if error_messages %}
+                            <div class="bg-danger rounded-top text-white position-absolute start-0 top-0 m-4 py-1 px-3">
+                                <p style="color: red;">{{ error_messages }}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- Property List End -->
+<!-- Property List Start -->
+<div class="container py-5">
+    <div class="container">
+        <div class="container text-center">
+            <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <div class="  wow slideInLeft " data-wow-delay="0.1s">
+                        <h1 class="mb-3">Nos Actualités sur nos Terrains</h1>
+                        <p class="text-justify">Nos actualités sur nos Immeubles sont une source d'informations précieuses qui mettent en lumière les caractéristiques uniques de nos propriétés, les rénovations en cours, les opportunités d'investissement, et les histoires fascinantes qui donnent vie à nos bâtiments. Découvrez l'univers captivant de nos immeubles à travers .</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-5">
+            <div class="">
+                <div class="col-md-6 mx-auto">
+                    <form id="searchForm center" >
+                        <div class="d-flex justify-content-center">
+                            <div class="form-group">
+                                <input type="search" id="search1" name="quartier_terrain" placeholder="Recherche ..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" id="searchButton2">Rechercher </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for terrain in terrains %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div style="height: 246px;"> <img class="img-fluid" src="{{terrain.images.url}} " alt="" style="width: 500px; height: 200px;" ></div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{terrain.operation}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5><span class="title-color">Prix :</span> <span class="fa  text-secondary me-2">{{terrain.prix}} CFA </span></h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{terrain.departement}}, {{terrain.commune}}, {{terrain.arrondissement}}</p>    
+                                <h5><span class="title-color">Quartier :</span> <span class="fa  text-secondary me-2">{{terrain.quartier}}</span></h5>
+
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button class="btn btn-primary m-3 mx-2">
+                                    <a href="{% url 'detail' terrain.id %}" class="text-white">Consulter</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FAQs Start -->
+{% comment %} <div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+           
+            <h1 class="mb-4">Foire Aux Questions</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="accordion" id="accordionFAQ1">
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.1s">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                How to build a website?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionFAQ1">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no diam.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.2s">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How long will it take to get a new website?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionFAQ1">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no diam.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.3s">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Do you only create HTML websites?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            data-bs-parent="#accordionFAQ1">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no diam.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.4s">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                Will my website be mobile-friendly?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                            data-bs-parent="#accordionFAQ1">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no diam.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="accordion" id="accordionFAQ2">
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.5s">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                Will you maintain my site for me?
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                            data-bs-parent="#accordionFAQ2">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no diam.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.6s">
+                        <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                I’m on a strict budget. Do you have any low cost options?
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                            data-bs-parent="#accordionFAQ2">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no diam.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.7s">
+                        <h2 class="accordion-header" id="headingSeven">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                Will you maintain my site for me?
+                            </button>
+                        </h2>
+                        <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                            data-bs-parent="#accordionFAQ2">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no diam.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.8s">
+                        <h2 class="accordion-header" id="headingEight">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                I’m on a strict budget. Do you have any low cost options?
+                            </button>
+                        </h2>
+                        <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+                            data-bs-parent="#accordionFAQ2">
+                            <div class="accordion-body">
+                                Dolor nonumy tempor elitr et rebum ipsum sit duo duo. Diam sed sed magna et magna diam aliquyam amet dolore ipsum erat duo. Sit rebum magna duo labore no diam.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+<!-- Avis des Clients -->
+{% comment %} <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">AVIS DES CLIENTS</h1>
+        </div>
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+            <div class="testimonial-item bg-light rounded p-3" >
+                <div class="bg-white border rounded p-4"style="height: 250px;">
+                    <em class="text-dark"> Je salue cette initiative qui est une première au Benin et qui donne un accès facile à tous les services et produits immobiliers. Je vous donne 4 Etoiles. Pour tous mes séjours au Bénin, je choisi BeninLand. </em>
+
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'immobilier/assete/img/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3" >
+                <div class="bg-white border rounded p-4"style="height: 250px;">
+                    <em class="text-dark"> BeninLand est le meilleur. Je donne 5 étoiles à cette plateforme révolutionnaire </em>
+
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'immobilier/assete/img/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3 ">
+                <div class="bg-white border rounded p-4" style="height: 250px;">
+                    <em class="text-dark"> Grâce à BeninLand, j’ai pu louer les Etats Unis sans aucune complication. C'est génial !</em>
+                    
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'immobilier/assete/img/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Rose Dossa</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3 ">
+                <div class="bg-white border rounded p-4" style="height: 250px;">
+                    <em class="text-dark">Dès que j'ai reçu mon affectation, j'ai juste rempli un formulaire sur BeninLand et dans les minutes qui ont suivies j'ai reçu mon contrat de location, puis la clé de mon apprtement. Tout s'est passé si rapidement et bien. C'était un incroyable !</em>
+                    <!-- <h6>Dès que j'ai reçu mon affectation, j'ai juste rempli un formulaire sur BeninLand et dans les minutes qui ont suivies j'ai reçu mon contrat de location, puis la clé de mon apprtement. Tout s'est passé si rapidement et bien. C'était un incroyable ! </h6> -->
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'immobilier/assete/img/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Fonctionnaire de l'Etat béninois</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3 ">
+                <div class="bg-white border rounded p-4" style="height: 250px;">
+                    <em class="text-dark">Mais depuis que je suis devenu apporteur d'affaires chez BeninLand, je suis devenu un Agent immoilier professionnel grâce à leurs formations régulières et les outils mis à notre disposition.</em>
+                    <!-- <h6>Dès que j'ai reçu mon affectation, j'ai juste rempli un formulaire sur BeninLand et dans les minutes qui ont suivies j'ai reçu mon contrat de location, puis la clé de mon apprtement. Tout s'est passé si rapidement et bien. C'était un incroyable ! </h6> -->
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'immobilier/assete/img/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Démarcheur</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+<!-- Avis des Clients  End -->
+
+<!-- Notre Equipe  -->
+{% comment %} <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">Notre Equipes</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="team-item rounded overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'immobilier/assete/img/team-2.jpg'%}" alt="">
+
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small> Directeur des Projets</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="team-item rounded overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'immobilier/assete/img/team-1.jpg'%}" alt="">
+
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Chargée de clientèle</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="team-item rounded overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'immobilier/assete/img/team-3.jpg'%}" alt="">
+
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Agent Immobilier</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="team-item rounded overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'immobilier/assete/img/team-4.jpg'%}" alt="">
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Agent Immobilier</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+<!-- Notre Equipe End -->
+<script>
+    $(document).ready(function () {
+      let departementId = document.getElementById("id_departement");
+      let communeId = document.getElementById("id_commune");
+      let arrondissementId = document.getElementById("id_arrondissement");
+      let quartierId = document.getElementById("id_quartier");
+
+      communeId.innerHTML = "<option selected disabled>---------</option>";
+      arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+      quartierId.innerHTML = "<option selected disabled>---------</option>";
+
+      if (departementId) {
+        departementId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'departemenCommune' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+
+            communeId.innerHTML = "<option selected disabled>---------</option>";
+            arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+
+            for (let i = 0; i < data.length; i++) {
+                communeId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+      if (communeId) {
+        communeId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'communeArrondissement' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+
+            arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+
+            for (let i = 0; i < data.length; i++) {
+                arrondissementId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+      if (arrondissementId) {
+        arrondissementId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'arrondissementQuartier' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+            for (let i = 0; i < data.length; i++) {
+                quartierId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+    });
+</script>
+<!-- Team End -->
+ {% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+	
+	<div class="mobile-menu-overlay"></div>
+
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>Expertise</h4>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+				
+				<div class="pd-20 card-box mb-30">
+					<div class="clearfix">
+						<div class="pull-left">
+							<h2 class="h4 mb-10 "><a href="{% url 'liste_expertise' %}" class="text-blue" >Liste Des Plan</a></h2>
+							
+						</div>	
+					</div>
+                    <form action="{% url 'expertiseImmobilier' %}" method="POST">
+                        {%csrf_token%}
+                        <div class="html-editor pd-20 card-box mb-30">
+                           {{form.as_p}}
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group mb-0">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Enregister</button>   
+                            </div>
+                        </div>
+					</form>
+					
+				</div>
+			</div>
+	
+
+
+{% endblock %}

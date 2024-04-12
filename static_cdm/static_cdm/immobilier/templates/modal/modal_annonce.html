@@ -1,0 +1,16 @@
+<div class="card-box height-100-p pd-20">
+    <h4 class="h5 mb-10">Modifier cet annonce <strong>{{obj.name}} </strong> </h4>
+    <form action="{% url 'update_annonce' pk=obj.id %}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        <div class="form-group">
+           {{form.as_p}}
+           {{formImages.as_p}}
+           <input type="hidden" name="id_annonce" value="{{obj.id}}" >
+        </div>
+        <div class="col-6">
+            <div class="input-group mb-0">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+            </div>
+        </div>
+    </form>
+</div>

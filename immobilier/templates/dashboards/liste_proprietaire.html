@@ -1,0 +1,91 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Liste Des Proporietaires</h4>
+            </div>
+            
+        </div>
+    <div class="pd-ltr-20">
+        <div class="row">
+            <div class="col-xl-12 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    {% comment %} <h2 class="h4 mb-10 "><a href="{% url 'proprietaire' %}" class="text-blue" >Nouveau Proprietaire</a></h2>  {% endcomment %}
+                    <table class="table hover multiple-select-row data-table-export nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">N°</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Téléphone</th>
+                                <th>Action</th>
+       
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for  listProprietaire in listProprietaires %}
+                            <tr>
+                                <td class="table-plus">{{ forloop.counter }}</td>
+                                    <td>{{listProprietaire.last_name}} </td>
+                                    <td>{{listProprietaire.first_name}}</td>
+                                    <td>{{listProprietaire.telephone}}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            <button class="dropdown-item edit" data-id=""><i class="dw dw-edit2"><a href="{% url 'update_proprietaire' listProprietaire.id %}">Modifier</a></i></button>
+                                            <button class="dropdown-item supp" data-toggle="modal" data-target="#Medium-modal" data-id="{{listProprietaire.id}}"><i class="dw dw-delete-3"  type="button"></i>Supprimer</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>	
+                </div>	
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mb-30">
+        <div class="pd-20  height-100-p">
+          
+            <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">Suppression de l'operation</h4>
+                            {% comment %} <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> {% endcomment %}
+                        </div>
+                        <form action="{% url 'delete_proprietaire' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <p>Voulez-Vous vraiment supprimer cette operation?</p>
+                                <input type="hidden" name="listProprietaireId" id="listProprietaireId" >
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.supp').click(function() {
+        console.log('moi')
+        var proporietaire_id=$(this).attr('data-id');
+        $('#listProprietaireId').attr('value', proporietaire_id);
+      })
+    });
+  </script>
+{% endblock %}

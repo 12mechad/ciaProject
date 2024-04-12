@@ -1,0 +1,128 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- About Start -->
+ <div class="container-xxl py-5">
+    <div class="container ">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="{% static 'immobilier/assete/img/departement/Ifangni.jpeg'%}" style="width: 400px; height: 500px;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn " data-wow-delay="0.5s">
+                <h1 class="mb-4">Ifangni</h1>
+                <p class="text-justify">Ifangni est une commune du sud-est du Bénin, composée des arrondissements de Ifangni,
+                    Banigbé, Laagbè, Daagbé, Tchaada et Ko- Koumolou. En tant que commune rurale disposant de terres cultivables en grande partie, Ifangni profite d’un climat de type subéquatorial à deux
+                    saisons sèches et deux saisons pluvieuses qui s alternent au cours de l’année, favorisant entre
+                    autres la culture du palmier à huile, une des grandes ressources de la commune. Son plateau est
+                    dominé à l'est par le cours d'eau Igidi qui offre une vallée occupée par des forêts marécageuses
+                    utiles pour la production des cultures de contre-saison, le maraîchage et l'installation des
+                    pépinières d espèces diversifiées. Sur le plan culturel Ifangni dispose ‘ duduwa, vodun porte-
+                    bonheur ; Egun-gun ou Kuvito, représentant les ancêtres ; Itcha-Ibédji ; Oro, société secrète
+                    réservée aux hommes , Zangbéto, gardien de la nuit, Lagba et To-Lagba ; Giri qui protège
+                    contre les envoûtements ; Joru, société secrète réservée uniquement aux hommes les plus âgés ;
+                    Dan, serpent porteur de chance et de bonheur ; Sakpata, dieu de la terre et de la variole ; Bosa,
+                    divinité qui donne des enfants ; Guèlèdè et plusieurs autres divinités vénérées à Ifangni sont à
+                    la fois, du panthéon vodoun Nago, Tori et Goun</p>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="">
+                                <h1 class="mb-5 text-center">Les Immeubles et chambres disponibres dans la commune de Ifangni</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for ifangniImmeuble in ifangniImmeubles %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in ifangniImmeuble.imagesimmeuble_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ifangniImmeuble.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{ifangniImmeuble.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ifangniImmeuble.departement}}, {{ifangniImmeuble.commune}}, {{ifangniImmeuble.arrondissement}}, {{ifangniImmeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'liste_chambres_immeubles' ifangniImmeuble.id %}" class="text-white">Consulter</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5"> 
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for ifangniQuartier in ifangniQuartiers %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in ifangniQuartier.images_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ifangniQuartier.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{ifangniQuartier.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ifangniQuartier.immeuble.departement}}, {{ifangniQuartier.immeuble.commune}}, {{kalaleQuartier.immeuble.arrondissement}}, {{kalaleQuartier.immeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'details_chambre' kalaleQuartier.id %}" class="text-white">Voir Detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}

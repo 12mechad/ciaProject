@@ -1,0 +1,123 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- About Start -->
+ <div class="container-xxl py-5">
+    <div class="container ">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="{% static 'immobilier/assete/img/departement/Aplahoué.jpg'%}" style="width: 400px; height: 500px;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn " data-wow-delay="0.5s">
+                <h1 class="mb-4">Aplahoué</h1>
+                <p class="text-justify">Aplahoué est une commune cosmopolite avec une population majoritairement jeune. Désignée
+                    comme chef lieu du département, elle est partagée par les arrondissements de Atomey, de
+                    Azovè, de Dékpo , de Godohou, de Kissamey, de Lonkly et d'Aplahoué. La commune
+                    d'Aplahoué a aussi un riche patrimoine culturel avec des mets qui rivalisent d'ardeur pour faire
+                    une sensation unique à qui choisit d'y goûter une fois. On peut retenir à ce titre, le «
+                    dékouchou» accompagné du « amin» ou la pâte blanche de maïs, le « gbahountchikudjobo »
+                    , le « wojagbou » , le « démin » ou encore le « dhafion » . Notons qu’elle est une forte zone
+                    commerciale ce qui fait sa force.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="">
+                                <h1 class="mb-5 text-center">Les Immeubles et chambres disponibres dans la commune de Aplahoué</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for aplahoueImmeuble in aplahoueImmeubles %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in aplahoueImmeuble.imagesimmeuble_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{aplahoueImmeuble.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{aplahoueImmeuble.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{aplahoueImmeuble.departement}}, {{aplahoueImmeuble.commune}}, {{aplahoueImmeuble.arrondissement}}, {{aplahoueImmeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'liste_chambres_immeubles' aplahoueImmeuble.id %}" class="text-white">Consulter</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5"> 
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for aplahoueQuartier in aplahoueQuartiers %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in aplahoueQuartier.images_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{aplahoueQuartier.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{aplahoueQuartier.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{aplahoueQuartier.immeuble.departement}}, {{aplahoueQuartier.immeuble.commune}}, {{aplahoueQuartier.immeuble.arrondissement}}, {{aplahoueQuartier.immeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'details_chambre' aplahoueQuartier.id %}" class="text-white">Voir Detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}

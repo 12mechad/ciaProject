@@ -1,0 +1,93 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class=" d-flex justify-content-between"> 
+                <button class="btn btn-primary"><a href="{% url 'departement' %}" class="text-white" >Nouveau Departement</a></h2></button>
+                <button class="btn btn-primary"><a href="{% url 'commune' %}" class="text-white" >Nouvelle Commune</a></button>
+                <button class="btn btn-primary"><a href="{% url 'quartier' %}" class="text-white" >Nouveau Quartier</a></button>
+            </div>	
+        </div>
+    <div class="pd-ltr-20">
+        <div class="row">
+            <div class="col-xl-7 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <h2 class="h4 mb-20">Liste Des Arrondissements</h2>
+           
+            <div class="card-box mb-30">
+              
+                <div class="pb-20">
+                    <table class="table hover multiple-select-row data-table-export nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">N°</th>
+                                <th>Arrondissements</th>
+                                <th>Communes</th>
+                                <th>Action</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for arrondissement in arrondissements %}
+                            <tr>
+                                <td class="table-plus">{{ forloop.counter }}</td>
+                                <td>{{arrondissement.nom}}</td>
+                                <td>{{arrondissement.commune}}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            <button class="dropdown-item edit" data-id="{{arrondissement.id}}"><i class="dw dw-edit2"></i>Modifier</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>			
+        </div>	
+            </div>
+            <div class="col-xl-5 mb-30" id="modaleArrondissement">
+                <div class="card-box height-100-p pd-20">
+                    <h4 class="h5 mb-10">Ajouter de nouvelle Arrondissement</h4>
+                    <form action="{% url 'arrondissement' %}" method="POST">
+                        {%csrf_token%}
+                        <div class="form-group">
+                           {{form.as_p}}
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-0">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.edit').click(function() {
+        var arrondissement_id=$(this).attr('data-id');
+        console.log(arrondissement_id)
+        url= "{% url 'update_arrondissement' 0 %}".replace('0', arrondissement_id)
+        $.ajax({
+          url: url,
+          method: 'get',
+        }).done(function(response){ 
+          $('#modaleArrondissement').html(response)
+        })
+      })
+    });
+  </script>
+{% endblock %}

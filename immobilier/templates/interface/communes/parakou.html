@@ -1,0 +1,128 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- About Start -->
+ <div class="container-xxl py-5">
+    <div class="container ">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="{% static 'immobilier/assete/img/departement/Parakou.jpg'%}" style="width: 400px; height: 500px;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn " data-wow-delay="0.5s">
+                <h1 class="mb-4">Parakou</h1>
+                <p class="text-justify">Parakou est une commune du centre du Bénin, située sur la Route nationale inter-états 2 (RNIE
+                    2) qui traverse le Bénin du nord au sud et relie notamment la ville à Cotonou. Elle se trouvait
+                    également sur la ligne de chemin de fer Bénin-Niger, aujourd'hui non-fonctionnelle.
+                    Le climat est de type tropical humide (sud-soudanien), avec une saison des pluies (mai à
+                    octobre) et une saison sèche (novembre à avril). Ses principales industries sont la fabrication
+                    d'huile d'arachide et la brasserie. L’économie locale est également centrée sur l’exploitation forestière (notamment du teck), la culture et l’égrenage du coton, le commerce de céréales.
+                    La ville de Parakou est aussi très prisée pour ses sites et ses activités qui font le bonheur des
+                    touristes qu’ils soient internes ou externes.
+                    Parakou, c’est aussi une référence scolaire avec son Lycée Mathieu B UKE, l’Université de
+                    Parakou, le musée ethnographique, le monastère Étoile Notre-Dame, le Centre Songhaï, les
+                    Palais Royaux de Sinagourou et de Kpébié, Musée de plein air de Parakou, Mausolée du
+                    Président Hubert MAGA (Père de l’indépendance du Bénin) et sa statue érigée sur un carrefour
+                    à l’entrée de la ville, la for t de Kpébié, la Place Bio Guéra.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="">
+                                <h1 class="mb-5 text-center">Les Immeubles et chambres disponibres dans la commune de Parakou</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for parakouImmeuble in parakouImmeubles %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in parakouImmeuble.imagesimmeuble_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{parakouImmeuble.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{parakouImmeuble.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{parakouImmeuble.departement}}, {{parakouImmeuble.commune}}, {{parakouImmeuble.arrondissement}}, {{parakouImmeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->   
+                                    <a href="{% url 'liste_chambres_immeubles' parakouImmeuble.id %}" class="text-white">Consulter</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5"> 
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for parakouQuartier in parakouQuartiers %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in parakouQuartier.images_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{parakouQuartier.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{parakouQuartier.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{parakouQuartier.immeuble.departement}}, {{parakouQuartier.immeuble.commune}}, {{parakouQuartier.immeuble.arrondissement}}, {{parakouQuartier.immeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'details_chambre' parakouQuartier.id %}" class="text-white">Voir Detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}

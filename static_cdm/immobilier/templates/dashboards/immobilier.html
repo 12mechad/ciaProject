@@ -1,0 +1,264 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic Page Info -->
+	<meta charset="utf-8">
+	<title>BeninLand</title>
+
+	<!-- Site favicon -->
+	{% comment %} <link rel="apple-touch-icon" sizes="180x180" href="{% static 'immobilier/vendors/images/apple-touch-icon.png'%}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'immobilier/vendors/images/favicon-32x32.png'%}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'immobilier/vendors/images/favicon-16x16.png'%}"> {% endcomment %}
+
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'immobilier/vendors/styles/core.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'immobilier/vendors/styles/icon-font.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'immobilier/src/plugins/datatables/css/dataTables.bootstrap4.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'immobilier/src/plugins/datatables/css/responsive.bootstrap4.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'immobilier/vendors/styles/style.css'%}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'immobilier/src/plugins/slick/slick.css'%}">
+	<!-- bootstrap-touchspin css -->
+	<link rel="stylesheet" type="text/css" href="{% static 'immobilier/src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'immobilier/vendors/styles/style.css'%}">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+	<script src="{% static 'immobilier/jquery.js'%}"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-119386393-1');
+	</script>
+</head>
+<body>
+	
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon dw dw-menu"></div>
+			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+			<div class="header-search">
+				
+			</div>
+		</div>
+		<div class="header-right">
+			<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<span class="user-icon">
+							{% if request.user.is_authenticated %}
+								{% if request.user.images %}
+									<img src="{{ request.user.images.url }}" alt="{{ request.user.username }}">
+								{% else %}
+									<!-- Image par défaut si l'utilisateur n'a pas d'image de profil -->
+									<img src="{% static 'path/vers/image/default.jpg' %}" alt="{{ request.user.username }}">
+								{% endif %}
+							{% endif %}
+						</span>
+						<span class="user-name">{{ user.username }} </span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+						<a class="dropdown-item" href="{% url 'update_proprietaire' user.id  %}"><i class="dw dw-user1"></i>Modifier son profile</a>
+						 <a class="dropdown-item" href="{% url 'modify' %}"><i class="dw dw-logout"></i>Changer son mot de passe </a>
+						<a class="dropdown-item" href="{% url 'logout' %}"><i class="dw dw-logout"></i>Deconnecter</a> 
+						{% if user.is_staff %}
+  							<a class="dropdown-item" href="{% url 'register' %}"><i class="dw dw-logout"></i>Créer un utilisateur</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			<div class="github-link">
+				<a href="https://github.com/dropways/deskapp" target="_blank"><img src="vendors/images/github.svg" alt=""></a>
+			</div>
+		</div>
+	</div>
+	<div class="left-side-bar">
+		<div class="brand-logo">
+			<a href="{% url 'accueil' %}">
+				<h4 class="text-white h2">BeninLand</h4>
+				{% comment %} <img src="{% static 'immobilier/vendors/images/deskapp-logo.svg'%}" alt="" class="dark-logo">
+				<img src="{% static 'immobilier/vendors/images/deskapp-logo-white.svg'%}" alt="" class="light-logo"> {% endcomment %}
+			</a>
+			<div class="close-sidebar" data-toggle="left-sidebar-close">
+				<i class="ion-close-round"></i>
+			</div>
+		</div>
+		<div class="menu-block customscroll">
+			<div class="sidebar-menu">
+				<ul id="accordion-menu">
+					{% if user.is_staff %}
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon icon-copy dw dw-layout1"></span><span class="mtext">Région</span>	
+						</a>
+						<ul class="submenu">
+							<li><a href="{% url 'departement' %}">Département</a></li>
+							
+						</ul>
+					</li>
+					
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon icon-copy dw dw-columns3"></span><span class="mtext">types</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="{% url 'types' %}">Types</a></li>
+							
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="{% url 'logement' %}" class="dropdown-toggle">
+							<span class="micon  dw dw-rows1"></span><span >Chambres</span>
+						</a>
+						
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon icon-copy dw dw-bottom"></span><span class="mtext">Proprietaire</span>
+						</a>
+						<ul class="submenu">
+							{% comment %} <li><a href="{% url 'proprietaire' %}">Nouveau Proprietaire</a></li> {% endcomment %}
+							<li><a href="{% url 'liste_proprietaire' %}">Liste Proprietaires</a></li>
+							
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon icon-copy dw dw-notepad"></span><span class="mtext">Immeubles</span>
+						</a>
+						
+						<ul class="submenu">
+							<li><a href="{% url 'immeuble' %}">Immeuble</a></li>
+							<li><a href="{% url 'liste_immeuble' %}">Liste Clients</a></li>
+							
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon icon-copy dw dw-notepad-1"></span><span class="mtext">Terrains</span>
+						</a>
+						
+						<ul class="submenu">
+							<li><a href="{% url 'terrain' %}">Terrain</a></li>
+							<li><a href="{% url 'liste_terrain' %}">Liste Terrains</a></li>
+							
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-apartment"></span><span class="mtext"> Construire </span>
+						</a>
+						<ul class="submenu">
+							<li><a href="{% url 'offre' %}">Offre</a></li>
+							<li><a href="{% url 'plan' %}">Plan</a></li>
+
+						</ul>
+					</li>
+					
+					 <li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon icon-copy dw dw-panel3"></span><span class="mtext">Annonce</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="{% url 'annonce' %}">Annonce</a></li>
+							
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon icon-copy dw dw-panel3"></span><span class="mtext">Contact</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="{% url 'contact' %}">Contact</a></li>
+							
+						</ul>
+					</li> 
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon icon-copy dw dw-sidebar1"></span><span class="mtext">Autre</span>
+						</a>
+						
+						<ul class="submenu">
+							<li><a href="{% url 'categorie' %}">Edition</a></li>
+						</ul>
+					</li> 
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="mobile-menu-overlay"></div>
+        {% block content %}
+        
+        {% endblock %}
+	
+
+	
+
+			<div class="footer-wrap pd-20 mb-20 card-box">
+				<h4 class="text-blue h2">BeninLand</h4>
+			</div>
+		</div>
+	</div>
+	<!-- js -->
+	<script src="{% static 'immobilier/vendors/scripts/core.js'%}"></script>
+	<script src="{% static 'immobilier/vendors/scripts/script.min.js'%}"></script>
+	<script src="{% static 'immobilier/vendors/scripts/process.js'%}"></script>
+	<script src="{% static 'immobilier/vendors/scripts/layout-settings.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/apexcharts/apexcharts.min.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/datatables/js/jquery.dataTables.min.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/datatables/js/dataTables.bootstrap4.min.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/datatables/js/dataTables.responsive.min.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/datatables/js/responsive.bootstrap4.min.js'%}"></script>
+	<script src="{% static 'immobilier/vendors/scripts/dashboard.js'%}"></script>
+
+	<script src="{% static 'immobilier/src/plugins/datatables/js/dataTables.buttons.min.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/datatables/js/buttons.bootstrap4.min.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/datatables/js/buttons.print.min.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/datatables/js/buttons.html5.min.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/datatables/js/buttons.flash.min.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/datatables/js/pdfmake.min.js'%}"></script>
+	<script src="{% static 'immobilier/src/plugins/datatables/js/vfs_fonts.js'%}"></script>
+	
+	<!-- Slick Slider js -->
+	<script src="{% static 'immobilier/src/plugins/slick/slick.min.js'%}"></script>
+	<!-- bootstrap-touchspin js -->
+	<script src="{% static 'immobilier/src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js'%}"></script>
+	<script src="{% static 'immobilier/vendors/scripts/datatable-setting.js'%}"></script></body>
+	<script>
+		jQuery(document).ready(function() {
+			jQuery('.product-slider').slick({
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: true,
+				infinite: true,
+				speed: 1000,
+				fade: true,
+				asNavFor: '.product-slider-nav'
+			});
+			jQuery('.product-slider-nav').slick({
+				slidesToShow: 3,
+				slidesToScroll: 1,
+				asNavFor: '.product-slider',
+				dots: false,
+				infinite: true,
+				arrows: false,
+				speed: 1000,
+				centerMode: true,
+				focusOnSelect: true
+			});
+			$("input[name='demo3_22']").TouchSpin({
+				initval: 1
+			});
+		});
+	</script>
+</body>
+</html>

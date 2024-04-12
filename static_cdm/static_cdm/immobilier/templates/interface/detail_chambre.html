@@ -1,0 +1,37 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- About Start -->
+ <div class="container-xxl py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="owl-carousel header-carousel">
+                    
+                    {% for image in chambre.images_set.all %}
+                        <div class="owl-carousel-item">
+                            <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                                <img class="img-fluid chambre-image" src="{{ image.images.url }}" alt="Chambre Image" style="width: 500px;height: 300px" >
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-4  text-white">
+                    <h1>BeninLand</h1>
+                </div>
+                <h4> Description: </h4>
+                <p>{{ chambre.immeuble.description }}</p> 
+                <h4>Chambre N°: {{ chambre.name }}</h4>
+                <p>Salon: {{ chambre.salon }}, Chambre: {{ chambre.chambre }}, Douche: {{ chambre.douche }}, Cuisine: {{ chambre.cuisine }}, Balcon/Veranda: {{ chambre.balcon }}</p>
+                <h5 class="text-danger">  {{ chambre.prix }} CFA</h5> 
+                <button><a href="{% url 'contact_immobilier' %}" class="text-white"> Commander</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About End -->
+ {% endblock %}

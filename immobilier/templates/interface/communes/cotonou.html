@@ -1,0 +1,129 @@
+
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- About Start -->
+ <div class="container-xxl py-5">
+    <div class="container ">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="{% static 'immobilier/assete/img/departement/Cotonou1.jpg'%}" style="width: 400px; height: 500px;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn " data-wow-delay="0.5s">
+                <h1 class="mb-4">Cotonou</h1>
+                <p class="text-justify">Cotonou est la capitale économique et la plus grande ville du Bénin avec 1 228 667 habitants
+                    en 2021. Elle abrite aussi de nombreux services gouvernementaux et diplomatiques.
+                    Cotonou est connue dans toute l'Afrique de l'Ouest pour son marché international
+                    de 20 hectares (Dantokpa), le plus grand marché d'Afrique de l'Ouest, ses Zémidjans (motos-
+                    taxis) et un marché secondaire, Missebo, situé à quelques mètres du marché Dantokpa. Le
+                    nom Kútɔnú signifie « embouchure du fleuve de la mort » en fon-gbe. Ses habitants sont
+                    appelés les Cotonois et les Cotonoises. Le climat est de type équatorial, où deux saisons
+                    pluvieuses (avril-juillet et septembre-octobre, 800 à 1 200 mm de pluie par an) alternent avec
+                    deux saisons sèches. De décembre à janvier, l’harmattan souffle. Du fait de sa situation
+                    géographique intéressante, Cotonou développe les échanges avec les pays voisins. La capitale
+                    économique du Bénin est aussi connue dans la région pour son marché de voitures d'occasions
+                    européennes, qu'elle stocke dans d'immenses parkings à ciel ouvert sur le port. C’est le siège de
+                    la Présidence et de la quasi-totalité des minisitères. Par ailleurs.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="">
+                                <h1 class="mb-5 text-center">Les Immeubles et chambres disponibres dans la commune de Cotonou</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for cotonouImmeuble in cotonouImmeubles %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in cotonouImmeuble.imagesimmeuble_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{cotonouImmeuble.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{cotonouImmeuble.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{cotonouImmeuble.departement}}, {{cotonouImmeuble.commune}}, {{cotonouImmeuble.arrondissement}}, {{cotonouImmeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'liste_chambres_immeubles' cotonouImmeuble.id %}" class="text-white">Consulter</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5"> 
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for cotonouQuartier in cotonouQuartiers %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in cotonouQuartier.images_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{cotonouQuartier.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{cotonouQuartier.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{cotonouQuartier.immeuble.departement}}, {{cotonouQuartier.immeuble.commune}}, {{cotonouQuartier.immeuble.arrondissement}}, {{cotonouQuartier.immeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'details_chambre' cotonouQuartier.id %}" class="text-white">Voir Detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}

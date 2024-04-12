@@ -1,0 +1,162 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Liste Des Immeubles</h4>
+            </div>
+            
+        </div>
+    <div class="pd-ltr-20">
+        <div class="row">
+            <div class="col-xl-12 mb-30">
+                <div class="card-box height-100-p pd-20 ">
+                    <div class=" d-flex justify-content-between mb-20">
+                      <button class="btn btn-primary"><a href="{% url 'immeuble' %}" class="text-white" >Nouveau Immeubles</a></button>
+                        <button class="supp btn btn-primary" data-toggle="modal" data-target="#login-modal" >Ajouter Chambre</button>
+                    </div>
+
+                    <table class="table hover multiple-select-row data-table-export nowrap">
+                        <thead>
+                            <tr>
+                                <!-- <th class="table-plus datatable-nosort">N°</th> -->
+                              
+                                <th>Proprietaire</th>
+                                <th>Immeuble</th>
+                                <th>Nom</th>
+                                <th>Prix</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for chambre in chambres %}
+                            <tr>
+                                <!-- <td class="table-plus">{{ forloop.counter }}</td> -->
+                                <td>{{chambre.proprietaire.last_name}} {{ chambre.proprietaire.first_name }}</td>
+                                <td>{{chambre.immeuble}}</td>
+                                <td>{{chambre.name}}</td>
+                                <td>{{chambre.prix}}</td>
+                            
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                          <a data-id="{{immeuble.id}}"><i class="dw dw-edit2"></i> <a href="{% url 'update_chambre' chambre.id%}">Modifier</a>
+                                            <button class="dropdown-item supp" data-toggle="modal" data-target="#Medium-modal" data-id="{{chambre.id}}"><i class="dw dw-delete-3"  type="button"></i>Supprimer</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>	
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 mb-30" id="modaleterrain">
+          <div class="pd-20  height-100-p">
+            
+              <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h4 class="modal-title" id="myLargeModalLabel">Suppression de l'operation</h4>
+                              {% comment %} <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> {% endcomment %}
+                          </div>
+                          <form action="{% url 'delete_chambre' %}" method="POST">
+                              {% csrf_token %}
+                              <div class="modal-body">
+                                  <p>Voulez-Vous vraiment supprimer cette operation?</p>
+                                  <input type="hidden" name="chambreId" id="chambreId" >
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                  <button type="submit" class="btn btn-danger">Supprimer</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mb-30">
+        <div class="pd-20 card-box height-100-p">
+          <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="login-box bg-white box-shadow border-radius-10">
+                  <div class="login-title">
+                    <h2 class="text-center text-primary">Ajouter une chambre</h2>
+                  </div>
+                 <form action="{% url 'liste_chambre' %}" method="POST"  enctype="multipart/form-data">
+                          {% csrf_token %}
+                          <div class="form-group">
+                              {{formChambre.as_p}}
+                              {{formImages.as_p}}
+                           </div>
+                           <div class="col-6">
+                              <div class="input-group mb-0">
+                                  <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                              </div>
+                          </div>
+                      </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+	
+<script>
+  $(document).ready(function(){
+    $('.supp').click(function() {
+      console.log('moi')
+      var types_id=$(this).attr('data-id');
+      $('#chambreId').attr('value', types_id);
+    })
+    $('.edit').click(function() {
+      var chambre_id=$(this).attr('data-id');
+      console.log(chambre_id)
+      url= "{% url 'update_chambre' 0 %}".replace('0', chambre_id)
+      $.ajax({
+        url: url,
+        method: 'get',
+      }).done(function(response){ 
+        $('#modaleChambre').html(response)
+      })
+    })
+      let proprietaireId= document.getElementById("id_proprietaire");
+      let immeubleId= document.getElementById("id_immeuble");
+        
+      immeubleId.innerHTML = "<option selected disabled>---------</option>";
+      
+     
+      if (proprietaireId) {
+        proprietaireId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'proprietaireImmeuble' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+            immeubleId.innerHTML = "<option selected disabled>---------</option>";
+            for (let i = 0; i < data.length; i++) {
+              immeubleId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.name +
+                "</option>";
+            }
+          });
+        });
+      }
+    });
+</script>
+{% endblock %}

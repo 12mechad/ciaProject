@@ -1,0 +1,95 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+{% comment %} <div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="title">
+                            <h4 class="text-primary">Detail</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'compte' %}">Mon Espace</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Detail</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="product-wrap">
+    <div class="product-detail-wrap mb-30">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="product-slider slider-arrow">
+                    {% for image in chambre.images.all %}
+                        <div class="product-slide">
+                            <img src="{{ image.url }}" alt="Chambre Image">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="product-slider-nav">
+                    {% for image in chambre.images.all %}
+                        <div class="product-slide-nav">
+                            <img src="{{ image.url }}" alt="Chambre Image">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="product-detail-desc pd-20 card-box height-100-p">
+                    <h4 class="mb-20 pt-20">{{ chambre.name }}</h4>
+                    <p>{{ chambre.description }}</p>
+                    <p><strong>Prix:</strong> {{ chambre.prix }}</p>
+                    <!-- Add other details as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div> {% endcomment %}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="title">
+                            <h4 class="text-primary">Detail</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'compte' %}">Mon Espace</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Detail</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+<div class="product-wrap">
+    <div class="product-detail-wrap mb-30">
+        <div class="row">
+            <div class="owl-carousel header-carousel">
+                {% for image in chambre.images_set.all %}
+                    <div class="owl-carousel-item">
+                        <div style="height: 246px;"> <img class="img-fluid" src="{{ image.images.url }}" style="width: 500px; height: 200px;"></div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="product-detail-desc pd-20 card-box height-100-p">
+                    <h4 class="mb-20 pt-20"> Chambre N{{ chambre.name }}</h4>
+                    <p> Carateristique :{{ chambre.immeuble.description }}</p>
+                    <div class="price">
+                        <p> Prix {{ chambre.prix }} FCFA</p>
+                    </div>
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}

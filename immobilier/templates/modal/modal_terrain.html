@@ -1,0 +1,15 @@
+{% comment %} <div class="card-box height-100-p pd-20">
+    <h4 class="h5 mb-10">Modifier cette opération <strong>{{obj.nom}} </strong> </h4>
+    <form action="{% url 'update_terrain' pk=obj.id %}" method="POST">
+        {%csrf_token%}
+        <div class="form-group">
+           {{form.as_p}}
+           <input type="hidden" name="id_terrain" value="{{obj.id}}" >
+        </div>
+        <div class="col-5">
+            <div class="input-group mb-0">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Modifier</button>   
+            </div>
+        </div>
+    </form>	
+</div> {% endcomment %}

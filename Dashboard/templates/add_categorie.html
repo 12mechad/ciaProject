@@ -1,0 +1,139 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!-- Emails Products & Avg Deals -->
+
+<div class="app-content content">
+  <div class="content-wrapper">
+    <div class="content-wrapper-before"></div>
+    <div class="content-header row">
+      <div class="content-header-left col-md-4 col-12 mb-2">
+        <h3 class="content-header-title">Catégories</h3>
+      </div>
+      {% comment %} <div class="content-header-right col-md-8 col-12">
+        <div class="breadcrumbs-top float-md-right">
+          <div class="breadcrumb-wrapper mr-1">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Apps</a></li>
+              <li class="breadcrumb-item active">Project Summary</li>
+            </ol>
+          </div>
+        </div>
+      </div> {% endcomment %}
+    </div>
+    <div class="content-body">
+      <!-- Revenue, Hit Rate & Deals -->
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="card">
+            <div class="card-header p-1">
+              <h class="card-title float-left lead">
+                Liste des Catégories
+              </h>
+           
+             
+            </div>
+            <div class="card-content collapse show">
+              <div class="card-footer text-center p-1">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for categorie in categories %}
+                                <tr>
+                                    <td>{{categorie.name}}</td>
+                                    <td>{{categorie.date}}</td>
+                                    <td> <button class="btn btn-warning edit" data-id="{{categorie.id}}">Edit</button>
+                                        <button class="btn btn-danger supp" data-toggle="modal" data-target="#danger" data-id="{{categorie.id}}" >Supp</button>
+                                     </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>  
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <div class="card pull-up border-top-info border-top-3 rounded-0" id="modaleCategory">
+            <div class="card-header">
+              <h4 class="card-title">Ajouter Une Catégories</h4>
+            </div>
+            <div class="card-content collapse show">
+              <form action="{% url 'categorie' %}" method="POST">
+                {% csrf_token %}
+                <div class="card-body p-1">
+                 {{form.as_p}}
+                </div>
+                <div class="card-footer p-1 text-center">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="la la-check-square-o"></i> Enregistrer
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-6 col-sm-12 my-1">
+    <div class="form-group">
+      <!-- Modal -->
+      <div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-danger white">
+          <h4 class="modal-title white" id="myModalLabel10">Suppression de catégorie </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <form action="{% url 'delete' %}" method="POST">
+            {% csrf_token %}
+            <div class="modal-body">
+              <h5 class="lead">Voulez-vous vraiment supprimer cette categorie ?</h5>
+              <input type="hidden" name="categorieId" id="categorieId" >
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn grey btn-secondary" data-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-danger">Supprimer</button>
+            </div>
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.supp').click(function() {
+      console.log('moi')
+      var category_id=$(this).attr('data-id');
+      $('#categorieId').attr('value', category_id);
+    })
+    $('.edit').click(function() {
+      var category_id=$(this).attr('data-id');
+      url= "{% url 'update_category' 0 %}".replace('0', category_id)
+      $.ajax({
+        url: url,
+        method: 'get',
+      }).done(function(response){ 
+        $('#modaleCategory').html(response)
+      })
+    })
+
+  });
+</script>
+<!--/ Emails Products & Avg Deals -->
+{% endblock %}

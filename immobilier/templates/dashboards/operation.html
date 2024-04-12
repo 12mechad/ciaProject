@@ -1,0 +1,120 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix MB-20">
+            <div class=" d-flex justify-content-between mb-20">
+                <button class="btn btn-primary"><a href="{% url 'operation' %}" class="text-white" >Liste Des Immeubles</a></button>
+                <button class="btn btn-primary"><a href="{% url 'types' %}" class="text-white" >Ajouter un Type</a></button>
+
+            </div>	
+        </div>
+    <div class="pd-ltr-20">
+        <div class="row">
+            <div class="col-xl-6 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <h2 class="h4 mb-20">Liste des operations</h2>
+                    <table class="table hover multiple-select-row data-table-export nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">N°</th>
+                                <th>Type operation</th>
+                                <th>Action</th>
+       
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for operation in operations %}
+                            <tr>
+                                <td class="table-plus">{{ forloop.counter }}</td>
+                                <td>{{operation.type}}</td>
+                               
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            <button class="dropdown-item edit" data-id="{{operation.id}}"><i class="dw dw-edit2"></i>Modifier</button>
+                                            <button class="dropdown-item supp" data-toggle="modal" data-target="#Medium-modal" data-id="{{operation.id}}"><i class="dw dw-delete-3"  type="button"></i>Supprimer</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>	
+                 
+                </div>	
+            </div>
+           
+            <div class="col-xl-6 mb-30" id="modaleOperation">
+                <div class="card-box height-100-p pd-20">
+                    <h4 class="h5 mb-10">Ajouter de nouvelle Opération</h4>
+                    <form action="{% url 'operation' %}" method="POST">
+                        {%csrf_token%}
+                        <div class="form-group">
+                           {{form.as_p}}
+                        </div>
+                        <div class="col-5">
+                            <div class="input-group mb-0">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                            </div>
+                        </div>
+                    </form>	
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mb-30">
+        <div class="pd-20  height-100-p">
+          
+            <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">Suppression de l'operation</h4>
+                            {% comment %} <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> {% endcomment %}
+                        </div>
+                        <form action="{% url 'delete' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <p>Voulez-Vous vraiment supprimer cette operation?</p>
+                                <input type="hidden" name="operationId" id="operationId" >
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.supp').click(function() {
+        console.log('moi')
+        var operation_id=$(this).attr('data-id');
+        $('#operationId').attr('value', operation_id);
+      })
+      $('.edit').click(function() {
+        var operation_id=$(this).attr('data-id');
+        console.log(operation_id)
+        url= "{% url 'update_operation' 0 %}".replace('0', operation_id)
+        $.ajax({
+          url: url,
+          method: 'get',
+        }).done(function(response){ 
+          $('#modaleOperation').html(response)
+        })
+      })
+    });
+  </script>
+
+{% endblock %}

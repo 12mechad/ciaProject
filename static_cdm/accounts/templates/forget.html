@@ -1,0 +1,28 @@
+{% extends 'user.html' %}
+{% load static %}
+ {% block user %}
+ {% for message in messages %}
+ <div class="alert alert-danger" role="alert">
+ <p > {{ message}} </p>
+
+</div>
+ {% endfor %}
+    
+
+    <div class="card-content">
+       
+        <div class="card-body">
+            <form method="post" action="{% url 'forget' %}">
+                {% csrf_token %}
+                <fieldset class="form-group position-relative has-icon-left">
+                    {{ form.as_p }}
+                </fieldset>   
+                <div class="form-group text-center">
+                    <button type="submit" class="btn round btn-block btn-glow btn-bg-gradient-x-purple-blue col-12 mr-1 mb-1">Réinitialiser le mot de passe</button>    
+                </div> 
+                
+            </form>
+        </div>                    
+    </div>
+
+{% endblock %}

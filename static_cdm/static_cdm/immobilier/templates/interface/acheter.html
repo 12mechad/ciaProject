@@ -1,0 +1,241 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid header bg-white p-0">
+    <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+        <div class="col-md-12 animated fadeIn">
+            <div class="owl-carousel header-carousel">
+                <div class="owl-carousel-item">
+                    <img class="img-fluid" src="{% static 'immobilier/assete/img/acheter.jpeg'%}" style=" height: 600px; margin-top: 110px;" alt="">
+                </div>
+                {% comment %} <div class="owl-carousel-item">
+                    <img class="img-fluid" src="{% static 'immobilier/assete/img/carousel-2.jpg'%}" style=" height: 700px;" alt="">
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Property List Start -->
+<div class="container-xxl py-5">
+  
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="d-flex">
+                                <h1 class="mb-3 ">Nos immeubles en vente </h1>
+                            </div>
+                            <p>Plongez dans l'opportunité avec nos immeubles en vente, où le luxe rencontre la fonctionnalité pour créer l'espace idéal pour votre prochaine étape immobilière.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container p-5">
+                <div class="">
+                    <div class="col-md-6 mx-auto">
+                        <form id="searchForm center" >
+                            <div class="d-flex justify-content-center">
+                                <div class="form-group">
+                                    <input type="search" id="search1" name="chambre" placeholder="Recherche ..." required>
+                                </div>
+    
+                                <div class="form-group">
+                                    <button type="submit" id="searchButton2">Rechercher </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for chambre in chambres %}
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="property-item rounded overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="owl-carousel header-carousel">
+                                        {% for image in chambre.images_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid" src="{{ image.images.url }}" style="width: 500px; height: 200px;"></div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
+                                        <a href="" class="text-white">Voir Detail</a>
+                                    </div>
+                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ chambre.immeuble.type }} </div>
+                                </div>
+                                <div class="p-4 pb-0">
+                                    <h5 class="text-primary mb-3">{{ chambre.prix }} CFA</h5>
+                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ chambre.immeuble.departement }}, {{ chambre.immeuble.commune }}, {{ chambre.immeuble.arrondissement }}, {{ chambre.immeuble.quartier }}</p>
+                                </div>
+                                <div class="d-flex border-top">
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>{{ chambre.salon }} </small>
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>{{ chambre.chambre }} </small>
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-sink text-primary me-2"></i>{{ chambre.cuisine }} </small>
+                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>{{ chambre.douche }} </small>
+                                </div>
+                                <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                    <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                        <a href="{% url 'details_chambre' chambre.id %}" class="text-white">Voir Detail</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="d-flex">
+                                <h1 class="mb-3 ">Nos Terrains en vente</h1>
+                            </div>
+                            <p>Explorez le confort et l'élégance dans nos terrains en vente, conçues pour offrir une expérience unique et mémorable à chaque séjour.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container p-5">
+                <div class="">
+                    <div class="col-md-6 mx-auto">
+                        <form id="searchForm center" >
+                            <div class="d-flex justify-content-center">
+                                <div class="form-group">
+                                    <input type="search" id="search1" name="quartier" placeholder="Recherche ..." required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" id="searchButton2">Rechercher </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for terrain in terrains %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="owl-carousel header-carousel">
+                                    <div class="owl-carousel-item">
+                                        <div style="height: 246px;"> <img class="img-fluid"  src="{{ terrain.images.url }}"  style="width: 500px; height: 200px;" ></div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{terrain.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{terrain.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{terrain.departement}}, {{terrain.commune}}, {{terrain.arrondissement}}, {{terrain.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'detail' terrain.id %}" class="text-white">Voir Detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Property List End -->
+
+<!-- Testimonial Start -->
+{% comment %} <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">AVIS DES CLIENTS</h1>
+          
+        </div>
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+            <div class="testimonial-item bg-light rounded p-3" >
+                <div class="bg-white border rounded p-4"style="height: 250px;">
+                    <em class="text-dark"> Je salue cette initiative qui est une première au Benin et qui donne un accès facile à tous les services et produits immobiliers. Je vous donne 4 Etoiles. Pour tous mes séjours au Bénin, je choisi BeninLand. </em>
+
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'immobilier/assete/img/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3" >
+                <div class="bg-white border rounded p-4"style="height: 250px;">
+                    <em class="text-dark"> BeninLand est le meilleur. Je donne 5 étoiles à cette plateforme révolutionnaire </em>
+
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'immobilier/assete/img/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3 ">
+                <div class="bg-white border rounded p-4" style="height: 250px;">
+                    <em class="text-dark"> Grâce à BeninLand, j’ai pu louer les Etats Unis sans aucune complication. C'est génial !</em>
+                    
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'immobilier/assete/img/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Rose Dossa</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3 ">
+                <div class="bg-white border rounded p-4" style="height: 250px;">
+                    <em class="text-dark">Dès que j'ai reçu mon affectation, j'ai juste rempli un formulaire sur BeninLand et dans les minutes qui ont suivies j'ai reçu mon contrat de location, puis la clé de mon apprtement. Tout s'est passé si rapidement et bien. C'était un incroyable !</em>
+                    <!-- <h6>Dès que j'ai reçu mon affectation, j'ai juste rempli un formulaire sur BeninLand et dans les minutes qui ont suivies j'ai reçu mon contrat de location, puis la clé de mon apprtement. Tout s'est passé si rapidement et bien. C'était un incroyable ! </h6> -->
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'immobilier/assete/img/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Fonctionnaire de l'Etat béninois</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3 ">
+                <div class="bg-white border rounded p-4" style="height: 250px;">
+                    <em class="text-dark">Mais depuis que je suis devenu apporteur d'affaires chez BeninLand, je suis devenu un Agent immoilier professionnel grâce à leurs formations régulières et les outils mis à notre disposition.</em>
+                    <!-- <h6>Dès que j'ai reçu mon affectation, j'ai juste rempli un formulaire sur BeninLand et dans les minutes qui ont suivies j'ai reçu mon contrat de location, puis la clé de mon apprtement. Tout s'est passé si rapidement et bien. C'était un incroyable ! </h6> -->
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'immobilier/assete/img/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Démarcheur</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+ {% endblock %}

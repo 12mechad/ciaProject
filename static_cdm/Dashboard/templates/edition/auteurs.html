@@ -1,0 +1,49 @@
+{% extends 'edition/base.html' %}
+{% load static %}
+{% block content%}
+    <!-- Header Start -->
+    <div class="container-fluid mb-1">
+        <img class="img-fluid" src="{% static 'immobilier/assete/img/auteur.jpeg'%}" style="height: 600px; width: 100%;" alt="">
+    </div>
+    
+    
+<!-- Header End -->
+<!-- Blog Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <div class="text-center pb-2">
+
+            <h1 class="mb-4">Nos Auteurs</h1>
+            <p>Consultez la biobibliographie de nos auteurs. Vous aussi vous pouvez devenir notre auteur(e).
+            </p>
+        </div>
+       
+        <div class="row pb-3">
+            {% for auteur  in auteurss %}
+            <div class="col-lg-4 mb-4" >
+                <div class="card border-0 shadow-sm mb-2" style="overflow: hidden;">
+                    {% comment %} <div style="height: 246px;"> <img class="card-img-top mb-2 " src="{{auteur.images.url}}" alt=""></div> {% endcomment %}
+                        <div class="card-body bg-light text-center p-4" style="height:250px;">
+                            
+                            <h5 class="text-decoration-underline ">{{ auteur.last_name }} {{ auteur.first_name }} </h5>
+                             
+                          
+                            {% comment %} <div class="d-flex justify-content-center mb-1">
+                               <h4><small class="mr-3 text-dark"><i class="fa fa-user text-primary"></i> {{accueil.auteur.first_name}} {{accueil.auteur.last_name}}</small></h4>
+                               
+                            </div>
+                                                    {% endcomment %}
+                            
+                            {% comment %} <a  href="{% url 'detail_actualite' accueil.id %}" class="btn btn-primary px-4 mx-auto my-2">Plus De eatail</a> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            
+            {% endfor %}
+         </div>
+        
+        
+    </div>
+</div>
+<!-- Blog End -->
+{% endblock%}

@@ -1,0 +1,106 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- About Start -->
+ <div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="{% static 'immobilier/assete/img/about1.jpg'%}">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <h1 class="mb-4">BeninLand</h1>
+                <p class="text-justify">Bienvenue chez BeninLand, la solution incontournable de gestion immobilière au Bénin. BeninLand est le département immobilier de la Société de Coopération pour l'Investissement en Afrique (CIA CONSULTING GROUP). Il se distingue par des solutions innovantes, une excellence opérationnelle, et une fidélité client basée sur la transparence et la qualité de ses services. Positionné comme un atout stratégique pour les propriétaires, locataires, apporteurs d'affaires et ceux désirant construire leur domicile de rêve, BeninLand offre un suivi quotidien traçable et automatisé des biens et des services. C’est Fort de ses cinq années expériences avec plusieurs dizaines de clients satisfaits que BeninLand continue de rechercher l'excellence, avec son équipe bien déterminée à offrir des services immobiliers de qualité exceptionnelle.
+                    Faites le meilleur choix, Choisissez BeninLand !</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- Contact Start -->
+ <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">Contactez-nous</h1>
+    <p class="text-justify">Contactez-nous pour toute question, demande d'information ou assistance. Notre équipe dévouée est à votre disposition pour vous fournir des réponses rapides et un soutien exceptionnel. Nous sommes là pour vous aider à chaque étape de votre parcours.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="row gy-4">
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <span>Porto-Novo, BENIN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-envelope-open text-primary"></i>
+                                </div>
+                                <span>beninlan@ciagroup.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fab fa-whatsapp text-primary"></i>
+                                </div>
+                                <span>+229 40470007</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7928.807790659692!2d2.614461!3d6.4704132!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b57a114bc797b%3A0x71ce14c8e04d4b9a!2sAdjinan%20Sud!5e0!3m2!1sfr!2sbj!4v1698511800112!5m2!1sfr!2sbj"
+                    width="100%"
+                    height="400" 
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"> 
+                </iframe>
+            </div>
+            <div class="col-md-6">
+                <div class="wow fadeInUp" data-wow-delay="0.5s">
+                    <form action="{% url 'propos_immobilier' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                           
+                            {{ formContact.name }}
+                        </div>
+                        <div class="form-group">
+                            
+                            {{ formContact.email }}
+                        </div>
+                        <div class="form-group">
+                            
+                            {{ formContact.message }}
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3" type="submit">Envoyer</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+
+
+ {% endblock %}

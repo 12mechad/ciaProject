@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- END: Main Menu-->
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-wrapper-before"></div>
+
+        <div class="content-header-left col-md-4 col-12 mb-2">
+            <h3 class="content-header-title">Liste des revus</h3>
+        </div>
+
+        <div class="content-body"><!-- Basic form layout section start -->
+            <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    <div class="heading-elements ">
+                                        <a class="btn btn-bg-gradient-x-blue-cyan" href="{% url 'revus_presse' %}">Nouvelle
+                                            Edition</a>
+
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col">Titre</th>
+                                                        <th scope="col">Categorie</th>
+                                                        {% comment %} <th scope="col">Image</th> {% endcomment %}
+                                                        <th scope="col">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    {% for listerevu in listerevus %}
+                                                    <tr>
+                                                        <th scope="row" class="p-2">
+                                                            {{listerevu.titre|truncatechars:20}}</th>
+                                                        <td class="p-2">{{listerevu.categories}}</td>
+                                                        {% comment %} <td class="p-2">{{listerevus.auteur}}</td>
+                                                        <td class="p-2">{{listerevus.prix}} FCFA</td> {% endcomment %}
+                                                        {% comment %} <td><img src="{{ listEdition.images.url }}"
+                                                                alt="image" class="avatar-xs"></td> {% endcomment %}
+                                                        
+                                                        {% comment %} {% if user.is_staff %}
+                                                            {% if listerevus.statut %} 
+                                                            <td class="p-1">
+                                                                <button type="button" class="btn btn-danger btn-sm publier" data-toggle="modal" data-keyboard="false" data-id="{{listEdition.id}}" data-target="#keyboard1">Dissimuler</button>
+                                                            </td>
+                                                            {% else %}
+                                                            <td class="p-1">
+                                                                <button type="button" class="btn btn-primary btn-sm publier" data-toggle="modal" data-keyboard="false" data-id="{{listEdition.id}}" data-target="#keyboard1">Publier</button>
+                                                            </td>
+                                                            {% endif %}
+                                                                
+                                                        {% endif %} {% endcomment %}
+                                                        <td class="p-1">
+                                                            <a href="{% url 'update_revus' listerevu.id %}" 
+                                                                 class="btn btn-warning btn-sm ">Edit</a> 
+                                                            <button class="btn btn-danger btn-sm supp"
+                                                                data-toggle="modal" data-target="#danger"
+                                                                data-id="{{listerevu.id}}">Supp</button>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 my-1">
+                            <div class="form-group">
+                                <!-- Modal -->
+                                <div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-danger white">
+                                                <h4 class="modal-title white" id="myModalLabel10">Suppression da Revis </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="{% url 'delete_revus' %}" method="POST">
+                                                {% csrf_token %}
+                                                <div class="modal-body">
+                                                    <h5 class="lead">Voulez-vous vraiment supprimer la Revus ?
+                                                    </h5>
+                                                    <input type="hidden" name="revusId" id="revusId" value="">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn grey btn-secondary"
+                                                        data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <!-- liste_auteurs.html -->
+
+
+
+                    <!-- Table head options end -->
+                    <!-- Table head options end -->
+                </section>
+            </div>
+        </div>
+        <div class="modal fade text-left" id="keyboard1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
+                <div class="modal-content" id="modalStatut">
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade text-left" id="keyboard1" tabindex="-1" role="dialog" aria-labelledby="basicModalLabel3" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" id="modalStatut" role="document">
+
+            </div>
+        </div>
+</div>
+</div>
+<!-- END: Content-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.supp').click(function () {
+            var revus_id = $(this).attr('data-id');
+            $('#revusId').attr('value',revus_id);
+        })
+        
+    });
+</script>
+
+{% endblock %}

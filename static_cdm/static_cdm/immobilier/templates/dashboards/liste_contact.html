@@ -1,0 +1,49 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Liste Des Plans</h4>
+            </div>
+            
+        </div>
+    <div class="pd-ltr-20">
+        <div class="row">
+            <div class="col-xl-12 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <div class=" d-flex justify-content-between mb-20">
+                        <button class="btn btn-primary"><a href="{% url 'plan' %}" class="text-white" >Ajouter Un Plan</a></button>
+                      
+
+                    </div>
+                    <table class="table hover multiple-select-row data-table-export nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">N</th>
+                                <th>Nom </th>
+                                <th>Email</th>
+                                <th>Meesage</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contact in listeContacts %}
+                            <tr>
+                                <!-- <td class="table-plus">{{ forloop.counter }}</td> -->
+                                <td>{{contact.name}}</td>
+                                <td>{{contact.email}}</td>
+                                <td>{{contact.message}}</td>
+                                
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>	
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

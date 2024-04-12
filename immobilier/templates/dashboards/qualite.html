@@ -1,0 +1,67 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <div class="pd-20 card-box mb-30">
+        
+    <div class="pd-ltr-20">
+        <div class="row">
+            <div class="col-xl-7 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <h2 class="h4 mb-20">Liste Des Qualités</h2>
+                    <table class="table hover multiple-select-row data-table-export nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">N°</th>
+                                <th>Nom</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for qualite in qualites %}
+                            <tr>
+                                <td class="table-plus">{{ forloop.counter }}</td>
+                                <td>{{qualite.qualite}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+						
+                </div>	
+            </div>
+            <div class="col-xl-5 mb-30" id="modaleCommune">
+                <div class="card-box height-100-p pd-20">
+                    <h4 class="h5 mb-10">Ajouter de nouvelle qualités </h4>
+                    <form action="{% url 'qualite' %}" method="POST">
+                        {%csrf_token%}
+                        <div class="form-group">
+                           {{form.as_p}}
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-0">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.edit').click(function() {
+        var commune_id=$(this).attr('data-id');
+        console.log(commune_id)
+        url= "{% url 'update_commune' 0 %}".replace('0', commune_id)
+        $.ajax({
+          url: url,
+          method: 'get',
+        }).done(function(response){ 
+          $('#modaleCommune').html(response)
+        })
+      })
+    });
+  </script>
+{% endblock %}

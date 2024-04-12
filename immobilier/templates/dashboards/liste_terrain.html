@@ -1,0 +1,167 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>DataTable</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                           
+                        </nav>
+                    </div>
+                    
+                </div>
+            </div>  
+            <!-- Checkbox select Datatable End -->
+            <!-- Export Datatable start -->
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <h2 class="h4 mb-10 "><a href="{% url 'terrain' %}" class="text-blue" >Nouveau Terrain</a></h2>
+                </div>
+                <div class="pb-20">
+                        <table class="table hover multiple-select-row data-table-export nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="table-plus datatable-nosort">N°</th>
+                                    <th>Prix</th>
+                                    <th>Prenom</th>
+                                    <th>Type operation</th>
+                                    <th>Action</th>
+           
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for  listeTerrains in listeTerrain %}
+                                <tr>
+                                    <td class="table-plus">{{ forloop.counter }}</td>
+                                        <td>{{listeTerrains.prix}} </td>
+                                        <td>{{listeTerrains.proprietaire.nom}}</td>
+                                        <td>{{listeTerrains.operation.type}}</td>
+                                   
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <button class="dropdown-item " data-id=""><i class="dw dw-edit2"><a href="{% url 'update_terrain' listeTerrains.id %}">Modifier</a></i></button>
+                                                <button class="dropdown-item supp" data-toggle="modal" data-target="#Medium-modal" data-id="{{listeTerrains.id}}"><i class="dw dw-delete-3"  type="button"></i>Supprimer</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4 col-sm-12 mb-30" id="modaleterrain">
+                        <div class="pd-20  height-100-p">
+                            <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myLargeModalLabel">Suppression de l'operation</h4>
+                                            {% comment %} <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> {% endcomment %}
+                                        </div>
+                                        <form action="{% url 'delete_terrain' %}" method="POST">
+                                            {% csrf_token %}
+                                            <div class="modal-body">
+                                                <p>Voulez-Vous vraiment supprimer cette operation?</p>
+                                                <input type="hidden" name="terrainId" id="terrainId" >
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Export Datatable End -->
+        
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.supp').click(function() {
+          console.log('moi')
+          var types_id=$(this).attr('data-id');
+          $('#terrainId').attr('value', types_id);
+        })
+      let departementId = document.getElementById("id_departement");
+      let communeId = document.getElementById("id_commune");
+      let arrondissementId = document.getElementById("id_arrondissement");
+      let quartierId = document.getElementById("id_quartier");
+
+      communeId.innerHTML = "<option selected disabled>---------</option>";
+      arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+      quartierId.innerHTML = "<option selected disabled>---------</option>";
+      
+      if (departementId) {
+        departementId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'departemenCommune' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+
+            communeId.innerHTML = "<option selected disabled>---------</option>";
+            arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+            
+            for (let i = 0; i < data.length; i++) {
+                communeId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+      if (communeId) {
+        communeId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'communeArrondissement' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+
+            arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+            
+            for (let i = 0; i < data.length; i++) {
+                arrondissementId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+      if (arrondissementId) {
+        arrondissementId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'arrondissementQuartier' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+            for (let i = 0; i < data.length; i++) {
+                quartierId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+    });
+  </script>
+        
+{% endblock %}

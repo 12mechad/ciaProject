@@ -1,0 +1,186 @@
+{% load static %}
+{% url 'agenda' as agenda %}
+{% comment %} {% url 'service_agenda' as service_agenda %} {% endcomment %}
+{% url 'propos_agenda' as propos_agenda %}
+{% url "racines" as racines %}
+{% url 'accueil' as accueil %}
+{% url 'bba' as bba %}
+{% url 'usine' as usine %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Ciagroupafrica</title>
+        <link rel="shortcut icon" style="height: 100px; width: 100px;" href="{% static 'immobilier/assete/img/logo.jpg' %}" type="image/png">
+
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <link rel="icon" href="{% static 'dashboard/assete/img/logo.png' %}" type="image/png">
+        <link rel="shortcut icon" href="{% static 'dashboard/assete/img/logo.png' %}" type="image/png">
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="{% static 'dashboard/asset/lib/animate/animate.min.css'%}" rel="stylesheet">
+        <link href="{% static 'dashboard/asset/lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="{% static 'dashboard/asset/css/bootstrap.min.css'%}" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="{% static 'dashboard/asset/css/style.css'%}" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Spinner Start -->
+        {% comment %} <div id="spinner" class="show position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div> {% endcomment %}
+        <!-- Spinner End -->
+
+        <!-- Topbar Start -->
+        <div class="container-fluid bg-dark py-2 d-none d-md-flex">
+            <div class="container">
+                <div class="d-flex justify-content-between topbar">
+                    <div class="top-info">
+                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>Porto-Novo, Bénin</small>
+                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>ciagroupg@gmail.com</small>
+                    </div>
+                    {% comment %} <div id="note" class="text-secondary d-none d-xl-flex"><small>Note : We help you to Grow your Business</small></div> {% endcomment %}
+                    {% comment %} <div class="top-link">
+                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-facebook-f text-primary"></i></a>
+                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-twitter text-primary"></i></a>
+                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-instagram text-primary"></i></a>
+                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+        <!-- Topbar End -->
+
+        <!-- Navbar Start -->
+        <div class="container-fluid bg-primary">
+            <div class="container">
+                <nav class="navbar navbar-dark navbar-expand-lg py-0">
+                    <a href="#" class="navbar-brand">
+                        <h1 class="text-white fw-bold d-block">Cia<span class="text-secondary">groupafrica</span> </h1>
+                    </a>
+                    <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto mx-xl-auto p-0">
+                            <a href="{% url 'agenda' %}" class="nav-item nav-link  {% if request.path == agenda %} active {% endif %}">Agenda</a>
+                            {% comment %} <a href="{% url 'service_agenda' %}" class="nav-item nav-link {% if request.path == service_agenda %} active {% endif %}">Services</a> {% endcomment %}
+                            <a href="{% url 'propos_agenda' %}" class="nav-item nav-link {% if request.path == propos_agenda %} active {% endif %}">A Propos</a>
+                            <a href="{% url 'racines' %}" class="nav-item nav-link {% if request.path == racines %} active {% endif %}">Racine d'afrique</a>
+                            <a href="{% url 'accueil' %}" class="nav-item nav-link {% if request.path == accueil %} active {% endif %}">BeninLand</a>
+                          
+                                <a href="#" class="nav-link " data-bs-toggle="">Agricole</a>
+                                {% comment %} <div class="dropdown-menu rounded">
+                                    <a href="bba" class="dropdown-item">BBA</a>
+                                    <a href="usine" class="dropdown-item">Usine</a>
+                                </div> {% endcomment %}
+                            
+                            <a href="" class="nav-item nav-link">Afric Investment</a>
+                            {% comment %} <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Afric Investissement</a>
+                                <div class="dropdown-menu rounded">
+                                   <a href="/consulting" class="dropdown-item">Consulting</a>
+                                    <a href="investisseur" class="dropdown-item">Investir</a>
+                                    <a href="investissement" class="dropdown-item">Obtenir un investissement</a>
+                                    <a href="no" class="dropdown-item">Nos Investisseur</a>
+
+                                </div>
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                    
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+    <body>
+        {% block content%}
+
+        {% endblock %}
+        <!-- Footer Start -->
+        <div class="container-fluid footer bg-dark wow fadeIn" data-wow-delay=".3s">
+            <div class="container pt-5 pb-4">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <a href="index">
+                            <h1 class="text-white fw-bold d-block">Cia<span class="text-secondary">groupafrica</span> </h1>
+                        </a>
+                        <p class="mt-4 text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta facere delectus qui placeat inventore consectetur repellendus optio debitis.</p>
+                        <div class="d-flex hightech-link">
+                            <a href="https://www.facebook.com/EditionsRacinesdAfrique" class="btn-light nav-fill btn btn-square rounded-circle me-2"><i class="fab fa-facebook-f text-primary"></i></a>
+                            <a href="https://wa.me/40470007" class="btn-light nav-fill btn btn-square rounded-circle me-2"><i class="fab fa-twitter text-primary"></i></a>
+                            {% comment %} <a href="" class="btn-light nav-fill btn btn-square rounded-circle me-2"><i class="fab fa-instagram text-primary"></i></a>
+                            <a href="" class="btn-light nav-fill btn btn-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a> {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <a href="#" class="h3 text-secondary">Liens Utiles</a>
+                        <div class="mt-4 d-flex flex-column short-link">
+                            <a href="agenda" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Agenda</a>
+                            <a href="propos_agenda" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>A Propos</a>
+                            <a href="service_agenda" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Services</a>
+                            <a href="racine" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Editer</a>
+                            <a href="accueil" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Immobolier</a>
+                        </div>
+                    </div>
+                      <div class="col-lg-3 col-md-6">
+                        <a href="#" class="h3 text-secondary">Autres</a>
+                        <div class="mt-4 d-flex flex-column help-link">
+                            <a href="#" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Rejoindre Notre Equipe</a>
+                            <a href="#" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Polittque de Developpement</a>
+                             <a href="" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>FQAs</a>
+                            <a href="" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Contact</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <a href="#" class="h3 text-secondary">Contactez Nous</a>
+                        <div class="text-white mt-4 d-flex flex-column contact-link">
+                            <a href="#" class="pb-3 text-light border-bottom border-primary"><i class="fas fa-map-marker-alt text-secondary me-2"></i> Porto-Novo, Bénin</a>
+                            <a href="#" class="py-3 text-light border-bottom border-primary"><i class="fas fa-phone-alt text-secondary me-2"></i> +229 40 47 00 07</a>
+                            <a href="#" class="py-3 text-light border-bottom border-primary"><i class="fas fa-envelope text-secondary me-2"></i> ciaconsulting@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="text-light mt-5 mb-4">
+                <div class="">
+                    <div class=" text-center">
+                        <span class="text-light"><a href="{% url 'agenda' %}" class="text-secondary"><i class="fas fa-copyright text-secondary me-2"></i>Ciagroupafrica</a>, All right reserved.</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-secondary btn-square rounded-circle back-to-top"><i class="fa fa-arrow-up text-white"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'dashboard/asset/lib/wow/wow.min.js'%}"></script>
+        <script src="{% static 'dashboard/asset/lib/easing/easing.min.js'%}"></script>
+        <script src="{% static 'dashboard/asset/lib/waypoints/waypoints.min.js'%}"></script>
+        <script src="{% static 'dashboard/asset/lib/owlcarousel/owl.carousel.min.js'%}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'dashboard/asset/js/main.js'%}"></script>
+
+    </body>
+
+</html>

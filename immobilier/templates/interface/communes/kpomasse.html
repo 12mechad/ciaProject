@@ -1,0 +1,131 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- About Start -->
+ <div class="container-xxl py-5">
+    <div class="container ">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="{% static 'immobilier/assete/img/departement/Kpomasse.jpg'%}" style="width: 400px; height: 500px;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn " data-wow-delay="0.5s">
+                <h1 class="mb-4">Kpomassè</h1>
+                <p class="text-justify">Kpomassè est une commune du sud-ouest du Bénin. Elle dispose de neuf arrondissements :
+                    Agonkanmè, Aganmalomè, Agbanto, Dédomè, Dekanmè, Kpomassè-Centre, Sègbohoué,
+                    Sègbéya et Tokpa-Domè sur une superficie de 305 km², avec une population de 72.000
+                    personnes habitants. Sur le plan culturel les habitants de Kpomassè pratiquent le Zangbéto
+                    (Gardien de nuit) ; Kluito (Culte des revenants) et le ro (Société secrète des hommes), m me
+                    si la grande majorité est chrétienne aujourd’hui. En termes de production et d activités
+                    économiques, en dehors de la p che, Kpomassè est un territoire favorable à la culture du mais,de l’arachide, du manioc, du piment, de la tomate et des arbres fruitiers (mangue, agrumes,
+                    ananas). On y transforme et commercialise les produits agricoles (gari, huile de palme, huile
+                    d’arachide) Kpomassè offre des lieux, on peut voir entre autres la for t sacrée Dagbohoussou,
+                    le prestigieux foyer de repos des prêtres catholiques à Sègbohouè, l'île de Mitogbodji et le
+                    village mythique Gogotinkpon où il est créé "Détour par Gogotinkpon". Il y a aussi sa berge
+                    lagunaire située dans la zone Est du lac Ahémé sur une distance de 41 km, les falaises
+                    d'Agbiyèkou dans l'arrondissement de Tokpa-Domé et celles localisées à Couffonou dans
+                    l'arrondissement de Dédomè, la place Belvédère de Sègbohouè, deux places remarquables dans
+                    les villages de Doga et Adjidjantomè, la plage de Nazoumè et les voies lagunaires (route des
+                    pêches, gare ferroviaire).</p>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                            <div class="">
+                                <h1 class="mb-5 text-center">Les Immeubles et chambres disponibres dans la commune de Kpomassè</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for kpomasseImmeuble in kpomasseImmeubles %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in kpomasseImmeuble.imagesimmeuble_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{kpomasseImmeuble.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{kpomasseImmeuble.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{kpomasseImmeuble.departement}}, {{kpomasseImmeuble.commune}}, {{kpomasseImmeuble.arrondissement}}, {{kpomasseImmeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->   
+                                    <a href="{% url 'liste_chambres_immeubles' kpomasseImmeuble.id %}" class="text-white">Consulter</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5"> 
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for kpomasseQuartier in kpomasseQuartiers %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <div class="col-md-12 animated fadeIn">
+                                        <div class="owl-carousel header-carousel">
+                                            {% for image in kpomasseQuartier.images_set.all %}
+                                            <div class="owl-carousel-item">
+                                                <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{kpomasseQuartier.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{kpomasseQuartier.prix}} CFA</h5>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{kpomasseQuartier.immeuble.departement}}, {{kpomasseQuartier.immeuble.commune}}, {{kpomasseQuartier.immeuble.arrondissement}}, {{kpomasseQuartier.immeuble.quartier}}</p>
+                            </div>
+                            <div class="text-center p-4 pb-0"> <!-- Utilisez la classe "text-center" pour centrer le contenu -->
+                                <button class="btn btn-primary m-2"> <!-- Utilisez la classe "m-2" pour ajouter une marge -->
+                                    <a href="{% url 'details_chambre' kpomasseQuartier.id %}" class="text-white">Voir Detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     {% comment %} <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                    </div>   {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}

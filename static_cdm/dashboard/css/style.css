@@ -1,0 +1,55 @@
+.style
+{
+    margin:2% 10% 3% 35%;
+    
+}
+.corps
+{
+    padding: 5%;
+}
+label
+{
+    margin-left: 5%;
+}
+.bg-gradient-x-orange-yellow1
+{background-image:-webkit-gradient(linear,left top,right top,from(#ffc837),to(#ffc837));
+    background-image:-webkit-linear-gradient(left,#00e6af,#ffc837);
+    background-image:linear-gradient(to right,#f5db9b,#ffc837);
+    background-image:-o-linear-gradient( right,#ffeab6,#ffc837);
+    background-image:linear-gradient(to right,#7becd2,#ffc837);
+    background-repeat:repeat-x
+}
+.bg-gradient-x-blue-green1
+{
+    background-image:-webkit-gradient(linear,left top,right top,from(#ffc837),to(#9f78ff));
+    background-image:-webkit-linear-gradient(left,#f8f7f9,#9f78ff);
+    background-image:-moz-linear-gradient(left,#f6f6f7,#9f78ff);
+    background-image:-o-linear-gradient(left,#f4f2f6,#9f78ff);
+    background-image:linear-gradient(to right,#ffc837,#9f78ff);
+    background-repeat:repeat-x
+}
+.valeur
+{
+    padding: 5px;
+}
+.val
+{
+    margin: 10px;
+}
+.vale
+{
+    margin: 13px;
+}
+.va
+{
+    margin: 10px;
+}
+.prix
+{
+    display:flex; 
+    justify-content: space-around;
+}
+.varriation
+{
+    padding: 50px;
+}

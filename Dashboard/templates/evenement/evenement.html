@@ -1,0 +1,81 @@
+{% extends 'edition/base.html' %}
+{% load static %}
+{% block content%}
+
+<div class="container-fluid mb-1">
+    <img class="img-fluid" src="{% static 'immobilier/assete/img/evenement.jpeg'%}" style="height: 600px; width: 100%;" alt="">
+</div>
+
+    <!-- Facilities Start -->
+    <div class="container-fluid pt-5">
+        <div class="container pb-3">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        
+                        <a href="{% url 'prix' %}">
+                            <div class="pl-4">
+                                <h4>Prix</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        
+                        <a href="{% url 'festival' %}">
+                            <div class="pl-4">
+                                <h4>Salons & Festivals</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        
+                        <a href="{% url 'projet' %}">
+                            <div class="pl-4">
+                                <h4>Projets</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+             
+                
+            </div>
+        </div>
+    </div>
+
+
+<!-- Blog Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <div class="text-center pb-2">
+             {% comment %} <p class="section-title px-5"><span class="px-2">Notre Librairie</span></p>  {% endcomment %}
+            <h1 class="mb-4">Nos Evenements</h1>
+            {% comment %} <p>Visitez notre librairie et achetez nos livres. Commandez juste et vous êtes servi(e)  </p> {% endcomment %}
+        </div>
+        <div class="row pb-3">
+            {% for evenement in evenements%}
+            <div class="col-lg-4 mb-4" >
+                <div class="card border-0 shadow-sm mb-2"style="overflow: hidden;" >
+                   <div style="height: 246px;" >
+                    <img class="card-img-top img-fluid mb-2" src="{{evenement.images.url}}" alt="{{evenement.images}} " ></div> 
+                    <div class="card-body bg-light text-center p-4">
+                        <h4 class="">{{evenement.titre}}</h4>
+                        <h6 class="">{{evenement.evenement.evenement}}</h6>
+                        <p> {{evenement.date_evenement.date}}</p>
+                        <p>{{ evenement.description}}</p>
+
+                        <a href="{% url 'detail_evenement' evenement.id %}" class="btn btn-primary px-4 mx-auto my-2">Plus de Detail</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock%}

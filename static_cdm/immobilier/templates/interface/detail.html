@@ -1,0 +1,35 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- About Start -->
+ <div class="container-xxl py-5">
+    <div class="container">  
+        <div class="row g-5 align-items-center ">
+        </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="position-relative overflow-hidden">
+                    <div class="owl-carousel header-carousel">
+                        {% for image in detailchambres.images_set.all %}
+                        <div class="owl-carousel-item">
+                            <div style="height: 446px;"> <img class="img-fluid"  src="{{ image.images.url }}"  style="width: 500px; height: 800px;" ></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{chambre.immeuble.type}} </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <h1 class="mb-4">BeninLand</h1>
+                <p class="mb-4">{{detailchambres.immeuble.description}} </p>
+                <p class="mb-4"><i class="fa fa-check text-primary me-3"> </i>Chambre N°: {{detailchambres.name}} </p>
+                <p class="mb-4"> <i class="fa fa-check text-primary me-3"></i>Salon   : {{detailchambres.salon}}, Chambre : {{detailchambres.chambre}}, Douche  : {{detailchambres.douche}},  Cuisine : {{detailchambres.cuisine}},  Balcon / Veranda : {{detailchambres.balcon}}</p>
+                <h4 class="text-danger"><i class="fa  text-primary me-3"></i> {{detailchambres.prix}} CFA</h4>
+                 <a class="btn btn-primary py-2 px-3 mt-1" href="{% url 'contact_immobilier' %}">Commander</a>  
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+ {% endblock %}

@@ -1,0 +1,159 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+            <div class=" d-flex justify-content-between">
+                <button class="btn btn-primary"><a href="{% url 'logement' %}" class="text-white" >Ajouter Chambre</a></button>
+                 <button class="supp btn btn-primary" data-toggle="modal" data-target="#Medium-modal" >Ajouter Salon</button>
+                 <button class="supp btn btn-primary" data-toggle="modal" data-target="#Medium-modal1" >Ajouter Cuisine</button>
+                 <button class="supp btn btn-primary" data-toggle="modal" data-target="#Medium-modal2" >Ajouter Douche</button>
+                 <button class="supp btn btn-primary" data-toggle="modal" data-target="#Medium-modal3" >Ajouter Balcon</button>
+            </div>
+            
+        </div>
+    <div class="pd-ltr-20">
+        <div class="row">
+            <div class="col-xl-7 mb-30">
+               
+            </div>
+            <div class="col-xl-5 mb-30" id="modaleArrondissement">
+                <div class="card-box height-100-p pd-20">
+                    <h4 class="h5 mb-10">Ajouter une nouvelle chambre</h4>
+                    <form action="{% url 'logement' %}" method="POST">
+                        {%csrf_token%}
+                        <div class="form-group">
+                           {{form.as_p}}
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-0">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mb-30">
+        <div class="pd-20  height-100-p">
+          
+            <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">Ajouter un nouveau salon</h4>
+                        </div>
+                        <form action="{% url 'salon' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{form.as_p}}
+                             </div>
+                             <div class="col-6">
+                                <div class="input-group mb-0">
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mb-30">
+        <div class="pd-20  height-100-p">
+            <div class="modal fade" id="Medium-modal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">Ajouter une nouvelle Cuisine</h4>
+                            {% comment %} <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> {% endcomment %}
+                        </div>
+                        <form action="{% url 'cuisine' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{form.as_p}}
+                             </div>
+                             <div class="col-6">
+                                <div class="input-group mb-0">
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                                </div>
+                            </div>
+                        </form> 
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mb-30">
+        <div class="pd-20  height-100-p">
+          
+            <div class="modal fade" id="Medium-modal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">Ajouter une nouvelle douche</h4>
+                            {% comment %} <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> {% endcomment %}
+                        </div>
+                        <form action="{% url 'douche' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{form.as_p}}
+                             </div>
+                             <div class="col-6">
+                                <div class="input-group mb-0">
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                                </div>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mb-30">
+        <div class="pd-20  height-100-p">
+          
+            <div class="modal fade" id="Medium-modal3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">Ajouter un balcon</h4>
+                            {% comment %} <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> {% endcomment %}
+                        </div>
+                        <form action="{% url 'balcon' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{form.as_p}}
+                             </div>
+                             <div class="col-6">
+                                <div class="input-group mb-0">
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.edit').click(function() {
+        var arrondissement_id=$(this).attr('data-id');
+        console.log(arrondissement_id)
+        url= "{% url 'update_arrondissement' 0 %}".replace('0', arrondissement_id)
+        $.ajax({
+          url: url,
+          method: 'get',
+        }).done(function(response){ 
+          $('#modaleArrondissement').html(response)
+        })
+      })
+    });
+  </script>
+{% endblock %}

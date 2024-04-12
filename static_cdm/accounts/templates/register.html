@@ -1,0 +1,70 @@
+{% extends 'user.html' %}
+{% load static %}
+ {% block user %}
+ {% for message in messages %}
+ <div class="alert alert-danger" role="alert">
+ <p > {{ message}} </p>
+
+</div>
+ {% endfor %}
+ <div class="card-content  mb-12">
+
+    <div class="card-body">
+        <form class="form-horizontal" action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            
+            <fieldset class="form-group position-relative has-icon-left">
+                
+                {{ form.username }}
+               
+            </fieldset>
+        
+            <fieldset class="form-group position-relative has-icon-left">
+              
+                {{ form.last_name }}
+                
+            </fieldset>
+        
+            <fieldset class="form-group position-relative has-icon-left">
+                {{ form.first_name }}
+              
+            </fieldset>
+        
+            <fieldset class="form-group position-relative has-icon-left">
+                {{ form.email }}
+                
+            </fieldset>
+            <fieldset class="form-group position-relative has-icon-left">
+                {{ form.password1 }}
+            </fieldset>
+            <fieldset class="form-group position-relative has-icon-left">
+                {{ form.password2 }}
+            </fieldset>
+            <div style="display: flex;justify-content: space-between;">
+
+                <fieldset class="form-group">
+                    <div>
+                        {{ form.is_auteur.label_tag }} {{ form.is_auteur }}
+                    </div>
+                </fieldset>
+            
+                <fieldset class="form-group">
+                    <div class="form-check">
+                        {{ form.is_proprietaire.label_tag }} {{ form.is_proprietaire }}
+                    </div>
+                </fieldset>
+            
+            </div>
+            
+        
+            <div class="form-group text-center">
+                <button type="submit" class="btn round btn-block btn-glow btn-bg-gradient-x-purple-blue col-12 mr-1 mb-1">S'inscrire</button>
+            </div>
+        </form>
+        
+    </div>
+    <p class="card-subtitle text-muted text-right font-small-3 mx-2 my-1"><span>Vous avez un compte <a href="{% url 'login' %}" class="card-link">Se Connecter </a></span></p>  
+</div>
+ {% endblock %}
+                
+           

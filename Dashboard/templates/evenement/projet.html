@@ -1,0 +1,41 @@
+{% extends 'edition/base.html' %}
+{% load static %}
+{% block content%}
+
+<div class="container-fluid mb-1">
+    <img class="img-fluid" src="{% static 'immobilier/assete/img/prix.jpeg'%}" style="height: 600px; width: 100%;" alt="">
+</div>
+
+
+<!-- Blog Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <div class="text-center pb-2">
+             {% comment %} <p class="section-title px-5"><span class="px-2">Notre Librairie</span></p>  {% endcomment %}
+            <h1 class="mb-4">Nos Projets</h1>
+            {% comment %} <p>Visitez notre librairie et achetez nos livres. Commandez juste et vous êtes servi(e) !
+            </p> {% endcomment %}
+        </div>
+        <div class="row pb-3">
+            {% for evenementsProjet in evenementsProjets %}
+            <div class="col-lg-4 mb-4" >
+                <div class="card border-0 shadow-sm mb-2"style="overflow: hidden;" >
+                   <div style="height: 246px;" >
+                    <img class="card-img-top img-fluid mb-2" src="{{evenementsProjet.images.url}}" alt="{{evenementsProjet.images}} " ></div> 
+                    <div class="card-body bg-light text-center p-4">
+                        <h4 class="">{{evenementsProjet.titre}}</h4>
+                        <h6 class="">{{evenementsProjet.evenement.evenement}}</h6>
+                        <p> {{evenementsProjet.date_evenement.date }}</p>
+                        {% comment %} <p> {{evenementsProjet.description|safe }}</p> {% endcomment %}
+                        <a href="{% url 'detail_evenement' evenementsProjet.id %}" class="btn btn-primary px-4 mx-auto my-2">Plus de Detail</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock%}

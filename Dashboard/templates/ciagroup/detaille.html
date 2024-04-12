@@ -1,0 +1,38 @@
+{% extends 'edition/base.html' %}
+{% load static %}
+{% block content%}
+    <!-- About Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row align-items-center">
+         
+          <div class="col-lg-5">
+            <img class="img-fluid rounded mb-5 mb-lg-0" src="{{detaille.images.url}}" alt="">
+        </div>
+        <div class="col-lg-7">
+
+            <h1 class="mb-4"> {{detaille.titre}} </h1>
+            <h3 class="mb-4">Catégorie:{{detaille.categorie}} </h3>
+            <p>  </p>
+            <h6 class="py-2 border-top border-bottom btn btn-danger" ><i class="fa fa-check text-primary mr-3"></i>{{detail.prix}} FCFA</h6>
+            <div class="row pt-2 pb-4">
+                <div class="col-6 col-md-4">
+                   
+                </div>
+                <div class="col-6 col-md-8">
+                    <ul class=" m-0">
+
+                        <li class="py-2 border-bottom"><h4>Ce livre est ecrire par: {{detaille.auteur}}</h4> </li>
+                        
+                    </ul>
+                    <button class="btn btn-danger"><a href="" class="btn-amber">Télécharger</a></button>
+                </div>
+            </div>
+                {% comment %} <a href="" class="btn btn-primary mt-2 py-2 px-4">Learn More</a>  {% endcomment %}
+        </div>
+        
+        </div>
+    </div>
+</div>
+
+{% endblock%}

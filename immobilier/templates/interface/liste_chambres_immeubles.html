@@ -1,0 +1,335 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid header bg-white p-0">
+    <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+
+        <div class="col-md-12 animated fadeIn">
+            <div class="owl-carousel header-carousel">
+                <div class="owl-carousel-item">
+                    <img class="img-fluid" src="{% static 'immobilier/assete/img/carousel-1.jpg'%}" style=" height: 700px;" alt="">
+                </div>
+                <div class="owl-carousel-item">
+                    <img class="img-fluid" src="{% static 'immobilier/assete/img/carousel-2.jpg'%}" style=" height: 700px;" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    <div class="container p-5">
+                        <div class="">
+                            <div class="col-md-6 mx-auto">
+                                <form id="searchForm center" >
+                                    <div class="d-flex justify-content-center">
+                                        <div class="form-group">
+                                            <input type="search" id="search1" name="quartier" placeholder="Recherche ..." required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" id="searchButton2">Rechercher </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% comment %} <div class="col-md-4">
+                        <form action="{% url 'accueil' %}" method="POST">
+                            {% csrf_token %}
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="form-container" style="display: flex; justify-content: space-between; align-items: center;weight:1000px">
+                                    {{ form.as_p }}
+                                </div>
+                                <div class="col-6" style="margin-left: 10px;"> <!-- Ajoutez de la marge ici -->
+                                    <div class="input-group mb-0">
+                                        <button class="btn btn-primary border-0 w-100 py-2" name="recherche" type="submit">Recherche</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div> {% endcomment %}
+
+<div class="container-xxl py-5">
+    <div class="container text-center">
+        <div class="container">
+            <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                        <div class="d-flex">
+                            <h1 class="mb-3 ">Nos Actualités Sur nos Immeubles</h1>
+                        </div>
+                        <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for chambre in chambres %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="col-md-12 animated fadeIn">
+                                    <div class="owl-carousel header-carousel">
+                                        {% for image in chambre.images_set.all %}
+                                        <div class="owl-carousel-item">
+                                            <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% comment %} <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"><a href="{% url 'detail' chambre.id %}" class="text-white">Voir Detail</a></div> {% endcomment %}
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{immeuble.type}}</div>
+                                
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{chambres.prix}} </h5> 
+                                <p class="d-block h5 mb-2">Golden Urban House For Sell</p>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{chambre.immeuble.departement}}, {{chambre.immeuble.commune}}, {{chambre.immeuble.arrondissement}}, {{chambre.immeuble.quartier}}</p>
+                                <button class="btn btn-primary"><a href="{% url 'details_chambre' chambre.id %}" class="text-white">Voir Detail</a></button>
+                            </div>
+                             <div class="d-flex border-top">
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>{{chambre.salon}} </small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>{{chambre.chambre}} </small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>{{chambre.cuisine}} </small>
+                                <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>{{chambre.douche}} </small>
+                            </div> 
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Property List End -->
+<!-- Property List Start -->
+{% comment %} <div class="container py-5">
+    <div class="container">
+        <div class="container text-center">
+            <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <div class="  wow slideInLeft " data-wow-delay="0.1s">
+                        <h1 class="mb-3">Nos Actualités Sur nos Immeubles</h1>
+                        <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for terrain in terrains %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div style="height: 246px;"> <img class="img-fluid" src="{{terrain.images.url}} " alt="" style="width: 500px; height: 200px;" ></div>
+                                <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"><a href="{% url 'detail' terrain.id %}" class="text-white">Voir Detail</a></div>
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{terrain.operation}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class="text-primary mb-3">{{terrain.prix}} CFA</h5>
+                                <p class="d-block h5 mb-2">Golden Urban House For Sell</p>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{terrain.departement}}, {{terrain.commune}}, {{terrain.arrondissement}}, {{terrain.quartier}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> {% endcomment %}
+
+
+
+
+
+
+<!-- Testimonial Start -->
+{% comment %} <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">AVIS DES CLIENTS</h1>
+        </div>
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+            <div class="testimonial-item bg-light rounded p-3">
+                <div class="bg-white border rounded p-4">
+                    <p>Commentaires</p>
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'dashboard/asset/img/immobilier/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3">
+                <div class="bg-white border rounded p-4">
+                    <p>Commentaires</p>
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'dashboard/asset/img/immobilier/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3">
+                <div class="bg-white border rounded p-4">
+                    <p>Commentaires</p>
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'dashboard/asset/img/immobilier/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+<!-- Testimonial End -->
+<!-- Team Start -->
+{% comment %} <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">Notre Equipes</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="team-item rounded overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'dashboard/asset/img/immobilier/team-1.jpg'%}" alt="">
+
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="team-item rounded overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'dashboard/asset/img/immobilier/team-2.jpg'%}" alt="">
+
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="team-item rounded overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'dashboard/asset/img/immobilier/team-3.jpg'%}" alt="">
+
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="team-item rounded overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'dashboard/asset/img/immobilier/team-4.jpg'%}" alt="">
+
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+{% comment %} <script>
+    $(document).ready(function () {
+      let departementId = document.getElementById("id_departement");
+      let communeId = document.getElementById("id_commune");
+      let arrondissementId = document.getElementById("id_arrondissement");
+      let quartierId = document.getElementById("id_quartier");
+
+      communeId.innerHTML = "<option selected disabled>---------</option>";
+      arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+      quartierId.innerHTML = "<option selected disabled>---------</option>";
+
+      if (departementId) {
+        departementId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'departemenCommune' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+
+            communeId.innerHTML = "<option selected disabled>---------</option>";
+            arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+
+            for (let i = 0; i < data.length; i++) {
+                communeId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+      if (communeId) {
+        communeId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'communeArrondissement' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+
+            arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+
+            for (let i = 0; i < data.length; i++) {
+                arrondissementId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+      if (arrondissementId) {
+        arrondissementId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'arrondissementQuartier' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+            for (let i = 0; i < data.length; i++) {
+                quartierId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+    });
+
+</script> {% endcomment %}
+<!-- Team End -->
+ {% endblock %}

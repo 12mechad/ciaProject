@@ -1,0 +1,62 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Liste Des Plans</h4>
+            </div>
+            
+        </div>
+    <div class="pd-ltr-20">
+        <div class="row">
+            <div class="col-xl-12 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <div class=" d-flex justify-content-between mb-20">
+                        <button class="btn btn-primary"><a href="{% url 'plan' %}" class="text-white" >Ajouter Un Plan</a></button>
+                      
+
+                    </div>
+                    <table class="table hover multiple-select-row data-table-export nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">Name</th>
+                                <th>Nom </th>
+                                <th>Prix</th>
+                                <th>Voix</th>
+                                <th>Action</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for plan in listePlan %}
+                            <tr>
+                                <!-- <td class="table-plus">{{ forloop.counter }}</td> -->
+                                <td>{{plan.name}}</td>
+                                <td>{{plan.proprietaire.nom}}</td>
+                                <td>{{plan.croquis}}</td>
+                                <td>{{plan.prix}}</td>                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            <a href="{% url 'update_immeuble' plan.id%}">Modifier</a>
+                                            <a data-id="{{plan.id}}"><i class="dw dw-edit2"></i> <a href="update_immeuble"></a> Modifier</a>
+                                            <button class="dropdown-item supp" data-toggle="modal" data-target="#Medium-modal" data-id="{{immeuble.id}}"><i class="dw dw-delete-3"  type="button"></i>Supprimer</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>	
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

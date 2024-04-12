@@ -1,0 +1,143 @@
+{% extends 'interface/beninland.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Property List Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="container">
+            <div class="row g-0 gx-5 align-items-end text-center d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <div class=" wow slideInLeft " data-wow-delay="0.1s">
+                        <div class="d-flex">
+                            <h1 class="mb-3 ">Nos Actualités sur nos Plans de construction</h1>
+                        </div>
+                        
+                            <p class="text-justify">
+                                Construire une maison relève de l’art et du goût. 
+                                C’est là notre spécialité ! Dites nous votre rêve et nous le transformons en réalité.
+                                Nous vous proposons en un temps record des plans extraordinaires. 
+                                Faites nous confiance.
+                            </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for plan in plans %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <div class="col-md-12 animated fadeIn">
+                                    <div class="owl-carousel header-carousel">
+                                        {% for image in plan.imagesplan_set.all %}
+                                        <div class="owl-carousel-item">
+                                            <div style="height: 246px;"> <img class="img-fluid"  src="{{ image.images.url }}"   style="width: 500px; height: 200px;" ></div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                               
+                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{plan.type}} </div>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <h5 class=" mb-3"> Nom du plan :<em class="text-primary">  {{plan.name}} </em> </h5> 
+                                <p class="d-block h6 mb-2">{{plan.description}}</p>
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-primary m-3 mx-2">
+                                        <a href="{% url 'detail_plan' plan.id %}" class="text-white">Consulter</a>
+                                    </button>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Property List End -->
+
+<!-- Testimonial Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">AVIS DES CLIENTS</h1>
+             {% comment %} <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>  {% endcomment %}
+        </div>
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+            <div class="testimonial-item bg-light rounded p-3" >
+                <div class="bg-white border rounded p-4"style="height: 250px;">
+                    <em class="text-dark"> Je salue cette initiative qui est une première au Benin et qui donne un accès facile à tous les services et produits immobiliers. Je vous donne 4 Etoiles. Pour tous mes séjours au Bénin, je choisi BeninLand. </em>
+
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'dashboard/asset/img/immobilier/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3" >
+                <div class="bg-white border rounded p-4"style="height: 250px;">
+                    <em class="text-dark"> BeninLand est le meilleur. Je donne 5 étoiles à cette plateforme révolutionnaire </em>
+
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'dashboard/asset/img/immobilier/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3 ">
+                <div class="bg-white border rounded p-4" style="height: 250px;">
+                    <em class="text-dark"> Grâce à BeninLand, j’ai pu louer les Etats Unis sans aucune complication. C'est génial !</em>
+                    
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'dashboard/asset/img/immobilier/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Rose Dossa</h6>
+                            <small>Profession</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3 ">
+                <div class="bg-white border rounded p-4" style="height: 250px;">
+                    <em class="text-dark">Dès que j'ai reçu mon affectation, j'ai juste rempli un formulaire sur BeninLand et dans les minutes qui ont suivies j'ai reçu mon contrat de location, puis la clé de mon apprtement. Tout s'est passé si rapidement et bien. C'était un incroyable !</em>
+                    <!-- <h6>Dès que j'ai reçu mon affectation, j'ai juste rempli un formulaire sur BeninLand et dans les minutes qui ont suivies j'ai reçu mon contrat de location, puis la clé de mon apprtement. Tout s'est passé si rapidement et bien. C'était un incroyable ! </h6> -->
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'dashboard/asset/img/immobilier/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Fonctionnaire de l'Etat béninois</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded p-3 ">
+                <div class="bg-white border rounded p-4" style="height: 250px;">
+                    <em class="text-dark">Mais depuis que je suis devenu apporteur d'affaires chez BeninLand, je suis devenu un Agent immoilier professionnel grâce à leurs formations régulières et les outils mis à notre disposition.</em>
+                    <!-- <h6>Dès que j'ai reçu mon affectation, j'ai juste rempli un formulaire sur BeninLand et dans les minutes qui ont suivies j'ai reçu mon contrat de location, puis la clé de mon apprtement. Tout s'est passé si rapidement et bien. C'était un incroyable ! </h6> -->
+                    <div class="d-flex align-items-center m-4">
+                        <img class="img-fluid flex-shrink-0 rounded" src="{% static 'dashboard/asset/img/immobilier/testimonial-1.jpg'%}" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">Nom du Client</h6>
+                            <small>Démarcheur</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ {% endblock %}

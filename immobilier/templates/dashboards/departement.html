@@ -1,0 +1,84 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class=" d-flex justify-content-between">
+              
+                <button class="btn btn-primary"><a href="{% url 'commune' %}" class="text-white" >Nouvelle Commune</a></button>
+                <button class="btn btn-primary"><a href="{% url 'arrondissement' %}" class="text-white" >Nouvel Arrondissement</a></button>
+                <button class="btn btn-primary"><a href="{% url 'quartier' %}" class="text-white" > Nouveau Quartier</a></button>
+            </div>	   
+    </div>
+    <div class="pd-ltr-20">
+        <div class="row">
+            <div class="col-xl-6 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <h2 class="h4 mb-20">Liste Des Départements</h2>
+                    <table class="table hover multiple-select-row data-table-export nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">N°</th>
+                                <th>Departement</th>
+                                <th>Action</th>
+       
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for departement in departements %}
+                            <tr>
+                                <td class="table-plus">{{ forloop.counter }}</td>
+                                <td>{{departement.nom}}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            <button class="dropdown-item edit" data-id="{{departement.id}}"><i class="dw dw-edit2"></i>Modifier</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  
+							
+                </div>	
+            </div>
+            <div class="col-xl-6 mb-30" id="modaleDepartement">
+                <div class="card-box height-100-p pd-20">
+                    <h4 class="h5 mb-10">Ajouter de nouveau Département</h4>
+                    <form action="{% url 'departement' %}" method="POST">
+                        {%csrf_token%}
+                        <div class="form-group">
+                           {{form.as_p}}
+                        </div>
+                        <div class="col-5">
+                            <div class="input-group mb-0">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                            </div>
+                        </div>
+                    </form>	
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('.edit').click(function() {
+            var departement_id=$(this).attr('data-id');
+            url= "{% url 'update_departement' 0 %}".replace('0', departement_id)
+            $.ajax({
+              url: url,
+              method: 'get',
+            }).done(function(response){ 
+              $('#modaleDepartement').html(response)
+            })
+          })
+        });
+      </script>
+{% endblock %}
