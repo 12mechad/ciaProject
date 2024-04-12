@@ -1,27 +1,17 @@
 {% extends 'edition/base.html' %}
 {% load static %}
 {% block content%}
-
 <!-- Header Start -->
-<div class="container-fluid bg-primary mb-5">
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
-        <h3 class="display-3 font-weight-bold text-white">Editer</h3>
-        <div class="d-inline-flex text-white">
-            <p class="m-0"><a class="text-white" href="">Accueil</a></p>
-            <p class="m-0 px-2">/</p>
-            <p class="m-0">Editions</p>
-        </div>
-    </div>
+<div class="container-fluid mb-1">
+    <img class="img-fluid" src="{% static 'dashboard/asset/img/cia/cia3.jpeg'%}" style="height: 600px; width: 100%;" alt="">
 </div>
-
-  
   <div class="container-fluid pt-5">
     <div class="container pb-3">
         <div class="row">
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
                     
-                    <a href="{% url 'listes_auteurs' %}">
+                    <a href="{% url 'edition' %}">
                         <div class="pl-4 mx-auto text-center">
                             <h4>Editer</h4>
                         </div>
@@ -53,30 +43,47 @@
         </div>
     </div>
 </div>
-<div class="row pb-3">
-    {% for accueil  in accueils %}
-    <div class="col-lg-4 mb-4" >
-        <div class="card border-0 shadow-sm mb-2" style="overflow: hidden;">
-            <div style="height: 246px;"> <img class="card-img-top mb-2 " src="{{accueil.images.url}}" alt=""></div>
-                <div class="card-body bg-light text-center p-4" style="height:250px;">
-                    <h4 > {{accueil.titre}} </h4>
-                    <h5 class="text-decoration-underline ">{{accueil.categorie}} </h5>
-                     <h5 class="text-decoration-underline ">{{accueil.prix}} FCFA</h5>
-                  
-                    <div class="d-flex justify-content-center mb-1">
-                       <h4><small class="mr-3 text-dark"><i class="fa fa-user text-primary"></i> {{accueil.auteur.first_name}} {{accueil.auteur.last_name}}</small></h4>
-                       
+
+
+<!-- Blog Start -->
+ <div class="container-fluid pt-5">
+    <div class="container">
+        <div class="text-center pb-2">
+      
+            <h1 class="mb-4">Nos actualités </h1>
+            <h6>Faites vous éditer chez Racines d'Afrique en un clique <a href="edition">ici</a></h6>
+        </div>
+        <div class="row pb-3">
+            {% for accueil  in accueils %}
+            <div class="col-lg-4 mb-4" >
+                <div class="card border-0 shadow-sm mb-2" style="overflow: hidden;">
+                    <div style="height: 246px;"> <img class="card-img-top mb-2 " src="{{accueil.images.url}}" alt=""></div>
+                        <div class="card-body bg-light text-center p-4" style="height:250px;">
+                            <h4 > {{accueil.titre}} </h4>
+                            <h5 class="text-decoration-underline ">{{accueil.categorie}} </h5>
+                             <h5 class="text-decoration-underline ">{{accueil.prix}} FCFA</h5>
+                          
+                            <div class="d-flex justify-content-center mb-1">
+                               <h4><small class="mr-3 text-dark"><i class="fa fa-user text-primary"></i> {{accueil.auteur.first_name}} {{accueil.auteur.last_name}}</small></h4>
+                               
+                            </div>
+                                                   
+                            
+                            <a  href="{% url 'detail_actualite' accueil.id %}" class="btn btn-primary px-4 mx-auto my-2">Plus De eatail</a>
+                        </div>
                     </div>
-                                           
-                    
-                    <a  href="{% url 'detail_actualite' accueil.id %}" class="btn btn-primary px-4 mx-auto my-2">Plus De eatail</a>
                 </div>
-            </div>
+            
+            {% endfor %}
+         </div>
+          
+    
+    
+</div>
+            
         </div>
     </div>
-    {% endfor %}
-</div>
-    
-
+</div> 
+<!-- Blog End -->
 
 {% endblock%}

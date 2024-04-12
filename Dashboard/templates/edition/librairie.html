@@ -2,49 +2,42 @@
 {% load static %}
 {% block content%}
 
+
 <div class="container-fluid mb-1">
     <img class="img-fluid" src="{% static 'immobilier/assete/img/librairie.jpeg'%}" style="height: 600px; width: 100%;" alt="">
 </div>
+<!-- Header End -->
 
-    <!-- Facilities Start -->
-    <div class="container-fluid pt-5">
-        <div class="container pb-3">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 pb-1">
-                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
-                        
-                        <a href="{% url 'auteurs' %}">
-                            <div class="pl-4">
-                                <h4>Notre Librairie</h4>
-                            </div>
-                        </a>
-                    </div>
+  <div class="container-fluid pt-5">
+    <div class="container pb-3">
+        <div class="row">
+            
+            <div class="col-lg-6 col-md-6 pb-1">
+                <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                    
+                    <a href="{% url 'edition' %}">
+                        <div class="pl-4">
+                            <h4>Editer</h4>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-lg-4 col-md-6 pb-1">
-                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
-                        
-                        <a href="{% url 'auteurs' %}">
-                            <div class="pl-4">
-                                <h4>Notre Librairie</h4>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 pb-1">
-                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
-                        
-                        <a href="{% url 'auteurs' %}">
-                            <div class="pl-4">
-                                <h4>Notre Librairie</h4>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-             
-                
             </div>
+            <div class="col-lg-6 col-md-6 pb-1">
+                <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                    
+                    <a href="{% url 'listes_auteurs' %}">
+                        <div class="pl-4">
+                            <h4>Nos Auteurs</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+         
+            
         </div>
     </div>
+</div>
+
 <!-- Facilities Start -->
  {% comment %} <div class="container-fluid pt-5">
     <div class="container pb-3">
@@ -114,7 +107,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5">
-                <img class="img-fluid rounded mb-5 mb-lg-0" src="{% static 'asset/img/edition/about-1.jpg'%}"   alt="" style="width: 100%; height: 200px; object-fit: cover;">>
+                <img class="img-fluid rounded mb-5 mb-lg-0" src="{% static 'asset/img/edition/about-1.jpg'%}"  alt="">
             </div>
             <div class="col-lg-7">
                 <p class="section-title pr-5"><span class="pr-2">Learn About Us</span></p>
@@ -436,37 +429,49 @@
 
 
 <!-- Blog Start -->
-
-
- <div class="container-fluid pt-5">
+<div class="container-fluid pt-5">
     <div class="container">
         <div class="text-center pb-2">
-            <h1 class="mb-4">Nos librairie</h1>
-            <p>Découvrez un sanctuaire de connaissances et de divertissement dans nos librairies. Notre vaste sélection de livres, allant des romans captivants aux ouvrages spécialisés, promet de satisfaire toutes les passions et curiosités. Que vous cherchiez à vous plonger dans un best-seller enivrant ou à explorer de nouveaux horizons intellectuels, notre équipe dévouée est là pour vous guider à travers les rayons et vous aider à trouver le trésor littéraire parfait. Venez nous rendre visite et laissez-vous emporter par le pouvoir des mots.</p>
+             {% comment %} <p class="section-title px-5"><span class="px-2">Notre Librairie</span></p>  {% endcomment %}
+            <h1 class="mb-4">Notre Librairie</h1>
+            <p>Visitez notre librairie et achetez nos livres. Commandez juste et vous êtes servi(e) !
+            </p>
         </div>
-        
-        <div class="row pb-3">
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm mb-2">
-                    <img class="card-img-top mb-2 img-fluid" src="{% static 'dashboard/asset/img/librairie/dame1.jpeg'%}" alt="" style="width: 100%; height: 200px; object-fit: cover;">
-            
+       <div class="row pb-3">
+            {% for editer in editers %}
+            <div class="col-lg-4 mb-4" >
+                <div class="card border-0 shadow-sm mb-2"style="overflow: hidden;" >
+                   <div style="height: 246px;" >
+                    <img class="card-img-top img-fluid mb-2" src="{{editer.images.url}}" alt="{{editer.images}} " ></div> 
                     <div class="card-body bg-light text-center p-4">
-                        <h4 class="">Notre dame de cotonou-+</h4>
-                        <div class="d-flex justify-content-center mb-3">
-                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                        <h4 class="">{{editer.titre}}</h4>
+                        <h5 class="text-decoration-underline">{{editer.categorie}}</h5>
+                         <h5 class="text-decoration-underline">{{editer.prix}} FCFA</h5>
+                       
+                         <div class="d-flex justify-content-center mb-3">
+                            <h4><small class="mr-3"><i class="fa fa-user text-primary"></i> {{editer.auteur.first_name}} {{editer.auteur.last_name}}</small></h4>
+                            {% comment %} <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small> {% endcomment %}
                         </div>
-                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
-                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                         
+                        <a href="{% url 'detail_actualite' editer.id %}" class="btn btn-primary px-4 mx-auto my-2">Plus de detail</a>
                     </div>
                 </div>
             </div>
-            
-            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+ {% comment %} <div class="container-fluid pt-5">
+    <div class="container">
+        <div class="text-center pb-2">
+            <p class="section-title px-5"><span class="px-2">Latest Blog</span></p>
+            <h1 class="mb-4">Latest Articles From Blog</h1>
+        </div>
+        <div class="row pb-3">
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 shadow-sm mb-2">
-                    <img class="card-img-top mb-2" src="{% static 'dashboard/asset/img/librairie/savoir1.jpeg'%}"   alt="" style="width: 100%; height: 200px; object-fit: cover;">
+                    <img class="card-img-top mb-2" src="{% static 'asset/img/edition/blog-1.jpg'%}"  alt="">
                     <div class="card-body bg-light text-center p-4">
                         <h4 class="">Diam amet eos at no eos</h4>
                         <div class="d-flex justify-content-center mb-3">
@@ -481,7 +486,22 @@
             </div>
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 shadow-sm mb-2">
-                    <img class="card-img-top mb-2" src="{% static 'dashboard/asset/img/librairie/sonaec.png'%}"   alt="" style="width: 100%; height: 200px; object-fit: cover;">
+                    <img class="card-img-top mb-2" src="{% static 'asset/img/edition/blog-2.jpg'%}"  alt="">
+                    <div class="card-body bg-light text-center p-4">
+                        <h4 class="">Diam amet eos at no eos</h4>
+                        <div class="d-flex justify-content-center mb-3">
+                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                        </div>
+                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
+                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm mb-2">
+                    <img class="card-img-top mb-2" src="{% static 'asset/img/edition/blog-3.jpg'%}"  alt="">
                     <div class="card-body bg-light text-center p-4">
                         <h4 class="">Diam amet eos at no eos</h4>
                         <div class="d-flex justify-content-center mb-3">
@@ -496,7 +516,7 @@
             </div>
         </div>
     </div>
-</div>  
+</div>  {% endcomment %}
 <!-- Blog End -->
 
 

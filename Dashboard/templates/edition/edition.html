@@ -3,56 +3,26 @@
 {% block content%}
 
 <!-- Header Start -->
-<div class="container-fluid bg-primary mb-5">
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
-        <h3 class="display-3 font-weight-bold text-white">Editer</h3>
-        <div class="d-inline-flex text-white">
-            <p class="m-0"><a class="text-white" href="">Accueil</a></p>
-            <p class="m-0 px-2">/</p>
-            <p class="m-0">Editions</p>
-        </div>
-    </div>
+<div class="container-fluid mb-1">
+    <img class="img-fluid" src="{% static 'immobilier/assete/img/edition.jpeg'%}" style="height: 600px; width: 100%;" alt="">
 </div>
-
   
   <div class="container-fluid pt-5">
     <div class="container pb-3">
         <div class="row">
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
-                    
-                    <a href="{% url 'edition' %}">
-                        <div class="pl-4 mx-auto text-center">
-                            <h4>Editer</h4>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
-                    
-                    <a href="{% url 'listes_auteurs' %}">
-                        <div class="pl-4">
-                            <h4>Nos Auteurs</h4>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
-                    
-                    <a href="{% url 'librairie' %}">
-                        <div class="pl-4">
-                            <h4>Notre Librairie</h4>
-                        </div>
-                    </a>
-                </div>
-            </div>
-         
+            
+            <p class="text-center">Vous avez des manuscrits dans vos placards et vous avez envie d'entreprendre une belle aventure : écrire et publier un livre chez nous.
+            Tentez Votre Chance, Envoyez Votre Manuscrit et nous vous Répondons dans 3jours après lecture.
+            Nos spécialistes se mettent entièrement à votre disposition pour écrire avec vous le livre de vos rêves. </p>
+
             
         </div>
     </div>
 </div>
+
+
+
+
     <!-- Registration Start -->
     <div class="container-fluid py-5">
         <div class="container">
