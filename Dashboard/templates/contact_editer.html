@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- END: Main Menu-->
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-wrapper-before"></div>
+
+        <div class="content-header-left col-md-4 col-12 mb-2">
+            <h3 class="content-header-title">Liste des Livres Editers </h3>
+        </div>
+
+        <div class="content-body"><!-- Basic form layout section start -->
+            <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    <div class="heading-elements ">
+                                        {% comment %} <a class="btn btn-bg-gradient-x-blue-cyan" href="{% url 'editer' %}">Nouvelle
+                                            Edition</a> {% endcomment %}
+
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col">Nom</th>
+                                                        <th scope="col">Titre</th>
+                                                        <th scope="col">Téléphone</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Caategories</th>
+                                                        <th scope="col">Thematique</th>
+                                                        <th scope="col">Type Edition</th>
+                                                        <th scope="col">Soumetre</th>
+                                                        <th scope="col">Message</th>
+                                                        {% comment %} <th scope="col">Image</th> {% endcomment %}
+                                                      
+                                                        
+                                                        <th scope="col">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    {% for EditionContacts in EditionContacts %}
+                                                    <tr> 
+                                                        <td class="p-2">{{EditionContacts.name}}</td>
+                                                        <td class="p-2">{{EditionContacts.titre}}</td>
+                                                        <td class="p-2">{{EditionContacts.telephone}}</td>
+                                                        <td class="p-2">{{EditionContacts.email}}</td>
+                                                        <td class="p-2">{{EditionContacts.categorie}}</td>
+                                                        <td class="p-2">{{EditionContacts.thematique}}</td>
+                                                        <td class="p-2">{{EditionContacts.typeedition}}</td>
+
+                                                        <td class="p-2">
+                                                            {% if EditionContacts.soumettre %}
+                                                                <a href="{{ EditionContacts.soumettre.url }}" target="_blank" class="btn btn-primary">Voir</a>
+                                                            {% endif %}
+                                                        </td>
+                                                                                                               
+                                                        <th scope="row" class="p-2">{{EditionContacts.message|truncatechars:20}}</th>
+                                                        
+                                                        {% comment %} <td><img src="{{ listEdition.images.url }}"
+                                                                alt="image" class="avatar-xs"></td> {% endcomment %}
+                                                        
+                                                        
+                                                        <td class="p-1">
+                                                            {% comment %} <a href="{% url 'update_edition' listEdition.id %}"
+                                                                class="btn btn-warning btn-sm ">Edit</a> {% endcomment %}
+                                                            <button class="btn btn-danger btn-sm supp"
+                                                                data-toggle="modal" data-target="#danger"
+                                                                data-id="{{EditionContacts.id}}">Supp</button>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 my-1">
+                            <div class="form-group">
+                                <!-- Modal -->
+                                <div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-danger white">
+                                                <h4 class="modal-title white" id="myModalLabel10">Suppression du livre </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="{% url 'delete_contactediter' %}" method="POST">
+                                                {% csrf_token %}
+                                                <div class="modal-body">
+                                                    <h5 class="lead">Voulez-vous vraiment supprimer ce livre ?
+                                                    </h5>
+                                                    <input type="hidden" name="EditionContactsId" id="EditionContactsId" value="">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn grey btn-secondary"
+                                                        data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Table head options end -->
+                    <!-- Table head options end -->
+                </section>
+            </div>
+        </div>
+        <div class="modal fade text-left" id="keyboard1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
+                <div class="modal-content" id="modalStatut">
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade text-left" id="keyboard1" tabindex="-1" role="dialog" aria-labelledby="basicModalLabel3" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" id="modalStatut" role="document">
+
+            </div>
+        </div>
+</div>
+</div>
+<!-- END: Content-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.supp').click(function () {
+            var EditionContacts_id = $(this).attr('data-id');
+            $('#EditionContactsId').attr('value', EditionContacts_id);
+        })
+        
+    });
+</script>
+
+{% endblock %}

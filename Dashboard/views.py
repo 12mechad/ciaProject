@@ -416,7 +416,8 @@ def contact(request):
         #     return HttpResponseRedirect(reverse('confirmation_contact'))
 
         return render(request, 'edition/contact.html')
-    
+
+
 
 # fonction pour la page vue client pour de notre librairie
 def mod(request):
@@ -896,6 +897,25 @@ def thematiques(request):
             'form':ThematiquesForm()
         }
         return render(request, "thematiques.html", data)
+
+
+@login_required
+@user_passes_test(is_admin, login_url=reverse_lazy('error')) 
+def contact_editer(request):
+    context = {
+        'EditionContacts': EditionContact.objects.all().order_by('-id'),
+    }
+    return render(request, 'contact_editer.html', context)
+
+
+@login_required
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def delete_contactediter(request,):
+    if request.method=='POST':
+        id=request.POST['EditionContactsId']
+        EditionContact.objects.get(id=int(id)).delete()
+        # return redirect('liste_edition')
+    return redirect('contact_editer')  
     
 
 #----------------------------------Rejondre notre equipe ------------------------------

@@ -26,6 +26,9 @@ urlpatterns = [
     path('editer', views.editer, name='editer'),
     path('update_edition/<int:pk>', views.update_edition, name='update_edition'),
     path('delete_edition', views.delete_edition, name='delete_edition'),
+    path('contact_editer', views.contact_editer, name='contact_editer'),
+    path('delete_contactediter', views.delete_contactediter, name='delete_contactediter'),
+
     
     path('passer_statut/<int:statut_id>/',views.statut, name='passer_statut'),
     # Autres URLs
