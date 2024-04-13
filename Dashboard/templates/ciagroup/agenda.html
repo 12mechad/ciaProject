@@ -151,17 +151,15 @@
                     <h5>Suivez nos actualités pour ne rien rater</h5>
                 </div>
                 <div class="row g-5 services-inner">
-                    <p class="text-center">Nos recentes publications sur Racines d'afrique</p>
-                    {% for edition in editions %}
+                    <p class="text-center">Nos recentes publications sur les événements</p>
+                    {% for evenement in evenements %}
                     <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
                         <div class="services-item bg-light">
                             <div class="p-4 text-center">
                                 <div  class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
                                         <div class="carousel-inner">
-                                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                                    <img src="{{ edition.images.url }}" alt="{{ edition.titre }}" class="d-block w-100">
-                                                </div>
+                                               <div style="height: 246px;"> <img class="card-img-top mb-2 " src="{{evenement.images.url}}" alt=""></div>
                                         </div>  
                                     </div>
                                 </div>
@@ -169,19 +167,71 @@
                                  
                                     <p>
                                         <h5 style="color: rgb(37, 37, 37); display: inline-block; margin-right: 10px;">Titre:</h5>
-                                        {{ edition.titre }} <br>
+                                        {{ evenement.titre }} <br>
+                                        <h6 style="color: rgb(37, 37, 37); display: inline-block; margin-right: 10px;">Type d'événement:</h6>
+                                        {{ evenement.evenement.evenement }} <br>
+                                        <p style="color: rgb(37, 37, 37); display: inline-block; margin-right: 10px;">Date:</p>
+                                        {{ evenement.date_evenement }} <br>
                                       
-                                        {{ edition.description }},
                                     </p>
                                 
                                     <!-- Bouton "Consulter" -->
                                 </div>
-                                <a href="{% url 'detail_actualite' edition.id %}"
+                                <a href="{% url 'detail_evenement' evenement.id %}"
                                 class="btn btn-secondary text-white px-5 py-3 rounded-pill">Detail</a>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid services py-5 mb-5">
+            <div class="container ">
+                <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
+                    <h1 class="text-primary">Nos Actualités</h1>
+                    <h5>Suivez nos actualités pour ne rien rater</h5>
+                </div>
+                
+                <div class="container-fluid  py-1 mb-5">
+                    <div class="container">
+                        <div class="row g-5 ">
+                            <h5 class="text-center">Liste des editions</h5>
+                
+                            {% for edition in editions %}
+                            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
+                                <div class="services-item bg-light">
+                                    <div class="p-4 text-center ">
+                                        
+                                        <div  class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <div style="height: 246px;"> <img class="card-img-top mb-2 " src="{{edition.images.url}}" alt=""></div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 pb-0">                
+                                            <!-- Informations sur le département, la commune, l'arrondissement et le quartier -->
+                                            <div class="p-4 pb-0">                
+                                 
+                                                <p>
+                                                    <h5 style="color: rgb(37, 37, 37); display: inline-block; margin-right: 10px;">Titre:</h5>
+                                                    {{ edition.titre }} <br>
+                                                  
+                                                    {{ edition.description }},
+                                                </p>
+                                            
+                                                <!-- Bouton "Consulter" -->
+                                            </div>
+                                        
+                                            <!-- Bouton "Consulter" -->
+                                            
+                                        </div>
+                                        <a href="{% url 'detail_actualite' edition.id %}"
+                                        class="btn btn-secondary text-white px-5 py-3 rounded-pill">Detail</a>                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
