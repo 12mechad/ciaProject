@@ -26,6 +26,9 @@ class AuteurUser(AbstractBaseUser, PermissionsMixin):
     piece = models.FileField(upload_to="pdf_terrain", blank=True, null=True)
     is_auteur = models.BooleanField(default=False)
     is_proprietaire = models.BooleanField(default=False)
+    is_ambassadeur = models.BooleanField(default=False)
+    is_agent_immobiliere = models.BooleanField(default=False)
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']

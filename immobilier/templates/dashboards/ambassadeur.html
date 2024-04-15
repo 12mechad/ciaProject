@@ -1,0 +1,117 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+	
+	<div class="mobile-menu-overlay"></div>
+
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>Immeuble</h4>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+				<div class="pd-20 card-box mb-30">
+					<div class="clearfix MB-20">
+						<div class=" d-flex justify-content-between mb-20">
+							<button class="btn btn-primary"><a href="{% url 'liste_immeuble' %}" class="text-white" >Liste Des Immeubles</a></button>
+              <button class="btn btn-primary"><a href="{% url 'liste_ambassadeur' %}" class="text-white" >Liste Des Chambres</a></button>
+
+						</div>	
+					</div>
+                    <form action="{% url 'immeuble' %}" method="POST" enctype="multipart/form-data">
+                        {%csrf_token%}
+                        <div class="form-group">
+                          {{form.media}}
+                          {{form.as_p}}
+                          {{formImages.as_p}}
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group mb-0">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>   
+                            </div>
+                        </div>
+                    </form>		
+				</div>
+			</div>
+	
+      <script>
+        $(document).ready(function () {
+          let departementId = document.getElementById("id_departement");
+          let communeId = document.getElementById("id_commune");
+          let arrondissementId = document.getElementById("id_arrondissement");
+          let quartierId = document.getElementById("id_quartier");
+    
+          communeId.innerHTML = "<option selected disabled>---------</option>";
+          arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+          quartierId.innerHTML = "<option selected disabled>---------</option>";
+          
+          if (departementId) {
+            departementId.addEventListener("input", (e) => {
+              let value = e.target.value;
+              url = "{% url 'departemenCommune' 0 %}".replace("0", value);
+              $.get(url, function (data) {
+    
+                communeId.innerHTML = "<option selected disabled>---------</option>";
+                arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+                quartierId.innerHTML = "<option selected disabled>---------</option>";
+                
+                for (let i = 0; i < data.length; i++) {
+                    communeId.innerHTML +=
+                    "<option value=" +
+                    data[i].pk +
+                    ">" +
+                    data[i].fields.nom +
+                    "</option>";
+                }
+              });
+            });
+          }
+          if (communeId) {
+            communeId.addEventListener("input", (e) => {
+              let value = e.target.value;
+              url = "{% url 'communeArrondissement' 0 %}".replace("0", value);
+              $.get(url, function (data) {
+    
+                arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+                quartierId.innerHTML = "<option selected disabled>---------</option>";
+                
+                for (let i = 0; i < data.length; i++) {
+                    arrondissementId.innerHTML +=
+                    "<option value=" +
+                    data[i].pk +
+                    ">" +
+                    data[i].fields.nom +
+                    "</option>";
+                }
+              });
+            });
+          }
+          if (arrondissementId) {
+            arrondissementId.addEventListener("input", (e) => {
+              let value = e.target.value;
+              url = "{% url 'arrondissementQuartier' 0 %}".replace("0", value);
+              $.get(url, function (data) {
+                quartierId.innerHTML = "<option selected disabled>---------</option>";
+                for (let i = 0; i < data.length; i++) {
+                    quartierId.innerHTML +=
+                    "<option value=" +
+                    data[i].pk +
+                    ">" +
+                    data[i].fields.nom +
+                    "</option>";
+                }
+              });
+            });
+          }
+        });
+      </script>
+
+{% endblock %}

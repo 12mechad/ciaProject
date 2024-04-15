@@ -1,0 +1,208 @@
+{% extends 'dashboards/immobilier.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Liste Des Immeubles</h4>
+            </div>
+            
+        </div>
+    <div class="pd-ltr-20">
+        <div class="row">
+            <div class="col-xl-12 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <h2 class="h4 mb-10 "><a href="{% url 'ambassadeur' %}" class="text-blue" >Nouveau Immeuble</a></h2>
+                    <table class="table hover multiple-select-row data-table-export nowrap">
+                      <thead>
+                          <tr>
+                              <th>Nom</th>
+                              <th>Quartier</th>
+                              <th>Operation</th>
+                              <th>Proprietaire</th>
+                              <th>Type </th>
+                              <th>Satut</th>
+                              <th>Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for immeuble in immeubles %}
+                          <tr>
+                              <td>{{ immeuble.name }}</td>
+                              <td>{{ immeuble.quartier.nom }}</td>
+                              <td>{{ immeuble.operation.type }}</td>
+                              <td>{{ immeuble.proprietaire.first_name }} </td>
+                              <td>{{ immeuble.type.name }}</td>
+                              <td>
+                                  {% if immeuble.statut %}
+                                      <button type="button" class="btn btn-danger btn-sm publier" data-toggle="modal" data-keyboard="false" data-id="{{ immeuble.id }}" data-target="#Medium-modal1">Desactiver</button>
+                                  {% else %}
+                                      <button type="button" class="btn btn-primary btn-sm publier" data-toggle="modal" data-keyboard="false" data-id="{{ immeuble.id }}" data-target="#Medium-modal1">Activer</button>
+                                  {% endif %}
+                              </td>
+                              <td>
+                                  <div class="dropdown">
+                                      <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                          <i class="dw dw-more"></i>
+                                      </a>
+                                      <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                          <a class="dropdown-item" href="{% url 'update_immeuble' immeuble.id %}"><i class="dw dw-edit2"></i> Modifier</a>
+                                          <button class="dropdown-item supp" data-toggle="modal" data-target="#Medium-modal" data-id="{{ immeuble.id }}"><i class="dw dw-delete-3"></i> Supprimer</button>
+                                      </div>
+                                  </div>
+                              </td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+                  
+                </div>	
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mb-30" id="modaleImmeuble">
+        <div class="pd-20  height-100-p">
+          
+            <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel11" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel11">Suppression de l'operation</h4>
+                            {% comment %} <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> {% endcomment %}
+                        </div>
+                        <form action="{% url 'delete_immeuble' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <p>Voulez-Vous vraiment supprimer cette operation?</p>
+                                <input type="hidden" name="immeubleId" id="immeubleId" >
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mb-30" id="Medium-modal1">
+      <div class="pd-20  height-100-p">
+          <div class="modal fade" id="Medium-modal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content" id="immeubleSatutId">
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% comment %} <div class="modal fade text-left" id="keyboard1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document" >
+          <div class="modal-content" id="immeubleSatutId">
+
+          </div>
+      </div>
+  </div> {% endcomment %}
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.supp').click(function() {
+          console.log('moi')
+          var types_id=$(this).attr('data-id');
+          $('#immeubleId').attr('value', types_id);
+        })
+        $('.publier').click(function() {
+          
+          var statut_id=$(this).attr('data-id');
+          url= "{% url 'update_statut' 0 %}".replace('0', statut_id)
+          $.ajax({
+            url: url,
+            method: 'get',
+          }).done(function(response){ 
+            $('#immeubleSatutId').html(response)
+          })
+        })
+        $('.edit').click(function() {
+          var immeuble_id=$(this).attr('data-id');
+          url= "{% url 'update_immeuble' 0 %}".replace('0', immeuble_id)
+          $.ajax({
+            url: url,
+            method: 'get',
+          }).done(function(response){ 
+            $('#immeubleId').html(response)
+          })
+        })
+      
+      let departementId = document.getElementById("id_departement");
+      let communeId = document.getElementById("id_commune");
+      let arrondissementId = document.getElementById("id_arrondissement");
+      let quartierId = document.getElementById("id_quartier");
+
+      communeId.innerHTML = "<option selected disabled>---------</option>";
+      arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+      quartierId.innerHTML = "<option selected disabled>---------</option>";
+      
+      if (departementId) {
+        departementId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'departemenCommune' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+
+            communeId.innerHTML = "<option selected disabled>---------</option>";
+            arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+            
+            for (let i = 0; i < data.length; i++) {
+                communeId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+      if (communeId) {
+        communeId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'communeArrondissement' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+
+            arrondissementId.innerHTML = "<option selected disabled>---------</option>";
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+            
+            for (let i = 0; i < data.length; i++) {
+                arrondissementId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+      if (arrondissementId) {
+        arrondissementId.addEventListener("input", (e) => {
+          let value = e.target.value;
+          url = "{% url 'arrondissementQuartier' 0 %}".replace("0", value);
+          $.get(url, function (data) {
+            quartierId.innerHTML = "<option selected disabled>---------</option>";
+            for (let i = 0; i < data.length; i++) {
+                quartierId.innerHTML +=
+                "<option value=" +
+                data[i].pk +
+                ">" +
+                data[i].fields.nom +
+                "</option>";
+            }
+          });
+        });
+      }
+    });
+  </script>
+{% endblock %}

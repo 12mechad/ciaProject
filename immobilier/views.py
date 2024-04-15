@@ -796,6 +796,35 @@ def update_expertise(request, pk):
         return render(request, 'modal/modal_expertise.html', data)
 
 
+#------------------------------------Les agent immobiliereet les ambassadeur -------------------------------
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def ambassadeur(request,):
+    
+        return render(request, 'ambassadeur.html')
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def liste_ambassadeur(request,):
+    
+        return render(request, 'liste_ambassadeur.html')
+
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def agent(request,):
+    
+        return render(request, 'agent.html')
+
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def liste_agent(request,):
+    
+        return render(request, 'liste_agent.html')
+
+
+
 
 
 def beninLand(request):

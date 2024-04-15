@@ -157,6 +157,7 @@ class ChambresForm(ModelForm):
         model = Chambres
         fields = '__all__' 
     proprietaire= forms.ModelChoiceField(required=True,queryset=AuteurUser.objects.filter(is_proprietaire=True), widget=forms.Select(attrs={'class':"form-control ",}))
+    ambassadeur= forms.ModelChoiceField(required=True,queryset=AuteurUser.objects.filter(is_ambassadeur=True), widget=forms.Select(attrs={'class':"form-control ",}))
     immeuble= forms.ModelChoiceField(required=True,queryset=Immeuble.objects.all(), widget=forms.Select(attrs={'class':"form-control ",}))
     name= forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',}), label='N°')
     prix= forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control col-12', 'placeholder': 'Prix'}))

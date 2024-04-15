@@ -106,6 +106,14 @@ urlpatterns = [
     #Construiction BTP
     path('plan', views.plan, name='plan'),
     path('liste_plan', views.listePlan, name='liste_plan'),
+
+#Les agent immobilieres et les ambassadeur 
+    path('agent', views.agent, name='agent'),
+    path('liste_agent', views.liste_agent, name='liste_agent'),
+    path('ambassadeur', views.ambassadeur, name='ambassadeur'),
+    path('liste_ambassadeur', views.liste_ambassadeur, name='liste_ambassadeur'),
+
+
     
     # Les urls sur l'interface de beninland
     path('accueil', views.beninLand, name='accueil'),

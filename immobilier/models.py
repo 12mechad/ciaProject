@@ -43,7 +43,12 @@ class Operation(models.Model):
     def __str__(self) -> str:
         return self.type
     
+class Ambassadeur(models.Model):
+    ambassadeur=models.ForeignKey(AuteurUser, on_delete=models.CASCADE,null=True)
 
+  
+    def __str__(self):
+        return self.name
     
 
 class Types(models.Model):
@@ -60,6 +65,7 @@ class Immeuble(models.Model):
     quartier= models.ForeignKey(Quartier, on_delete=models.CASCADE,null=True)
     operation= models.ForeignKey(Operation, on_delete=models.CASCADE,null=True)
     proprietaire= models.ForeignKey(AuteurUser, on_delete=models.CASCADE,null=True)
+    ambassadeur= models.ForeignKey(Ambassadeur, on_delete=models.CASCADE,null=True)
     type= models.ForeignKey(Types, on_delete=models.CASCADE,null=True)
     prix=models.IntegerField(null=True)
     description=RichTextUploadingField(blank=True, null=True)
@@ -100,6 +106,7 @@ class Balcon(models.Model):
     
 class Chambres(models.Model):
     proprietaire= models.ForeignKey(AuteurUser, on_delete=models.CASCADE,null=True)
+    ambassadeur= models.ForeignKey(Ambassadeur, on_delete=models.CASCADE,null=True)
     immeuble= models.ForeignKey(Immeuble, on_delete=models.CASCADE,null=True)
     name=models.CharField(max_length=50, null=True)
     prix=models.IntegerField(null=True)
@@ -144,6 +151,7 @@ class Terrain(models.Model):
     quartier= models.ForeignKey(Quartier, on_delete=models.CASCADE,null=True)
     operation= models.ForeignKey(Operation, on_delete=models.CASCADE,null=True)
     proprietaire= models.ForeignKey(AuteurUser, on_delete=models.CASCADE,null=True)
+    ambassadeur= models.ForeignKey(Ambassadeur, on_delete=models.CASCADE,null=True)
     images=models.ImageField(upload_to="images_terrain",blank=True, null=True)
     croquis=models.FileField(upload_to="pdf_terrain")
     prix=models.IntegerField(null=True)
