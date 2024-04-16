@@ -108,13 +108,23 @@ urlpatterns = [
     path('liste_plan', views.listePlan, name='liste_plan'),
 
 #Les agent immobilieres et les ambassadeur 
-    path('agent', views.agent, name='agent'),
-    path('liste_agent', views.liste_agent, name='liste_agent'),
-    path('ambassadeur', views.ambassadeur, name='ambassadeur'),
-    path('liste_ambassadeur', views.liste_ambassadeur, name='liste_ambassadeur'),
-
-
+    path('agent_immobiliere', views.agent_immobiliere, name='agent_immobiliere'),
+    path('agent_liste_immobiliere', views.agent_liste_immobiliere, name='agent_liste_immobiliere'),
+    path('agent_chambres', views.agent_chambres, name='agent_chambres'),
+    path('agent_liste_chambres', views.agent_liste_chambres, name='agent_liste_chambres'),
+    path('agent_terrains', views.agent_terrains, name='agent_terrains'),
+    path('agent_liste_terrains', views.agent_liste_terrains, name='agent_liste_terrains'),
+    path('ambassadeur_immobiliere', views.ambassadeur_immobiliere, name='ambassadeur_immobiliere'),
+    path('liste_ambassadeur', views.liste_ambassadeur_immobiliere, name='liste_ambassadeur'),
+    path('ambassadeur_liste_chambre', views.ambassadeur_liste_chambre, name='ambassadeur_liste_chambre'),
+    path('ambassadeur_chambres', views.ambassadeur_chambres, name='ambassadeur_chambres'),
+    path('ambassadeur_liste_chambre', views.ambassadeur_liste_chambre, name='ambassadeur_liste_chambre'),
+    path('ambassadeur_terrains', views.ambassadeur_terrains, name='ambassadeur_terrains'),
+    path('ambassadeur_liste_terrains', views.ambassadeur_liste_terrains, name='ambassadeur_liste_terrains'),
     
+
+
+
     # Les urls sur l'interface de beninland
     path('accueil', views.beninLand, name='accueil'),
     path('faq', views.faq, name='faq'),

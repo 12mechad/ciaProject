@@ -649,9 +649,6 @@ def deleteterrain(request):
 # @group_required('administrateur')
 @login_required(login_url='login')
 @user_passes_test(is_admin, login_url=reverse_lazy('error'))
-
-
-
 def update_terrain(request, pk):
     try:
         obj = Terrain.objects.get(id=pk)
@@ -799,31 +796,261 @@ def update_expertise(request, pk):
 #------------------------------------Les agent immobiliereet les ambassadeur -------------------------------
 @login_required(login_url='login')
 @user_passes_test(is_admin, login_url=reverse_lazy('error'))
-def ambassadeur(request,):
+def ambassadeur_immobiliere(request,):
+    if request.method == 'POST':
+        form = ImmeubleForm(request.POST,request.FILES)
+        formImage =ImmeubleImagesForm(request.POST, request.FILES)
+        images=request.FILES.getlist('images')
+        if form.is_valid() and formImage.is_valid():
+            immeubleCreats=form.save()
+            for i in images:
+                ImagesImmeuble.objects.create(immeuble=immeubleCreats,images=i)
+            messages.success(request,'Immeuble ajouter !')
+            return redirect('ambassadeur_liste_chambre')
+        else:
+            errors= form.errors
+            for field, error in errors.items():
+                messages.error(request, f'{error}')
+            return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        data = {
+            'form':ImmeubleForm(),
+            'formImages':ImmeubleImagesForm(),
+
+             }
     
-        return render(request, 'ambassadeur.html')
+    return render(request, 'dashboards/ambassadeur.html',data)
 
 @login_required(login_url='login')
 @user_passes_test(is_admin, login_url=reverse_lazy('error'))
-def liste_ambassadeur(request,):
-    
-        return render(request, 'liste_ambassadeur.html')
+def liste_ambassadeur_immobiliere(request,):
+    data = {
+            'form':ImmeubleForm(),
+            'immeubles':Immeuble.objects.all().order_by('-id')
+            }
+    return render(request, 'dashboards/liste_ambassadeur.html',data)
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def ambassadeur_chambres(request,):
+    if request.method == 'POST':
+        form = ChambresForm(request.POST, request.FILES)
+        formImage =ChambreImagesForm(request.POST, request.FILES)
+        images=request.FILES.getlist('images')
+        if form.is_valid() and formImage.is_valid():
+            chambresCreats=form.save()
+            for i in images:
+                Images.objects.create(chambres=chambresCreats,images=i)
+            messages.success(request,'Chambre ajouter !')
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            errors= form.errors
+            for field, error in errors.items():
+                messages.error(request, f'{error}')
+            return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        data = {
+            'chambres':Chambres.objects.all().order_by('-id'),
+            'formChambre':ChambresForm(),
+            'formImages':ChambreImagesForm()
+            }
+    return render(request, 'dashboards/ambassadeur_liste_chambres.html',data)
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def ambassadeur_liste_chambre(request,):
+    data = {
+            'chambres':Chambres.objects.all().order_by('-id'),
+            }
+    return render(request, 'dashboards/ambassadeur_liste_chambre.html',data)
+
+
 
 
 @login_required(login_url='login')
 @user_passes_test(is_admin, login_url=reverse_lazy('error'))
-def agent(request,):
-    
-        return render(request, 'agent.html')
+def ambassadeur_terrains(request):
+    if request.method == 'POST':
+        form = TerrainForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        return redirect('ambassadeur_terrains')
+    else:
+        data = {
+            'form':TerrainForm(),
+             }
+        return render(request,'dashboards/ambassadeur_terrains.html',data)
+
+# @group_required('administrateur')
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def ambassadeur_liste_terrains(request):
+        data ={
+             'listeTerrain':Terrain.objects.all().order_by('-id')[:3],
+        }
+        return render(request,'dashboards/ambassadeur_liste_terrains.html',data)
+
+
+
+
+# @group_required('administrateur')
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def deleteterrain(request):
+    if request.method=='POST':
+        id=request.POST['terrainId']
+        Terrain.objects.get(id=int(id)).delete()
+    return redirect('liste_terrain')
+
+# @group_required('administrateur')
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def update_terrain(request, pk):
+    try:
+        obj = Terrain.objects.get(id=pk)
+    except Terrain.DoesNotExist:
+        raise Http404 
+    formTerrain = TerrainForm(request.POST, request.FILES, instance=obj)
+    print(formTerrain)
+    messages=''
+    if formTerrain.is_valid():
+        formTerrain.save()
+        messages ="Your modifiactions was  succesfully done!"
+        return redirect('liste_terrain')
+   
+    context={
+        'form': TerrainForm(instance=obj),
+        'obj': obj,
+        'messagers':messages}
+    return render(request, 'modifiers/update_terrain.html',context)
+
+            #Agent immobiliere
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def agent_terrains(request):
+    if request.method == 'POST':
+        form = TerrainForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        return redirect('agent_terrains')
+    else:
+        data = {
+            'form':TerrainForm(),
+             }
+        return render(request,'dashboards/agent_terrains.html',data)
+
+# @group_required('administrateur')
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def agent_liste_terrains(request):
+        data ={
+             'listeTerrain':Terrain.objects.all().order_by('-id')[:3],
+        }
+        return render(request,'dashboards/agent_liste_terrains.html',data)
 
 
 @login_required(login_url='login')
 @user_passes_test(is_admin, login_url=reverse_lazy('error'))
-def liste_agent(request,):
+def agent_chambres(request,):
+    if request.method == 'POST':
+        form = ChambresForm(request.POST, request.FILES)
+        formImage =ChambreImagesForm(request.POST, request.FILES)
+        images=request.FILES.getlist('images')
+        if form.is_valid() and formImage.is_valid():
+            chambresCreats=form.save()
+            for i in images:
+                Images.objects.create(chambres=chambresCreats,images=i)
+            messages.success(request,'Chambre ajouter !')
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            errors= form.errors
+            for field, error in errors.items():
+                messages.error(request, f'{error}')
+            return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        data = {
+            'chambres':Chambres.objects.all().order_by('-id'),
+            'formChambre':ChambresForm(),
+            'formImages':ChambreImagesForm()
+            }
+    return render(request, 'dashboards/agent_chambres.html',data)
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def agent_liste_chambres(request,):
+    data = {
+            'chambres':Chambres.objects.all().order_by('-id'),
+            }
+    return render(request, 'dashboards/agent_liste_chambre.html',data)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def agent_immobiliere(request,):
+    if request.method == 'POST':
+        form = ImmeubleForm(request.POST,request.FILES)
+        formImage =ImmeubleImagesForm(request.POST, request.FILES)
+        images=request.FILES.getlist('images')
+        if form.is_valid() and formImage.is_valid():
+            immeubleCreats=form.save()
+            for i in images:
+                ImagesImmeuble.objects.create(immeuble=immeubleCreats,images=i)
+            messages.success(request,'Immeuble ajouter !')
+            return redirect('liste_chambre')
+        else:
+            errors= form.errors
+            for field, error in errors.items():
+                messages.error(request, f'{error}')
+            return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        data = {
+            'form':ImmeubleForm(),
+            'formImages':ImmeubleImagesForm(),
+
+             }
     
-        return render(request, 'liste_agent.html')
+    return render(request, 'dashboards/agent.html',data)
 
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def agent_liste_immobiliere(request,):
+    data = {
+            'form':ImmeubleForm(),
+            'immeubles':Immeuble.objects.all().order_by('-id')
+            }
+    return render(request, 'dashboards/liste_agent.html',data)
 
+# @group_required('administrateur')
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def deleteterrain(request):
+    if request.method=='POST':
+        id=request.POST['terrainId']
+        Terrain.objects.get(id=int(id)).delete()
+    return redirect('liste_terrain')
+
+# @group_required('administrateur')
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+def update_terrain(request, pk):
+    try:
+        obj = Terrain.objects.get(id=pk)
+    except Terrain.DoesNotExist:
+        raise Http404 
+    formTerrain = TerrainForm(request.POST, request.FILES, instance=obj)
+    print(formTerrain)
+    messages=''
+    if formTerrain.is_valid():
+        formTerrain.save()
+        messages ="Your modifiactions was  succesfully done!"
+        return redirect('liste_terrain')
+   
+    context={
+        'form': TerrainForm(instance=obj),
+        'obj': obj,
+        'messagers':messages}
+    return render(request, 'modifiers/update_terrain.html',context)
 
 
 
@@ -886,6 +1113,7 @@ def details_chambre(request, chambre_id):
     }
 
     return render(request, 'interface/details_chambre.html', context)
+
 
 #************************* Mon Espace **********************************
 @login_required

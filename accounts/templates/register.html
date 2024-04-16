@@ -55,7 +55,21 @@
                 </fieldset>
             
             </div>
+            <div style="display: flex;justify-content: space-between;">
+
+                <fieldset class="form-group">
+                    <div>
+                        {{ form.is_ambassadeur.label_tag }} {{ form.is_ambassadeur }}
+                    </div>
+                </fieldset>
             
+                <fieldset class="form-group">
+                    <div class="form-check">
+                        {{ form.is_agent_immobiliere.label_tag }} {{ form.is_agent_immobiliere }}
+                    </div>
+                </fieldset>
+            
+            </div>
         
             <div class="form-group text-center">
                 <button type="submit" class="btn round btn-block btn-glow btn-bg-gradient-x-purple-blue col-12 mr-1 mb-1">S'inscrire</button>

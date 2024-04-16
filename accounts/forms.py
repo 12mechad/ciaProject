@@ -67,7 +67,7 @@ class CustomUserCreationForm(UserCreationForm):
                      })       
         class Meta(UserCreationForm):
             model = AuteurUser
-            fields = ['username', 'last_name', 'first_name', 'email', 'password1', 'password2', 'is_auteur', 'is_proprietaire']
+            fields = ['username', 'last_name', 'first_name', 'email', 'password1', 'password2', 'is_auteur', 'is_proprietaire','is_ambassadeur','is_agent_immobiliere']
 
 
 
