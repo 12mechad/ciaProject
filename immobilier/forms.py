@@ -88,6 +88,29 @@ class ImmeubleForm(ModelForm):
         # Personnaliser les choix du champ auteur avec le nom et le prénom
         self.fields['proprietaire'].label_from_instance = lambda obj: f"{obj.last_name} {obj.first_name}"
 
+class ImmeubleAmbassadeurForm(ModelForm):
+    class Meta:
+        model = Immeuble
+        fields = ("name","departement","commune","arrondissement","quartier","operation","proprietaire","ambassadeur","type","prix","description") # Remplacez par les champs que vous souhaitez permettre à l'utilisateur de modifier
+
+    name= forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',}), label='Nom de immeulble')
+    departement= forms.ModelChoiceField(required=True,queryset=Departement.objects.all(), widget=forms.Select(attrs={'class':"form-control ",  }))
+    commune= forms.ModelChoiceField(required=True,queryset=Commune.objects.all(), widget=forms.Select(attrs={'class':"form-control ",}))
+    arrondissement= forms.ModelChoiceField(required=True,queryset=Arrondissement.objects.all(), widget=forms.Select(attrs={'class':"form-control ",}))
+    quartier= forms.ModelChoiceField(required=True,queryset=Quartier.objects.all(), widget=forms.Select(attrs={'class':"form-control ",}))
+    operation= forms.ModelChoiceField(required=True,queryset=Operation.objects.all(), widget=forms.Select(attrs={'class':"form-control ",}))
+    proprietaire= forms.ModelChoiceField(required=True,queryset=AuteurUser.objects.filter(is_proprietaire=True), widget=forms.Select(attrs={'class':"form-control ",}))
+    ambassadeur= forms.ModelChoiceField(required=True,queryset=AuteurUser.objects.filter(is_ambassadeur=True), widget=forms.Select(attrs={'class':"form-control ",}))
+    description= forms.CharField(required=True, widget=CKEditorWidget(attrs={'class': 'form-control ', 'placeholder': 'Description de immeuble','rows':"5",}))
+    type= forms.ModelChoiceField(required=True,queryset=Types.objects.all(), widget=forms.Select(attrs={'class':"form-control ",}))
+    prix= forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control col-12', 'placeholder': 'Prix'}))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Personnaliser les choix du champ auteur avec le nom et le prénom
+        self.fields['proprietaire'].label_from_instance = lambda obj: f"{obj.last_name} {obj.first_name}"
+        self.fields['ambassadeur'].label_from_instance = lambda obj: f"{obj.last_name} {obj.first_name}"
+
 
 class ImmeubleStatutForm(forms.ModelForm):
     class Meta:

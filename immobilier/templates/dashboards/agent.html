@@ -22,11 +22,11 @@
 					<div class="clearfix MB-20">
 						<div class=" d-flex justify-content-between mb-20">
 							<button class="btn btn-primary"><a href="{% url 'liste_immeuble' %}" class="text-white" >Liste Des Immeubles</a></button>
-              <button class="btn btn-primary"><a href="{% url 'liste_ambassadeur' %}" class="text-white" >Liste Des Chambres</a></button>
-
+                            <button class="btn btn-primary"><a href="{% url 'agent_chambres' %}" class="text-white" >Nouvelle  Chambre</a></button>
+                            <button class="btn btn-primary"><a href="{% url 'agent_terrains' %}" class="text-white" >Nouveau Terrain</a></button>
 						</div>	
 					</div>
-                    <form action="{% url 'immeuble' %}" method="POST" enctype="multipart/form-data">
+                    <form action="{% url 'agent' %}" method="POST" enctype="multipart/form-data">
                         {%csrf_token%}
                         <div class="form-group">
                           {{form.media}}
@@ -41,7 +41,6 @@
                     </form>		
 				</div>
 			</div>
-	
       <script>
         $(document).ready(function () {
           let departementId = document.getElementById("id_departement");

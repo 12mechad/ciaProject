@@ -798,7 +798,7 @@ def update_expertise(request, pk):
 @user_passes_test(is_admin, login_url=reverse_lazy('error'))
 def ambassadeur_immobiliere(request,):
     if request.method == 'POST':
-        form = ImmeubleForm(request.POST,request.FILES)
+        form = ImmeubleAmbassadeurForm(request.POST,request.FILES)
         formImage =ImmeubleImagesForm(request.POST, request.FILES)
         images=request.FILES.getlist('images')
         if form.is_valid() and formImage.is_valid():
@@ -814,7 +814,7 @@ def ambassadeur_immobiliere(request,):
             return redirect(request.META.get('HTTP_REFERER'))
     else:
         data = {
-            'form':ImmeubleForm(),
+            'form':ImmeubleAmbassadeurForm(),
             'formImages':ImmeubleImagesForm(),
 
              }
@@ -989,7 +989,7 @@ def agent_liste_chambres(request,):
 @user_passes_test(is_admin, login_url=reverse_lazy('error'))
 def agent_immobiliere(request,):
     if request.method == 'POST':
-        form = ImmeubleForm(request.POST,request.FILES)
+        form = ImmeubleAmbassadeurForm(request.POST,request.FILES)
         formImage =ImmeubleImagesForm(request.POST, request.FILES)
         images=request.FILES.getlist('images')
         if form.is_valid() and formImage.is_valid():
@@ -1005,7 +1005,7 @@ def agent_immobiliere(request,):
             return redirect(request.META.get('HTTP_REFERER'))
     else:
         data = {
-            'form':ImmeubleForm(),
+            'form':ImmeubleAmbassadeurForm(),
             'formImages':ImmeubleImagesForm(),
 
              }

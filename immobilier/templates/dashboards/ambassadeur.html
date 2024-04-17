@@ -22,8 +22,8 @@
 					<div class="clearfix MB-20">
 						<div class=" d-flex justify-content-between mb-20">
 							<button class="btn btn-primary"><a href="{% url 'liste_immeuble' %}" class="text-white" >Liste Des Immeubles</a></button>
-              <button class="btn btn-primary"><a href="{% url 'liste_ambassadeur' %}" class="text-white" >Liste Des Chambres</a></button>
-
+                            <button class="btn btn-primary"><a href="{% url 'ambassadeur_chambres' %}" class="text-white" >Nouvelle Chambre</a></button>
+                            <button class="btn btn-primary"><a href="{% url 'ambassadeur_terrains' %}" class="text-white" >Nouveau Terrain</a></button>
 						</div>	
 					</div>
                     <form action="{% url 'immeuble' %}" method="POST" enctype="multipart/form-data">
