@@ -11,8 +11,7 @@ urlpatterns = [
     path('arrondissement', views.arrondissement, name='arrondissement'),
     path('update_arrondissement/<int:pk>', views.update_arrondissement, name='update_arrondissement'),
     
-   
-
+  
     #Commune
     path('commune', views.commune, name='commune'),
     path('update_commune/<int:pk>', views.update_commune, name='update_commune'),
@@ -139,6 +138,9 @@ urlpatterns = [
     path('expertise', views.beninLandExpertise, name='expertise'),
     path('devis', views.beninLandDevis, name='devis'),
     path('contact_immobilier', views.beninLandContact, name='contact_immobilier'),
+    path('commande_immobilier', views.commande_immobilier, name='commande_immobilier'),
+    # path('commande_immobilier/<int:id>/commande_immobilier', views.commande_immobilier, name='commande_immobilier'),
+
     path('contact', views.Contact, name='contact'),
     path('chambre/<int:id>/detail', views.chambreDetail, name='detail'),
     path('terrain/<int:id>/detail', views.terrainDetail, name='detail'),

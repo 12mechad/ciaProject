@@ -243,15 +243,6 @@ class ImmeubleImagesForm(ModelForm):
         ))
     
 
-# class ContactSimpleForm(ModelForm):
-#     class Meta:
-#         model = Contactez
-#         fields = ("name","email","message",)
-#     name= forms.CharField(required=True, widget=forms.TextInput(
-#         attrs={'class': 'form-control',}
-#     ), label='Nom')
-#     email= forms.EmailField( widget=forms.EmailInput(attrs={'class': 'form-control',}), label='Adresse e-mail')
-#     message= forms.CharField(required=True, widget=CKEditorWidget(attrs={'class': 'form-control ', 'placeholder': 'Message','rows':"5",}))
 
 class PlanForm(ModelForm):
 
@@ -339,4 +330,12 @@ class RejoindreContactForm(ModelForm):
         piece= forms.FileField(required=False, widget=forms.FileInput(attrs={'class': 'form-control','placeholder': 'Pièce'} ))
         message= forms.CharField(required=True, widget=CKEditorWidget(attrs={'class': 'form-control', 'placeholder': 'Message', 'rows': '10', 'cols':'150','style': 'margin-bottom: 10px;'}))
 
-    
+
+class CommanderImmeubilierFrom(ModelForm):
+    class Meta:
+        model = CommanderImmeubilier
+        fields = '__all__'
+    name= forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': 'Nom & Prenom'}))
+    adresse= forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': 'Adresse de Livraison'}))
+    telephone= forms.CharField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Téléphone'}))
+    email= forms.EmailField( widget=forms.EmailInput(attrs={'class': 'form-control','placeholder': 'Email'}))

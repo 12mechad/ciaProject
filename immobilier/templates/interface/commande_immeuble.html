@@ -21,7 +21,7 @@
                                 <div class="icon me-3" style="width: 45px; height: 45px;">
                                     <i class="fa fa-map-marker-alt text-primary"></i>
                                 </div>
-                                <span>123 Street, New York, USA</span>
+                                <span>Porto-Novo, BENIN</span>
                             </div>
                         </div>
                     </div>
@@ -48,44 +48,49 @@
                 </div>
             </div>
             <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7928.807790659692!2d2.614461!3d6.4704132!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b57a114bc797b%3A0x71ce14c8e04d4b9a!2sAdjinan%20Sud!5e0!3m2!1sfr!2sbj!4v1698511800112!5m2!1sfr!2sbj" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7928.807790659692!2d2.614461!3d6.4704132!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b57a114bc797b%3A0x71ce14c8e04d4b9a!2sAdjinan%20Sud!5e0!3m2!1sfr!2sbj!4v1698511800112!5m2!1sfr!2sbj"
+                    width="100%"
+                    height="400" 
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"> 
+                </iframe>
             </div>
             <div class="col-md-6">
                 <div class="wow fadeInUp" data-wow-delay="0.5s">
-                  
-                    <form method="post">
+
+                    <form action="{% url 'commande_immobilier' %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    {{ form.name.label_tag }}
-                                    {{ form.name }}
+                            <div class="col-md-12">
+                                <div class="">
+                                    {{ formContact.name }}
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    {{ form.email.label_tag }}
-                                    {{ form.email }}
+                            <div class="col-md-12">
+                                <div class="">
+                                    {{ formContact.adresse }}
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    {{ form.subject.label_tag }}
-                                    {{ form.subject }}
+                            <div class="col-md-12">
+                                <div class="">
+                                    {{ formContact.telephone }}
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-floating">
-                                    {{ form.message.label_tag }}
-                                    {{ form.message }}
+                                <div class="">
+                                    {{ formContact.email }}
                                 </div>
                             </div>
+                            
+        
                             <div class="col-12">
                                 <button class="btn btn-primary w-100 py-3" type="submit">Envoyer</button>
                             </div>
                         </div>
                     </form>
-                    
                 </div>
             </div>
         </div>

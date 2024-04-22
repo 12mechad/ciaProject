@@ -16,7 +16,7 @@ from accounts.models import AuteurUser
 from cia.forms import UtilisateurForm
 from immobilier.forms import ContactezNousForm
 from immobilier.models import Annonce, Immeuble
-from .forms import CategoryPresseForm, DocumentairePresseForm, EditionContactForm, EditionLivreStatutForm, EvenementEditionForm, EvenementForm, InterviewPresseForm, QualiteForm, RejoindreContactForm, RevusPresseForm,  ThematiquesForm, TypeeDitionForm
+from .forms import CategoryPresseForm, CommanderEditionFrom, DocumentairePresseForm, EditionContactForm, EditionLivreStatutForm, EvenementEditionForm, EvenementForm, InterviewPresseForm, QualiteForm, RejoindreContactForm, RevusPresseForm,  ThematiquesForm, TypeeDitionForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import user_passes_test
@@ -964,3 +964,35 @@ def delete_rejoindre(request,):
         RejoindrContact.objects.get(id=int(id)).delete()
         # return redirect('liste_edition')
     return redirect('liste_rejoindre') 
+
+
+#-------------------------- Passer une Commande ----------------
+
+def commande_edition(request):
+    context = {}  # Initialisez context en dehors du bloc conditionnel
+    
+    if request.method == 'POST':
+        form = CommanderEditionFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            
+        
+            # nom = form.cleaned_data['name']
+            # adresse = form.cleaned_data['adresse']
+            # telephone = form.cleaned_data['telephone']
+            # email = form.cleaned_data['email']
+            # quantite = form.cleaned_data['quantite']
+            # # id = form.cleaned_data.get('numero_chambre')  # Récupérer le numéro de chambre s'il est présent dans les données du formulaire
+            # sujet = f"Nouvelle commande  de {nom}"
+            # contenu = f"Nom : {nom}\nAdresse : {adresse}\nTéléphone : {telephone}\nEmail : {email}\nQuantité : {quantite}\nNuméro de chambre : {numero_chambre}"
+            # destinataires = ['agenda@ciagroupafrica.com']  # Liste des adresses e-mail
+
+            # send_mail(sujet, contenu, email, destinataires)
+            
+            return redirect("racine")
+    else:
+        context = {
+            'form': CommanderEditionFrom()
+        }
+
+    return render(request, 'edition/commande_edition.html', context)    

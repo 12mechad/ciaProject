@@ -145,8 +145,8 @@ urlpatterns = [
   path('delete_rejoindre', views.delete_rejoindre, name='delete_rejoindre'),
 
 
-
-
+#******************************** Commander*************************************************
+  path('commande_edition', views.commande_edition, name='commande_edition'),
 
 
 

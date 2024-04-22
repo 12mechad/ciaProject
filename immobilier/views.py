@@ -1060,8 +1060,6 @@ def beninLand(request):
      
     error_message = None 
     error_message_terrain = None
-  
-
     if request.method == "GET":
         quartier = request.GET.get("quartier")
         quartier_terrain = request.GET.get("quartier_terrain")
@@ -1092,6 +1090,7 @@ def beninLand(request):
         'error_messages_terrain': error_message_terrain,
     }
     return render(request, 'interface/accueil.html', data)
+
 
 def liste_chambres_immeubles(request, immeuble_id):
     immeuble = Immeuble.objects.get(id=immeuble_id)
@@ -2231,6 +2230,30 @@ def delete_rejoindre(request,):
         return redirect('liste_rejoindre')
     return render(request,'dashboards/liste_rejoindre.html') 
 
+#****************************** Passer une commande **********************
+
+def commande_immobilier(request, ):
+    if request.method == 'POST':
+        form = CommanderImmeubilierFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            nom = form.cleaned_data['name']
+            adresse = form.cleaned_data['adresse']
+            telephone = form.cleaned_data['telephone']
+            email = form.cleaned_data['email']
+            
+            # id = form.cleaned_data.get('numero_chambre')  # Récupérer le numéro de chambre s'il est présent dans les données du formulaire
+            sujet = f"Nouvelle commande de chambre (N° {id}) de {nom}"
+            contenu = f"Nom : {nom}\nAdresse : {adresse}\nTéléphone : {telephone}\nEmail : {email}\n"
+            destinataires = ['agenda@ciagroupafrica.com']  # Liste des adresses e-mail
+            
+            send_mail(sujet, contenu, email, destinataires)
+            
+            return redirect('accueil')
+    else:
+        form = CommanderImmeubilierFrom()
+    
+    return render(request, 'interface/commande_immeuble.html', {'formContact': form})
 
 #******************************JSON Ajax********************************
 def departemenCommune(request,id):

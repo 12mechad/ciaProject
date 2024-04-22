@@ -200,3 +200,14 @@ class QualiteForm(ModelForm):
     name= forms.CharField(required=True, widget=forms.TextInput(
         attrs={'class': 'form-control',}
     ), label='Nom de la catégorie:')
+
+
+class CommanderEditionFrom(ModelForm):
+    class Meta:
+        model = CommanderEdition
+        fields = '__all__'
+    name= forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control border-0 p-4', 'placeholder': 'Nom et Prenom'}))
+    adresse= forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control border-0 p-4','placeholder': 'Adresse de Livraison'}))
+    telephone= forms.CharField(max_length=20, required=False, widget=forms.TextInput(attrs={'class': 'form-control border-0 p-4', 'placeholder': 'Téléphone'}))
+    email= forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control border-0 p-4', 'placeholder': 'Email'}))
+    quantite= forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control border-0 p-4', 'placeholder': 'Quantité à Commander'}))

@@ -27,7 +27,9 @@
                 <h4>Chambre N°: {{ chambre.name }}</h4>
                 <p>Salon: {{ chambre.salon }}, Chambre: {{ chambre.chambre }}, Douche: {{ chambre.douche }}, Cuisine: {{ chambre.cuisine }}, Balcon/Veranda: {{ chambre.balcon }}</p>
                 <h5 class="text-danger">  {{ chambre.prix }} CFA</h5> 
-                <button><a href="{% url 'contact_immobilier' %}" class="text-white"> Commander</a></button>
+                <button><a href="{% url 'commande_immobilier'%}" class="text-white"> Commander</a></button>
+                {% comment %} <button><a href="{% url 'commande_immobilier' id=chambre.name %}" class="text-white"> Commander</a></button> {% endcomment %}
+
             </div>
         </div>
     </div>
