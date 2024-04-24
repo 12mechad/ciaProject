@@ -975,24 +975,27 @@ def commande_edition(request):
         form = CommanderEditionFrom(request.POST)
         if form.is_valid():
             form.save()
-            
-        
-            # nom = form.cleaned_data['name']
-            # adresse = form.cleaned_data['adresse']
-            # telephone = form.cleaned_data['telephone']
-            # email = form.cleaned_data['email']
-            # quantite = form.cleaned_data['quantite']
-            # # id = form.cleaned_data.get('numero_chambre')  # Récupérer le numéro de chambre s'il est présent dans les données du formulaire
-            # sujet = f"Nouvelle commande  de {nom}"
-            # contenu = f"Nom : {nom}\nAdresse : {adresse}\nTéléphone : {telephone}\nEmail : {email}\nQuantité : {quantite}\nNuméro de chambre : {numero_chambre}"
-            # destinataires = ['agenda@ciagroupafrica.com']  # Liste des adresses e-mail
+            nom = form.cleaned_data['name']
+            adresse = form.cleaned_data['adresse']
+            telephone = form.cleaned_data['telephone']
+            email = form.cleaned_data['email']
+            quantite = form.cleaned_data['quantite']
+            # id = form.cleaned_data.get('numero_chambre')  # Récupérer le numéro de chambre s'il est présent dans les données du formulaire
+            sujet = f"Nouveau message depuis le formulaire de contact de {nom}"
+            contenu = f"De : {email}\n"
+            contenu += f"Adresse : {adresse}\n"
+            contenu += f"Téléphone : {telephone}\n"
+            contenu += f"Quantité : {quantite}\n"
 
-            # send_mail(sujet, contenu, email, destinataires)
+            destinataires = ['agenda@ciagroupafrica.com']  # Liste des adresses e-mail
+                        
+            send_mail(sujet, contenu, email, destinataires)
             
-            return redirect("racine")
+        return redirect("racine")
     else:
         context = {
             'form': CommanderEditionFrom()
         }
 
     return render(request, 'edition/commande_edition.html', context)    
+

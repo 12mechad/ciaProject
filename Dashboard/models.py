@@ -141,7 +141,7 @@ class RejoindrContact(models.Model):
 
 class CommanderEdition(models.Model):
     name = models.CharField(max_length=100, null=False)
-    adresse = models.EmailField(null=False)
+    adresse = models.CharField(max_length=100,null=False)
     telephone = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(null=False)
     quantite = models.IntegerField(null=True)
