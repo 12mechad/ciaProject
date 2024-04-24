@@ -991,7 +991,7 @@ def commande_edition(request):
                         
             send_mail(sujet, contenu, email, destinataires)
             
-        return redirect("racine")
+        return redirect('racines')
     else:
         context = {
             'form': CommanderEditionFrom()
