@@ -11,7 +11,7 @@ from django.core.paginator import Paginator
 
 from django.views import View
 from Dashboard.forms import AuteurForm, CategoryForm, EditionLivreForm
-from Dashboard.models import Categorie, CategoriePresse, DocumentairePresse, EditionContact, EditionLivre, Evenement, EvenementEdition, InterviewPresse, Qualite, RejoindrContact,  RevusPresse,  Thematiques, TypeeDition
+from Dashboard.models import Categorie, CategoriePresse, CommanderEdition, DocumentairePresse, EditionContact, EditionLivre, Evenement, EvenementEdition, InterviewPresse, Qualite, RejoindrContact,  RevusPresse,  Thematiques, TypeeDition
 from accounts.models import AuteurUser
 from cia.forms import UtilisateurForm
 from immobilier.forms import ContactezNousForm
@@ -997,5 +997,14 @@ def commande_edition(request):
             'form': CommanderEditionFrom()
         }
 
-    return render(request, 'edition/commande_edition.html', context)    
+    return render(request, 'edition/commande_edition.html', context)
+   
+
+def liste_commandeEdition(request):
+    context={
+        'liste_commandesEditions':CommanderEdition.objects.all().order_by('-id')
+    }
+    return render(request, 'liste_commandeEdition.html', context)
+
+
 

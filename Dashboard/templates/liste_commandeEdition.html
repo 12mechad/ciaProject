@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- END: Main Menu-->
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-wrapper-before"></div>
+
+        <div class="content-header-left col-md-6 col-12 mb-2">
+            <h3 class="content-header-title">Liste des commandes de livre</h3>
+        </div>
+
+        <div class="content-body"><!-- Basic form layout section start -->
+            <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col">Noms</th>
+                                                        <th scope="col">Adresses</th>
+                                                        <th scope="col">Téléphones</th>
+                                                        <th scope="col">Emails</th>
+                                                        <th scope="col">Quantités</th>
+                                                        
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    {% for liste_commandesEdition in liste_commandesEditions %}
+                                                    <tr>
+                                                        <td class="p-2">{{liste_commandesEdition.name}}</td>
+                                                        <td class="p-2">{{liste_commandesEdition.adresse}}</td>
+                                                        <td class="p-2">{{liste_commandesEdition.telephone}}</td>
+                                                        <td class="p-2">{{liste_commandesEdition.email}}</td>
+                                                        <td class="p-2">{{liste_commandesEdition.quantite}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                  
+                </section>
+            </div>
+        </div>
+        <div class="modal fade text-left" id="keyboard1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
+                <div class="modal-content" id="modalStatut">
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade text-left" id="keyboard1" tabindex="-1" role="dialog" aria-labelledby="basicModalLabel3" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" id="modalStatut" role="document">
+
+            </div>
+        </div>
+</div>
+</div>
+<!-- END: Content-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.supp').click(function () {
+            var edition_id = $(this).attr('data-id');
+            $('#editionId').attr('value', edition_id);
+        })
+        $('.publier').click(function() {
+            var statut_id=$(this).attr('data-id');
+            console.log(statut_id)
+            url= "{% url 'update_statut' 0 %}".replace('0', statut_id)
+            $.ajax({
+              url: url,
+              method: 'get',
+            }).done(function(response){ 
+              $('#modalStatut').html(response)
+            })
+          })
+    });
+</script>
+
+{% endblock %}

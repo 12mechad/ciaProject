@@ -147,6 +147,7 @@ urlpatterns = [
 
 #******************************** Commander*************************************************
   path('commande_edition', views.commande_edition, name='commande_edition'),
+  path('liste_commandeEdition', views.liste_commandeEdition, name='liste_commandeEdition'),
 
 
 

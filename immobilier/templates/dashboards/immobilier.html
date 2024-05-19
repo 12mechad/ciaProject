@@ -104,6 +104,8 @@
 							
 						</ul>
 					</li>
+					{% endif %}
+					{% if user.is_staff %}
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-layout1"></span><span class="mtext">Divertissement</span>	
@@ -113,6 +115,8 @@
 							
 						</ul>
 					</li>
+					{% endif %}
+					{% if user.is_staff %}
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-columns3"></span><span class="mtext">types</span>
@@ -122,11 +126,15 @@
 							
 						</ul>
 					</li>
+					{% endif %}
+					{% if user.is_staff %}
 					<li class="dropdown">
 						<a href="{% url 'logement' %}" class="dropdown-toggle">
 							<span class="micon  dw dw-rows1"></span><span >Chambres</span>
 						</a>
 					</li>
+					{% endif %}
+					{% if user.is_staff %}
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-bottom"></span><span class="mtext">Proprietaire</span>
@@ -136,6 +144,8 @@
 							
 						</ul>
 					</li>
+					{% endif %}
+					{% if user.is_staff %}
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-notepad"></span><span class="mtext">Immeubles</span>
@@ -146,6 +156,8 @@
 							
 						</ul>
 					</li>
+					{% endif %}
+					{% if user.is_staff %}
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-notepad-1"></span><span class="mtext">Terrains</span>
@@ -155,6 +167,8 @@
 							<li><a href="{% url 'liste_terrain' %}">Liste Terrains</a></li>	
 						</ul>
 					</li>
+					{% endif %}
+					{% if user.is_staff %}
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon dw dw-apartment"></span><span class="mtext"> Construire </span>
@@ -164,7 +178,9 @@
 							<li><a href="{% url 'plan' %}">Plan</a></li>
 						</ul>
 					</li>
-					 <li class="dropdown">
+					{% endif %}
+					{% if user.is_staff %}					
+					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-panel3"></span><span class="mtext">Annonce</span>
 						</a>
@@ -173,6 +189,8 @@
 							
 						</ul>
 					</li>
+					{% endif %}
+					{% if user.is_staff %}
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-panel3"></span><span class="mtext">Contact</span>
@@ -181,7 +199,9 @@
 							<li><a href="{% url 'contact' %}">Contact</a></li>
 							
 						</ul>
-					</li> 
+					</li>
+					{% endif %}
+					{% if user.is_staff %} 
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-panel3"></span><span class="mtext">Formulaire</span>
@@ -194,7 +214,9 @@
 							<li><a href="{% url 'liste_rejoindre' %}">Liste des Contacts</a></li>
 							
 						</ul>
-					</li> 
+					</li>
+					{% endif %}
+					{% if  user.is_staff and user.is_ambassadeur %}
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-sidebar1"></span><span class="mtext">Ambassadeur</span>
@@ -202,7 +224,9 @@
 						<ul class="submenu">
 							<li><a href="{% url 'ambassadeur_immobiliere' %}">Ambassadeur</a></li>
 						</ul>
-					</li> 
+					</li>
+					{% endif %}
+					{% if user.is_staff %} 
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-sidebar1"></span><span class="mtext">Agent Immobiliere</span>
@@ -210,7 +234,22 @@
 						<ul class="submenu">
 							<li><a href="{% url 'agent_immobiliere' %}">Agent</a></li>
 						</ul>
-					</li> 
+					</li>
+					{% endif %}
+					{% if  user.is_staff  %}
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon icon-copy dw dw-sidebar1"></span><span class="mtext">Ambassadeur/Agent</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="{% url 'liste_ambassadeur' %}">Ambassadeur</a></li>
+						</ul>
+						<ul class="submenu">
+							<li><a href="{% url 'agent_liste_immobiliere' %}">Agent</a></li>
+						</ul>
+					</li>
+					{% endif %}
+					{% if user.is_staff %} 
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon icon-copy dw dw-sidebar1"></span><span class="mtext">Autre</span>

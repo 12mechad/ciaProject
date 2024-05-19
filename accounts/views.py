@@ -14,20 +14,27 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 
 
-
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # Vous pouvez traiter les champs is_auteur et is_proprietaire ici
+            # Vous pouvez traiter les champs is_auteur ,  is_proprietaire, is_ambassadeur et is_agent_immobliere ici
             is_auteur = form.cleaned_data.get('is_auteur')
             is_proprietaire = form.cleaned_data.get('is_proprietaire')
+            is_ambassadeur = form.cleaned_data.get('is_ambassadeur')
+            is_agent_immobiliere = form.cleaned_data.get('is_agent_immobiliere')
             
             if is_auteur:
                
                 pass
             if is_proprietaire:
+                
+                pass
+            if is_ambassadeur:
+                
+                pass
+            if is_agent_immobiliere:
                 
                 pass
             login(request, user)
@@ -56,9 +63,13 @@ def login_user(request):
                 return redirect('auteur')
             elif isinstance(user, AuteurUser) and user.is_proprietaire:
                 return redirect('compte')
-            elif user.is_superuser:
+            
+            elif user.is_superuser :
+                if not user.is_superuser :
+                   return redirect('ambassadeur_immobiliere') 
                 # Redirect superuser to the "departement" page
-                return redirect('departement')
+            return redirect('departement')
+            
             
             if next_url and next_url.startswith('/'):
                 return redirect(next_url)
