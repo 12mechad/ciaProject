@@ -20,6 +20,8 @@ from django.core.serializers import serialize
 from django.urls import reverse_lazy
 import json
 from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 def creat_views(request):
@@ -611,6 +613,30 @@ def edit_statut(request, pk):
     
     return render(request, 'publishBuilding.html', {'form': form,'obj':immeuble })
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url=reverse_lazy('error'))
+@csrf_exempt
+def modifier_statut_immeuble(request):
+    if request.method == 'POST':
+        immeuble_id = request.POST.get('id')
+        action = request.POST.get('action')
+        
+        try:
+            immeuble = Immeuble.objects.get(id=immeuble_id)
+            if action == 'activer':
+                immeuble.statut = True
+            else:
+                immeuble.statut = False
+            immeuble.save()
+            return JsonResponse({'status': 'success'})
+        except Immeuble.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Immeuble non trouvé'}, status=404)
+    return JsonResponse({'status': 'error', 'message': 'Requête invalide'}, status=400)
+
+
 
 # @group_required('administrateur')
 @login_required(login_url='login')
@@ -1055,7 +1081,7 @@ def update_terrain(request, pk):
 
 
 def beninLand(request):
-    selectImmeuble = Immeuble.objects.all().order_by('-id')[:3]
+    selectImmeuble = Immeuble.objects.filter(statut=True).order_by('-id')[:3]
     selectTerrain = Terrain.objects.all().order_by('-id')[:3]
      
     error_message = None 
@@ -1067,7 +1093,7 @@ def beninLand(request):
             quartier = quartier.title()
             print(f"Recherche de quartier : {quartier}")
             # Utilisez quartier__nom pour accéder au champ nom du modèle Quartier
-            selectImmeuble = Immeuble.objects.filter(quartier__nom=quartier)
+            selectImmeuble = Immeuble.objects.filter(statut=True, quartier__nom=quartier)
             # Vérifier si des résultats ont été trouvés
             if not selectImmeuble.exists():
                 error_message = f"Nous n'avons pas d'oeuvre dans cette zone souhaitée : {quartier}"
@@ -1162,7 +1188,7 @@ def beninLandPropos(request):
     return render(request, 'interface/propos.html', context)
 
 def beninLandLouer(request):
-    operations_immeubles = Immeuble.objects.filter(operation__type='Location')
+    operations_immeubles = Immeuble.objects.filter(statut=True, operation__type='Location')
     operations_terrains = Terrain.objects.filter(operation__type='Location')
     quartier_search = request.GET.get('quartier')
     
@@ -1183,7 +1209,7 @@ def beninLandLouer(request):
 
 
 def beninLandAcheter(request):
-    operations_immeubles = Immeuble.objects.filter(operation__type='Acheter')
+    operations_immeubles = Immeuble.objects.filter(statut=True, operation__type='Acheter')
     operations_terrains = Terrain.objects.filter(operation__type='Acheter')
     quartier_search = request.GET.get('quartier')
     

@@ -40,6 +40,8 @@ urlpatterns = [
     path('delete_immeuble', views.deleteimmeuble, name='delete_immeuble'),
     path('update_immeuble/<int:pk>', views.update_immeuble, name='update_immeuble'),
     path('update_statut/<int:pk>', views.edit_statut, name='update_statut'),
+    path('modifier-statut-immeuble/', views.modifier_statut_immeuble, name='modifier_statut_immeuble'),
+
     
     #Annonce
     path('annonce', views.annonce, name='annonce'),

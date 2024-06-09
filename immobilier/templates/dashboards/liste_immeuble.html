@@ -36,12 +36,12 @@
                               <td>{{ immeuble.proprietaire.first_name }} </td>
                               <td>{{ immeuble.type.name }}</td>
                               <td>
-                                  {% if immeuble.statut %}
-                                      <button type="button" class="btn btn-danger btn-sm publier" data-toggle="modal" data-keyboard="false" data-id="{{ immeuble.id }}" data-target="#Medium-modal1">Desactiver</button>
-                                  {% else %}
-                                      <button type="button" class="btn btn-primary btn-sm publier" data-toggle="modal" data-keyboard="false" data-id="{{ immeuble.id }}" data-target="#Medium-modal1">Activer</button>
-                                  {% endif %}
-                              </td>
+                                {% if immeuble.statut %}
+                                    <button type="button" class="btn btn-danger btn-sm publier" data-toggle="modal" data-id="{{ immeuble.id }}" data-action="desactiver">Desactiver</button>
+                                {% else %}
+                                    <button type="button" class="btn btn-success btn-sm publier" data-toggle="modal" data-id="{{ immeuble.id }}" data-action="activer">Activer</button>
+                                {% endif %}
+                            </td>
                               <td>
                                   <div class="dropdown">
                                       <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -62,9 +62,8 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-12 mb-30" id="modaleImmeuble">
+      <div class="col-md-4 col-sm-12 mb-30" id="modaleImmeuble">
         <div class="pd-20  height-100-p">
-          
             <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel11" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -89,15 +88,25 @@
         </div>
     </div>
     <div class="col-md-4 col-sm-12 mb-30" id="Medium-modal1">
-      <div class="pd-20  height-100-p">
-          <div class="modal fade" id="Medium-modal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content" id="immeubleSatutId">
-                      
-                  </div>
-              </div>
-          </div>
-      </div>
+      <div class="modal fade" id="statutModal" tabindex="-1" role="dialog" aria-labelledby="statutModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="statutModalLabel">Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Voulez-vous vraiment <span id="modalActionText"></span> cet immeuble ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirmAction">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
   {% comment %} <div class="modal fade text-left" id="keyboard1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document" >
@@ -205,4 +214,39 @@
       }
     });
   </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var statutModal = $('#statutModal');
+        var confirmActionBtn = document.getElementById('confirmAction');
+        var modalActionText = document.getElementById('modalActionText');
+        var immeubleId;
+        var action;
+
+        $('.publier').on('click', function () {
+            immeubleId = $(this).data('id');
+            action = $(this).data('action');
+            modalActionText.textContent = action === 'activer' ? 'activer' : 'désactiver';
+            statutModal.modal('show');
+        });
+
+        confirmActionBtn.addEventListener('click', function () {
+            $.ajax({
+                url: '{% url "modifier_statut_immeuble" %}',
+                method: 'POST',
+                data: {
+                    'id': immeubleId,
+                    'action': action,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr, errmsg, err) {
+                    alert('Erreur : ' + errmsg);
+                }
+            });
+        });
+    });
+</script>
+
 {% endblock %}

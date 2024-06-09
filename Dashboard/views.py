@@ -485,7 +485,7 @@ def agenda(request):
      
         context={
             'editions':EditionLivre.objects.all().order_by("id")[:6],
-            'immeubles': Immeuble.objects.all().order_by('-id')[:6],
+            'immeubles': Immeuble.objects.filter(statut=True).order_by('-id')[:6],
             'annonces': Annonce.objects.all().order_by('-id')[:6],
             'evenements': EvenementEdition.objects.all().order_by('-id')[:6],
             'form' : ContactezNousForm()
